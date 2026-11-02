@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>AI PM Daily Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0}
+
+/* Layout: status strip on top, then a date rail beside one readable column; rail becomes a chip row on phones. */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --ink:#141B24; --muted:#5A6573; --line:#DCE1E8;
+  --accent:#2E47C7; --accent-soft:#E6EAFB;
+  --good:#1D7A4E; --good-soft:#E2F3EA; --warn:#9A6300; --warn-soft:#FBF0DA; --bad:#B42318; --bad-soft:#FCE6E4;
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1217; --surface:#161C24; --ink:#E7EBF1; --muted:#97A3B1; --line:#27303B;
+  --accent:#93A4FF; --accent-soft:#1E2747;
+  --good:#5CCB92; --good-soft:#12291E; --warn:#E8B44C; --warn-soft:#2D2312; --bad:#FF8A80; --bad-soft:#331A18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1217; --surface:#161C24; --ink:#E7EBF1; --muted:#97A3B1; --line:#27303B;
+  --accent:#93A4FF; --accent-soft:#1E2747;
+  --good:#5CCB92; --good-soft:#12291E; --warn:#E8B44C; --warn-soft:#2D2312; --bad:#FF8A80; --bad-soft:#331A18; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 64px}
+.mast{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.mast h1{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,4vw,34px);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.mast .sub{font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+
+/* status strip */
+.status{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:6px 18px;align-items:center;margin-bottom:28px}
+.status .label{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.status .when{font-family:var(--f-display);font-weight:500;font-size:20px;line-height:1.3}
+.status .count{grid-column:2;font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.status .last{grid-column:1/-1;font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin-top:6px}
+.status .last b{color:var(--ink);font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:12px;font-weight:500;padding:5px 10px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.scheduled{background:var(--accent-soft);color:var(--accent)}
+.pill.running{background:var(--warn-soft);color:var(--warn)}
+.pill.running::before{animation:pulse 1.2s ease-in-out infinite}
+.pill.sent{background:var(--good-soft);color:var(--good)}
+.pill.failed{background:var(--bad-soft);color:var(--bad)}
+@keyframes pulse{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.pill.running::before{animation:none}}
+
+/* body grid */
+.grid{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;align-items:start}
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px)}
+.rail h2{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:500}
+.dates{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.dates button{all:unset;cursor:pointer;display:block;width:100%;box-sizing:border-box;padding:8px 10px;border-radius:8px;font-family:var(--f-display);font-size:15px;line-height:1.3}
+.dates button small{display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.dates button:hover{background:var(--accent-soft)}
+.dates button[aria-current="true"]{background:var(--accent-soft);color:var(--accent)}
+
+article{min-width:0;max-width:68ch}
+.kicker{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+article h2.title{font-family:var(--f-display);font-weight:700;font-size:clamp(24px,3.4vw,32px);line-height:1.2;margin:6px 0 8px;text-wrap:balance}
+.quiet{display:inline-block;font-family:var(--f-mono);font-size:12px;background:var(--warn-soft);color:var(--warn);padding:3px 8px;border-radius:6px;margin-bottom:8px}
+.toc{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:var(--f-mono);font-size:12px;margin:12px 0 28px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.toc a{color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--accent)}
+section{margin-bottom:36px;scroll-margin-top:16px}
+section > h3{font-family:var(--f-display);font-weight:500;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+
+.story{padding:0 0 22px;margin-bottom:22px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 14px}
+.story:last-child{border-bottom:0;margin-bottom:0}
+.story .n{font-family:var(--f-display);font-weight:700;font-size:28px;line-height:1;color:var(--line)}
+.story h4{font-family:var(--f-display);font-weight:500;font-size:20px;line-height:1.3;margin:0 0 6px}
+.story h4 a{color:var(--ink);text-decoration:none}
+.story h4 a:hover{color:var(--accent);text-decoration:underline}
+.story p{margin:0 0 8px}
+.why{color:var(--ink)}
+.why b,.take b{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-right:6px}
+.take{background:var(--accent-soft);border-radius:8px;padding:10px 12px;font-style:italic}
+.src{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+
+ul.items{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.tool{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.tool h4{font-family:var(--f-display);font-weight:500;font-size:19px;margin:0 0 6px}
+.tool p{margin:0 0 8px}
+.tool .test b{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-right:6px}
+
+.concept-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.concept-head h4{font-family:var(--f-display);font-weight:500;font-size:21px;margin:0}
+.track{display:flex;gap:3px;align-items:center}
+.track i{width:9px;height:9px;border-radius:2px;background:var(--line)}
+.track i.done{background:var(--accent-soft);outline:1px solid var(--accent)}
+.track i.now{background:var(--accent)}
+.track span{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-left:8px;font-variant-numeric:tabular-nums}
+
+.qa{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.qa .q{font-family:var(--f-display);font-weight:500;font-size:20px;line-height:1.35;margin:0 0 12px}
+.qa button{font:500 13px var(--f-mono);background:var(--accent);color:var(--surface);border:0;border-radius:8px;padding:8px 14px;cursor:pointer}
+.qa dl{margin:14px 0 0;display:grid;gap:10px}
+.qa dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.qa dd{margin:0}
+.notes{font-size:14px;color:var(--muted)}
+.notes p{margin:0 0 4px}
+
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:28px 22px;color:var(--muted)}
+.empty h2{font-family:var(--f-display);font-weight:500;color:var(--ink);font-size:22px;margin:0 0 6px}
+.banner{font-family:var(--f-mono);font-size:12px;color:var(--warn);margin:0 0 12px}
+
+@media (max-width:760px){
+  .grid{grid-template-columns:minmax(0,1fr);gap:20px}
+  .rail{position:static}
+  .dates{flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:4px}
+  .dates li{flex:0 0 auto}
+  .dates button{width:auto;border:1px solid var(--line);background:var(--surface)}
+  .status{grid-template-columns:1fr auto}
+  .status .label,.status .count{grid-column:1/-1}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="mast">
+    <h1>AI PM Daily Brief</h1>
+    <span class="sub">Interview prep · every day 6:44 AM IST</span>
+  </header>
+
+  <section class="status" aria-live="polite" id="status">
+    <span class="label">Next digest</span>
+    <span class="when" id="nextWhen">Calculating…</span>
+    <span class="pill scheduled" id="statePill">Scheduled</span>
+    <span class="count" id="countdown"></span>
+    <div class="last" id="lastLine">Waiting for the first run.</div>
+  </section>
+
+  <p class="banner" id="netNote" hidden>Can't reach the digest archive yet. Showing what has loaded so far.</p>
+
+  <div class="grid">
+    <nav class="rail" aria-label="Digest archive">
+      <h2>Archive</h2>
+      <ul class="dates" id="dates"></ul>
+    </nav>
+    <main id="main">
+      <div class="empty" id="empty">
+        <h2>No digests here yet</h2>
+        <p>Each morning's digest appears here as soon as it is emailed to you, newest first. The first one lands at the next scheduled run shown above.</p>
+      </div>
+      <article id="article" hidden></article>
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = s => document.getElementById(s);
+  const IST = 'Asia/Kolkata';
+  const RUN_UTC_H = 1, RUN_UTC_M = 14; // 6:44 AM IST
+  let digests = [], status = null, current = null;
+
+  // ---------- helpers ----------
+  function el(tag, attrs, ...kids){
+    const n = document.createElement(tag);
+    if (attrs) for (const k in attrs){ if (k === 'class') n.className = attrs[k]; else n.setAttribute(k, attrs[k]); }
+    for (const c of kids){ if (c == null || c === false) continue; n.append(c instanceof Node ? c : String(c)); }
+    return n;
+  }
+  function safeUrl(u){ try { const x = new URL(u); return (x.protocol === 'https:' || x.protocol === 'http:') ? x.href : null; } catch { return null; } }
+  function link(text, url){ const h = safeUrl(url); return h ? el('a', {href:h, target:'_blank', rel:'noopener'}, text) : document.createTextNode(text); }
+  function arr(v){ return Array.isArray(v) ? v : []; }
+  const fmtDate = (iso, opts) => new Intl.DateTimeFormat('en-IN', Object.assign({timeZone: IST}, opts)).format(new Date(iso));
+  function dayLabel(dateStr){ return fmtDate(dateStr + 'T12:00:00+05:30', {weekday:'short', day:'numeric', month:'short'}); }
+
+  // ---------- status ----------
+  function nextRun(now){
+    const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), RUN_UTC_H, RUN_UTC_M));
+    if (d <= now) d.setUTCDate(d.getUTCDate() + 1);
+    return d;
+  }
+  function renderStatus(){
+    const now = new Date();
+    const nr = nextRun(now);
+    $('nextWhen').textContent = fmtDate(nr.toISOString(), {weekday:'long', day:'numeric', month:'short'}) + ', 6:44 AM IST';
+    const mins = Math.max(0, Math.round((nr - now) / 60000));
+    $('countdown').textContent = 'in ' + (mins >= 60 ? Math.floor(mins/60) + 'h ' : '') + (mins % 60) + 'm';
+
+    const pill = $('statePill');
+    let state = 'scheduled', label = 'Scheduled';
+    if (status && status.state === 'running' && status.lastRunAt && (now - new Date(status.lastRunAt)) < 45*60000){ state = 'running'; label = 'Preparing now'; }
+    pill.className = 'pill ' + state; pill.textContent = label;
+
+    const last = $('lastLine'); last.textContent = '';
+    if (!status || !status.lastRunAt){ last.append('Waiting for the first run.'); return; }
+    const when = fmtDate(status.lastRunAt, {weekday:'short', day:'numeric', month:'short', hour:'numeric', minute:'2-digit'});
+    if (status.state === 'failed'){
+      const p = el('span', {class:'pill failed'}, 'Last run failed');
+      last.append(p, ' ', when + '. ', status.note || 'The digest was not sent. The next run will try again.');
+    } else if (status.state === 'running'){
+      last.append('Run started ', el('b', null, when), '. Email and this page update when it finishes.');
+    } else {
+      last.append(el('span', {class:'pill sent'}, 'Last digest sent'), ' ', el('b', null, when), status.lastSubject ? ' · ' + status.lastSubject : '');
+    }
+  }
+  renderStatus();
+  setInterval(renderStatus, 30000);
+
+  // ---------- archive ----------
+  function renderDates(){
+    const ul = $('dates'); ul.textContent = '';
+    for (const d of digests){
+      const b = el('button', {type:'button', 'aria-current': String(d.date === current)}, dayLabel(d.date), el('small', null, d.date));
+      b.addEventListener('click', () => { location.hash = 'd-' + d.date; });
+      ul.append(el('li', null, b));
+    }
+  }
+
+  // ---------- digest ----------
+  function renderDigest(d){
+    const a = $('article'); a.textContent = '';
+    if (!d){ a.hidden = true; $('empty').hidden = false; return; }
+    $('empty').hidden = true; a.hidden = false;
+
+    a.append(el('div', {class:'kicker'}, fmtDate(d.date + 'T12:00:00+05:30', {weekday:'long', day:'numeric', month:'long', year:'numeric'})));
+    a.append(el('h2', {class:'title'}, d.headline || d.subject || 'Daily digest'));
+    if (d.quiet) a.append(el('span', {class:'quiet'}, 'Quiet news day'));
+
+    const toc = el('nav', {class:'toc', 'aria-label':'Sections'});
+    const add = (id, name, node) => { if (!node) return; toc.append(el('a', {href:'#'+id}, name)); node.id = id; secs.push(node); };
+    const secs = [];
+
+    const top = arr(d.topStories);
+    if (top.length){
+      const s = el('section', null, el('h3', null, 'Top stories'));
+      top.forEach((t, i) => {
+        s.append(el('div', {class:'story'},
+          el('span', {class:'n', 'aria-hidden':'true'}, String(i+1)),
+          el('div', null,
+            el('h4', null, link(t.title || 'Untitled', t.url)),
+            t.what ? el('p', null, t.what) : null,
+            t.why ? el('p', {class:'why'}, el('b', null, 'Why it matters'), t.why) : null,
+            t.take ? el('p', {class:'take'}, el('b', null, 'Interview take'), t.take) : null,
+            t.source ? el('div', {class:'src'}, t.source) : null)));
+      });
+      add('top', 'Top stories', s);
+    }
+
+    const mp = arr(d.modelsPricing);
+    { const s = el('section', null, el('h3', null, 'Models and pricing'));
+      if (mp.length){ const ul = el('ul', {class:'items'}); mp.forEach(m => ul.append(el('li', null, link(m.text, m.url)))); s.append(ul); }
+      else s.append(el('p', null, 'No notable changes.'));
+      add('models', 'Models', s); }
+
+    if (d.tool && d.tool.name){
+      const t = d.tool;
+      add('tool', 'Tool', el('section', null, el('h3', null, 'Tool to try today'),
+        el('div', {class:'tool'}, el('h4', null, link(t.name, t.url)), t.what ? el('p', null, t.what) : null,
+          t.test ? el('p', {class:'test'}, el('b', null, '10-minute test'), t.test) : null)));
+    }
+
+    if (d.concept && d.concept.title){
+      const c = d.concept, n = Number(c.number) || 0;
+      const track = el('div', {class:'track', 'aria-label':'Concept ' + n + ' of 20'});
+      for (let i = 1; i <= 20; i++) track.append(el('i', {class: i < n ? 'done' : i === n ? 'now' : ''}));
+      track.append(el('span', null, n + ' / 20'));
+      const s = el('section', null, el('h3', null, 'AI PM concept of the day'),
+        el('div', {class:'concept-head'}, el('h4', null, c.title), n ? track : null));
+      String(c.body || '').split(/\n{2,}/).filter(Boolean).forEach(p => s.append(el('p', null, p)));
+      add('concept', 'Concept', s);
+    }
+
+    const ind = arr(d.india);
+    { const s = el('section', null, el('h3', null, 'India corner'));
+      if (ind.length){ const ul = el('ul', {class:'items'}); ind.forEach(m => ul.append(el('li', null, link(m.text, m.url)))); s.append(ul); }
+      else s.append(el('p', null, 'Nothing notable today.'));
+      add('india', 'India', s); }
+
+    if (d.question && d.question.q){
+      const q = d.question;
+      const dl = el('dl', null,
+        el('dt', null, 'Framing'), el('dd', null, q.framing || ''),
+        el('dt', null, 'Key trade-off'), el('dd', null, q.tradeoff || ''),
+        el('dt', null, 'Metric or recommendation'), el('dd', null, q.metric || ''));
+      dl.hidden = true;
+      const btn = el('button', {type:'button', 'aria-expanded':'false'}, 'Show answer skeleton');
+      btn.addEventListener('click', () => { dl.hidden = !dl.hidden; btn.setAttribute('aria-expanded', String(!dl.hidden)); btn.textContent = dl.hidden ? 'Show answer skeleton' : 'Hide answer skeleton'; });
+      add('question', 'Question', el('section', null, el('h3', null, 'Interview question of the day'),
+        el('div', {class:'qa'}, el('p', {class:'q'}, q.q), btn, dl)));
+    }
+
+    const an = arr(d.alsoNotable);
+    if (an.length){ const ul = el('ul', {class:'items'}); an.forEach(m => ul.append(el('li', null, link(m.text, m.url))));
+      add('notable', 'Also notable', el('section', null, el('h3', null, 'Also notable'), ul)); }
+
+    if (d.sourceNotes){
+      const sn = d.sourceNotes;
+      add('sources', 'Sources', el('section', {class:'notes'}, el('h3', null, 'Source notes'),
+        el('p', null, 'Sources checked: ' + (sn.checked ?? '—')),
+        el('p', null, 'Failed to load: ' + (arr(sn.failed).join(', ') || 'none')),
+        el('p', null, 'Single-source items: ' + (arr(sn.singleSource).join('; ') || 'none'))));
+    }
+
+    a.append(toc, ...secs);
+  }
+
+  function pick(){
+    const h = location.hash.replace(/^#d-/, '');
+    const found = digests.find(d => d.date === h);
+    const d = found || digests[0];
+    current = d ? d.date : null;
+    renderDates(); renderDigest(d);
+    if (found) window.scrollTo({top:0});
+  }
+  window.addEventListener('hashchange', () => { if (/^#d-/.test(location.hash)) pick(); });
+
+  // ---------- data ----------
+  async function load(){
+    try {
+      const [d, s] = await Promise.all([
+        fetch('data/digests.json', {cache:'no-store'}).then(r => r.ok ? r.json() : []),
+        fetch('data/status.json', {cache:'no-store'}).then(r => r.ok ? r.json() : null)
+      ]);
+      digests = (Array.isArray(d) ? d : []).filter(x => x && typeof x.date === 'string').sort((a,b) => b.date.localeCompare(a.date));
+      status = s; $('netNote').hidden = true;
+      renderStatus(); pick();
+    } catch (e) {
+      $('netNote').textContent = 'Could not load the digest archive. Check your connection and refresh.';
+      $('netNote').hidden = false;
+    }
+  }
+  load();
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) load(); });
+})();
+</script>
+
+</body>
+</html>
