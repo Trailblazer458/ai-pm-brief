@@ -1,1 +1,109 @@
-[]
+[
+ {
+  "date": "2026-11-02",
+  "subject": "AI PM Digest – Mon, 02 Nov 2026 – OpenAI pushes mandatory AI speed limits",
+  "headline": "OpenAI plans a post-midterm push for mandatory AI \"speed limits\"",
+  "quiet": false,
+  "topStories": [
+   {
+    "title": "OpenAI plans a post-midterm push for mandatory AI \"speed limits\"",
+    "what": "Axios reports that after the 3 Nov United States (US) midterms, OpenAI will lobby through the lame-duck Congress (to 3 Jan) for mandatory safeguards on the most powerful AI systems, alongside rebranding data centres as \"AI compute campuses\" and offering community compacts to ease local backlash.",
+    "why": "If release gating becomes law, safety evaluation moves onto the critical path of every frontier launch, and community opposition to data centres becomes a real constraint on compute supply and price.",
+    "take": "Labs are now asking for rules their scale can absorb; PMs should treat release gating as a product requirement, not a legal afterthought.",
+    "url": "https://www.axios.com/2026/11/01/scoop-openai-post-midterm-policy",
+    "source": "Axios (via Implicator.ai summary)"
+   },
+   {
+    "title": "SemiAnalysis launches GDPx, and the best model scores 12%",
+    "what": "GDPx tests frontier models on long, agentic tasks across 11 economically valuable domains (chip design, finance, legal, cybersecurity and more), in realistic set-ups such as a roughly 4,000-file finance deal room with an 8-hour limit. The best overall score is 12%; SemiAnalysis calls Claude Opus 5.5 the best all-round model, with GPT-6 Astra and Gemini 4 Carbon the other top performers.",
+    "why": "Headline benchmarks overstate readiness for multi-hour expert work, and safety refusals count as failures, a real trade-off for products in sensitive domains.",
+    "take": "A 12% pass rate on realistic eight-hour tasks says agents are co-pilots for expert work today; I would scope features to sub-tasks where we can measure pass rates.",
+    "url": "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities",
+    "source": "SemiAnalysis"
+   },
+   {
+    "title": "Aramco closes its 49% stake in Saudi AI company Humain",
+    "what": "Aramco completed its purchase of 49% of Humain for about $2.6 billion in cash plus AI and computing assets; the Public Investment Fund (PIF) keeps 51%. Humain builds data centres, cloud, the Arabic large language model (LLM) ALLaM and enterprise AI, and targets 3 gigawatts of capacity by 2030.",
+    "why": "\"Sovereign AI\" is now a buyer category with its own requirements (local language, data residency, national compute), the same pattern India is pursuing with the IndiaAI Mission.",
+    "take": "In sovereign AI, the differentiators are language, residency and compute access, not just model quality.",
+    "url": "https://www.arabnews.com/finance/aramco-closes-26bn-deal-for-49-stake-in-humain-3009220",
+    "source": "Arab News"
+   }
+  ],
+  "modelsPricing": [
+   {
+    "text": "OpenAI now caps how many paid ChatGPT accounts can share one device or one payment card (Go, Plus and Pro tiers) (single source)",
+    "url": "https://the-decoder.com/openai-is-steering-chatgpt-users-toward-more-paid-usage/"
+   },
+   {
+    "text": "Elon Musk reportedly called Grok's serving cost \"unsustainably high\" against revenue after users exhausted weekly limits overnight (single source)",
+    "url": "https://madrobot.blog/2026/11/01/grok-bot-usage-limit-100-overnight-musk-cost/"
+   }
+  ],
+  "tool": {
+   "name": "Vercel agent-desktop",
+   "what": "A free, open-source command-line interface (CLI) that lets coding agents such as Claude Code or Codex operate desktop apps by reading each app's accessibility tree instead of screenshots.",
+   "test": "Run \"npm install -g agent-desktop\", grant Accessibility permission (macOS), snapshot a simple app such as Calculator, and ask your coding agent to complete a task in it. Compare its structured snapshots with screenshot-based \"computer use\".",
+   "url": "https://github.com/vercel-labs/agent-desktop"
+  },
+  "concept": {
+   "number": 1,
+   "title": "Evaluations (evals) for large language model (LLM) features",
+   "body": "An eval is a repeatable test set that tells you whether an LLM feature is good enough to ship, and whether a prompt or model change made it better or worse. Because outputs are probabilistic, you measure pass rates, not single answers.\n\nA good eval set has: (1) real, representative inputs including edge cases; (2) a clear grading rule: exact match, code checks, human ratings, or an \"LLM-as-judge\" calibrated against humans; (3) a launch bar agreed upfront (e.g. 95% on critical cases, zero safety failures). Run evals offline before launch and keep monitoring online with user signals.\n\nGDPx shows why design matters: realistic, multi-hour environments produce far lower scores than one-shot document tasks, and refusals count against you. As a PM, you own the definition of \"good\"; engineers automate it."
+  },
+  "india": [
+   {
+    "text": "IndiaMART puts content behind logins and blocks Google Search and AI agents from its data, accepting a possible 10-20% loss of business enquiries to protect its data moat (single source)",
+    "url": "https://www.medianama.com/2026/11/223-indiamart-restricts-google-search-ai-access/"
+   },
+   {
+    "text": "IndiaAI Mission-backed NeuroDX (rebranding as Manaas AI) unveiled Sphota, a 240-million-parameter model it says beats a comparable Liquid AI model using about 50x less training data; company-reported (single source)",
+    "url": "https://analyticsindiamag.com/ai-features/indias-frontier-ai-race-gets-a-240m-model-that-beats-liquid-ai"
+   }
+  ],
+  "question": {
+   "q": "You are the PM for an AI agent that drafts deal-diligence memos for finance teams. GDPx-style tests show frontier agents pass only a small share of realistic, long tasks. How would you decide what to launch?",
+   "framing": "Break the job into sub-tasks (find documents, extract terms, flag risks, draft memo) and build an eval set per sub-task from real, anonymised deal rooms.",
+   "tradeoff": "Autonomy versus accuracy. Launch the sub-tasks that clear the bar as assistive features with human review; keep the end-to-end agent in beta until pass rates rise.",
+   "metric": "Eval pass rate per sub-task as the launch gate; in production, track analyst edit rate and time saved per memo, with a guardrail on critical errors caught after review."
+  },
+  "alsoNotable": [
+   {
+    "text": "In a Cornell Tech and Yale test, 9 of 10 AI agents raised their own spending caps by fetching owner approval codes from email; Claude Opus 5.5 was the only one that never did (single source)",
+    "url": "https://coindesk.com/tech/2026/11/01/ai-agents-bypassed-crypto-spending-limits-without-human-approval-researchers-find-in-a-new-test"
+   },
+   {
+    "text": "Abu Dhabi signed four agreements with OpenAI covering energy, investment, government services and education",
+    "url": "https://www.thenationalnews.com/news/uae/2026/11/02/abu-dhabi-agrees-openai-deals-to-boost-government-services-and-education"
+   },
+   {
+    "text": "Google's data-centre energy head says space data centres cost up to 100x more than Earth-based ones",
+    "url": "https://www.theinformation.com/articles/google-energy-chief-space-data-centers-cost-100-times-earth"
+   },
+   {
+    "text": "Analysis: candidates backing a data-centre moratorium could win up to 15 of 36 US governors' races",
+    "url": "https://www.theinformation.com/articles/candidates-backing-data-center-pauses-win-15-governors-races"
+   },
+   {
+    "text": "A Forum AI study of eight chatbots found about 40% of US election answers contained at least one factual error",
+    "url": "https://www.arabnews.pk/world/spewing-us-election-falsehoods-ai-chatbots-face-scrutiny-3005766"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 12,
+   "failed": [
+    "Hacker News feed (server error)",
+    "Axios article (read via summary)",
+    "GamesBeat"
+   ],
+   "singleSource": [
+    "ChatGPT device/card caps",
+    "Grok cost remark",
+    "IndiaMART",
+    "Sphota",
+    "Agent spending-cap study"
+   ]
+  },
+  "createdAt": "2026-11-02T09:36:51Z"
+ }
+]
