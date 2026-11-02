@@ -85,10 +85,20 @@ h2,h3,h4{font-family:var(--f-head);font-weight:700;margin:0;text-wrap:balance}
 
 .concept h3{font-size:21px;line-height:1.3;margin:2px 0 10px}
 .concept p{font-family:var(--f-head);font-size:14.5px;line-height:1.7;margin:0 0 10px}
-.track{display:flex;gap:3px;margin:4px 0 12px}
-.track i{flex:1;height:5px;border-radius:3px;background:var(--line)}
-.track i.done{background:var(--red-soft)}
-.track i.now{background:var(--red)}
+.track{display:flex;gap:3px;margin:4px 0 14px}
+.track button{flex:1;height:16px;padding:5px 0;border:0;background:transparent;cursor:pointer;position:relative}
+.track button::before{content:"";position:absolute;inset:5px 0;border-radius:3px;background:var(--line)}
+.track button:hover::before{background:var(--muted)}
+.track button.today::before{background:var(--red-soft);outline:1px solid var(--red)}
+.track button.on::before{background:var(--red);outline:0}
+.cnav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px;padding-top:12px;border-top:1px solid var(--line)}
+.cnav .count{font-weight:600;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.nav{font:600 12.5px var(--f-ui);background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}
+.nav:hover{border-color:var(--red);color:var(--red)}
+.nav.today{margin-top:10px;background:var(--red-soft);border-color:transparent;color:var(--red)}
+.cbody{min-height:12em}
+.col p.kicker,.card p.kicker{font-family:var(--f-ui);font-size:12px;line-height:1.5;margin:0 0 8px}
+.lead p.kicker{text-align:center}
 
 /* lead story (centre) */
 .lead{text-align:center}
@@ -260,6 +270,66 @@ section,.col{scroll-margin-top:12px}
   const dayOf = d => d + 'T12:00:00+05:30';
   const paras = (t, cls) => String(t || '').split(/\n{2,}/).filter(Boolean).map(p => el('p', cls ? {class:cls} : null, p));
 
+  // ---------- concept library (all 20, readable any day) ----------
+  const CONCEPTS = [
+    ['Evaluations (evals) for large language model (LLM) features', 'An eval is a repeatable test set that tells you whether an LLM feature is good enough to ship, and whether a prompt or model change made it better or worse. Because outputs are probabilistic, you measure pass rates, not single answers.\n\nA good eval set has real, representative inputs including edge cases; a clear grading rule (exact match, code checks, human ratings, or an LLM-as-judge calibrated against humans); and a launch bar agreed upfront, such as 95% on critical cases and zero safety failures. Run evals offline before launch and keep monitoring with user signals after. As PM, you own the definition of "good".'],
+    ['Retrieval-augmented generation (RAG)', 'RAG fetches relevant documents at query time and puts them into the model’s prompt, so answers are grounded in your data rather than only the model’s training. The pipeline: split documents into chunks, index them (often as embeddings, numeric vectors that capture meaning), retrieve the best matches for each question, then generate an answer with citations.\n\nThe PM owns three decisions: what content is in scope and how fresh it must be; how to measure quality (retrieval recall and answer faithfulness, tested with evals); and what happens when nothing relevant is found. The right answer there is usually "I don’t know", not a guess.'],
+    ['Context engineering and prompt design', 'A model can only act on what is in its context window: the instructions, examples, retrieved documents, conversation history and tool results you give it. Context engineering is deciding what goes in, in what order, and what stays out.\n\nGood practice: state the role and goal plainly, give the output format, include one or two worked examples, and put the most important constraints where they can’t be missed. More context is not always better; irrelevant text dilutes attention and raises cost and latency. For a PM, prompts are product surface: version them, review them, and test every change against your evals.'],
+    ['Fine-tuning versus prompting versus RAG', 'Three levers, in order of cost. Prompting changes instructions and examples: cheap, instant, reversible; start here. RAG adds knowledge the model lacks, especially private or fast-changing facts, without retraining. Fine-tuning changes the model’s behaviour by training on your examples; use it for a consistent style or format, a narrow task done at high volume, or to let a smaller, cheaper model match a larger one.\n\nRule of thumb: knowledge problem, use RAG; behaviour problem, try prompting, then fine-tuning. Fine-tuning needs clean labelled data, an eval set, and a plan to redo it when the base model changes.'],
+    ['AI agents: tool use and planning', 'An agent is a model running in a loop: it plans, calls tools (search, code, APIs, a browser), reads the results, and decides the next step until the goal is met. That lets it complete multi-step tasks, not just answer questions.\n\nThe product questions are about control. Which actions can it take alone, and which need human approval? How does it recover from a failed step? How do you cap cost and time? Reliability compounds: ten steps at 95% each succeed only about 60% of the time end to end. So scope agents to tasks where steps are checkable and mistakes are reversible.'],
+    ['Model Context Protocol (MCP) and connectors', 'MCP is an open standard for connecting AI applications to tools and data. A service exposes an MCP server once, describing its actions and data, and any MCP-compatible assistant can then use it: read a calendar, query a database, create a ticket.\n\nFor product teams, it shifts integration work from many custom connectors to one standard interface, and makes "works inside the user’s AI assistant" a distribution channel. The PM questions are permissions (what can the AI read and change?), authentication, audit logs, and which actions need the user’s confirmation before they run.'],
+    ['Human-in-the-loop design', 'Human-in-the-loop means placing people at the points where AI errors are costly: approving an action, reviewing a draft, handling low-confidence cases. The design choice is where in the flow, and how much friction.\n\nCommon patterns: suggest, then the human accepts (autocomplete); draft, then the human edits and sends (email replies); act automatically under a threshold and escalate above it (refunds under a set amount). Track edit and override rates: they show where the model is weak and become training data. As accuracy rises, move the human from approving everything to sampling and auditing.'],
+    ['Guardrails and safety layers', 'Guardrails are checks around the model that keep outputs safe, on-topic and compliant. They sit at the input (block prompt injection, detect personal data, refuse out-of-scope requests), at the output (filter harmful content, validate format, check facts against sources), and around actions (permissions, spending limits, confirmations).\n\nNo single layer is enough; defence in depth is the norm. The trade-off is over-blocking, since refusing legitimate requests frustrates users. Measure both false positives and false negatives, red-team before launch, and give users a clear path when something is blocked.'],
+    ['Hallucination: causes and mitigation', 'A hallucination is a fluent, confident answer that is false. Models predict plausible text, not verified facts, so they fill gaps, especially for niche facts, recent events, exact numbers and citations.\n\nMitigations: ground answers in retrieved sources and show citations; let the model say "I don’t know"; ask for structured output that can be validated; use tools (search, calculators, databases) for facts and arithmetic; and evaluate faithfulness to sources. In the product, design for verification: link to sources, flag low confidence, and keep humans in the loop where an error is costly.'],
+    ['Latency, cost and quality trade-offs, and model routing', 'Bigger models are usually better but slower and pricier. Every AI feature sits somewhere on the triangle of latency, cost and quality, and the right point depends on the use case: autocomplete needs speed, contract review needs quality.\n\nModel routing sends each request to the cheapest model that can handle it: a small fast model for simple queries, a frontier model for hard ones, sometimes with a cheap classifier deciding which. Add caching, streaming (showing tokens as they arrive) and shorter prompts. Track cost per successful task, not cost per call, and the 95th-percentile latency users actually feel.'],
+    ['Open-weight versus closed models', 'Closed models (most frontier models from OpenAI, Anthropic and Google) are used through an application programming interface (API): usually the most capable, no infrastructure to run, but you depend on the vendor’s pricing, policies and roadmap. Open-weight models (Llama, Mistral, DeepSeek, Qwen) can be downloaded and run yourself.\n\nOpen weights win on data control and residency, customisation through fine-tuning, cost at high volume, and offline or on-device use. Closed models win on capability and speed to market. Many teams mix both, routing by task. In India, data residency and cost often tilt decisions toward open weights.'],
+    ['Pricing AI products: seat-based, usage-based and outcome-based', 'AI breaks the classic software-as-a-service (SaaS) model because each use has a real cost (inference). Seat-based pricing is simple and predictable but risky when heavy users cost more than they pay. Usage-based pricing (per token, task or credit) tracks cost but makes bills unpredictable and can discourage adoption. Outcome-based pricing (per resolved ticket, per qualified lead) aligns with value but needs clear attribution.\n\nMany products use hybrids: seats with usage caps, or a base fee plus overage. The PM questions: what unit of value does the customer recognise, and what are the gross margins at the 90th-percentile user?'],
+    ['Unit economics of inference', 'Every AI response costs money: input tokens plus output tokens times the model’s price, plus any retrieval, tool calls and retries. Agents can make dozens of calls per task, so costs compound.\n\nTo manage it, measure cost per successful outcome, find the heavy-user tail, and pull the levers: smaller models for easy steps (routing), prompt caching, shorter context, batch processing for non-urgent work, and limits on agent loops. Prices per token have been falling fast, so a feature that is marginal today may be cheap in a year. Plan for the curve, but launch on today’s numbers.'],
+    ['Moats when models commoditise', 'When anyone can call the same frontier model, the model itself is not your advantage. Durable moats come from proprietary data the model cannot get elsewhere; workflow depth, meaning owning the end-to-end job rather than one prompt; distribution and existing customer relationships; trust, compliance and integrations in regulated industries; and feedback loops that improve the product with use.\n\nA useful test: if the model provider shipped your core feature natively tomorrow, what would customers still pay you for? If the answer is "nothing", you are a thin wrapper. Build where the model is necessary but not sufficient.'],
+    ['Metrics for probabilistic products', 'AI features don’t pass or fail; they are right some percentage of the time. So add quality metrics to the usual adoption and retention ones: task success rate, accuracy against an eval set, and hallucination or error rate. Add behavioural signals of quality: acceptance rate of suggestions, edit distance (how much users change outputs), regeneration and thumbs-down rates, and escalation to humans.\n\nAlso track cost per task and latency. Watch for silent regressions when a model or prompt changes, by running evals on every change, and segment results: averages hide failures on specific languages, user groups or edge cases.'],
+    ['Generative user interface (UI) and AI user experience (UX) patterns', 'Chat is a starting point, not the only interface. Generative UI means the model composes the interface for each answer: a table, a chart, a form or a set of buttons, instead of a wall of text. ChatGPT’s Intelligent UI and artifact-style outputs are examples.\n\nCore AI UX patterns: show sources and confidence; let users steer mid-task; make outputs editable rather than final; stream progress for long tasks; offer clear undo for actions; and set expectations about what the AI can and cannot do. Good AI UX reduces the cost of the AI being wrong.'],
+    ['Data flywheels and feedback loops', 'A data flywheel is a loop where usage generates data that improves the product, which drives more usage. In AI products, the data comes from user corrections, accepted versus rejected suggestions, ratings, and logged failures.\n\nTo make it real: capture feedback inside the workflow (an edit is better data than a survey), store it with the context that produced it, turn it into eval cases and training data, and close the loop with regular releases. Watch privacy and consent: use customer data only as agreed. The flywheel is one of the few moats that strengthens as models commoditise.'],
+    ['Responsible AI: bias, privacy, the EU AI Act and India’s Digital Personal Data Protection (DPDP) Act', 'Responsible AI covers fairness (does the system perform equally across groups?), privacy (what personal data is used, stored and sent to model providers?), transparency (do users know they are dealing with AI?) and accountability (who answers when it goes wrong?).\n\nRegulation is arriving in waves. The European Union (EU) AI Act sorts systems by risk, with the strictest duties on high-risk uses such as hiring and credit, now delayed to 2027–28. India’s DPDP Act requires consent, purpose limits and data-subject rights. For PMs: run a risk assessment early, minimise personal data, document decisions, and test for bias.'],
+    ['Building AI for India: Indic languages, voice-first users, price sensitivity', 'India has 22 scheduled languages, much code-mixed speech (Hinglish) and hundreds of millions of first-time internet users who prefer voice to typing. That shapes AI products: voice in and voice out, regional language support, low-bandwidth and low-end-phone performance, and very low price points.\n\nModel choice matters. Global models are strong in English but weaker and costlier per word in Indic scripts, since those scripts take more tokens. Indian models such as Sarvam and BharatGen target this gap. Digital public infrastructure (Aadhaar, UPI, ONDC) is an integration advantage. Test with real users in their language, not translated English.'],
+    ['AI-native PM workflows: prototyping, discovery, smaller teams', 'AI is changing how PMs work, not only what they build. Prototyping tools let a PM build a clickable or working prototype in hours, so teams test ideas with users before writing a long specification. AI speeds up discovery: synthesising interviews, clustering feedback and analysing data.\n\nThe results: smaller teams, faster cycles, and PMs expected to be more hands-on and technical. What stays human: choosing the right problem, judgment on trade-offs, taste, and stakeholder alignment. In interviews, show how you use AI in your own workflow and where you deliberately don’t.']
+  ];
+  function conceptCarousel(today){
+    const todayN = today && Number(today.number) >= 1 && Number(today.number) <= 20 ? Number(today.number) : 0;
+    let k = todayN || 1;
+    const box = el('div', {class:'concept', id:'concept'});
+    const kicker = el('p', {class:'kicker'});
+    const track = el('div', {class:'track', role:'tablist', 'aria-label':'All 20 concepts'});
+    const segs = [];
+    for (let i = 1; i <= 20; i++){
+      const b = el('button', {type:'button', role:'tab', 'aria-label':'Concept ' + i + ': ' + CONCEPTS[i-1][0]});
+      b.addEventListener('click', () => { k = i; show(); });
+      segs.push(b); track.append(b);
+    }
+    const title = el('h3');
+    const body = el('div', {class:'cbody', 'aria-live':'polite'});
+    const prev = el('button', {type:'button', class:'nav', 'aria-label':'Previous concept'}, '← Prev');
+    const next = el('button', {type:'button', class:'nav', 'aria-label':'Next concept'}, 'Next →');
+    const todayBtn = el('button', {type:'button', class:'nav today'}, 'Today’s concept');
+    const count = el('span', {class:'count'});
+    prev.addEventListener('click', () => { k = k === 1 ? 20 : k - 1; show(); });
+    next.addEventListener('click', () => { k = k === 20 ? 1 : k + 1; show(); });
+    todayBtn.addEventListener('click', () => { k = todayN; show(); });
+    box.addEventListener('keydown', e => { if (e.target.closest('.track,.cnav')){ if (e.key === 'ArrowLeft'){ prev.click(); e.preventDefault(); } if (e.key === 'ArrowRight'){ next.click(); e.preventDefault(); } } });
+    function show(){
+      const isToday = k === todayN;
+      kicker.textContent = (isToday ? 'Concept of the day' : 'Concept library') + ' · ' + k + ' / 20';
+      segs.forEach((s, i) => { s.className = (i + 1 === k ? 'on' : '') + (i + 1 === todayN ? ' today' : ''); s.setAttribute('aria-selected', String(i + 1 === k)); });
+      title.textContent = isToday && today.title ? today.title : CONCEPTS[k-1][0];
+      body.textContent = '';
+      paras(isToday && today.body ? today.body : CONCEPTS[k-1][1]).forEach(p => body.append(p));
+      count.textContent = k + ' of 20';
+      todayBtn.hidden = !todayN || isToday;
+    }
+    box.append(kicker, track, title, body, el('div', {class:'cnav'}, prev, count, next), todayBtn);
+    show();
+    return box;
+  }
+
   // ---------- status ----------
   function nextRun(now){
     const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), RUN_UTC_H, RUN_UTC_M));
@@ -318,14 +388,7 @@ section,.col{scroll-margin-top:12px}
 
     // left column: status + concept
     const left = el('div', {class:'col c-left'}, statusCard());
-    if (d.concept && d.concept.title){
-      const n = Number(d.concept.number) || 0;
-      const track = el('div', {class:'track', 'aria-label':'Concept ' + n + ' of 20'});
-      for (let i = 1; i <= 20; i++) track.append(el('i', {class: i < n ? 'done' : i === n ? 'now' : ''}));
-      left.append(el('div', {class:'rule'}), el('div', {class:'concept', id:'concept'},
-        el('p', {class:'kicker'}, 'Concept of the day' + (n ? ' · ' + n + ' / 20' : '')), n ? track : null,
-        el('h3', null, d.concept.title), ...paras(d.concept.body)));
-    }
+    left.append(el('div', {class:'rule'}), conceptCarousel(d.concept));
 
     // centre: lead
     const lead = el('div', {class:'col c-lead lead', id:'top'});
