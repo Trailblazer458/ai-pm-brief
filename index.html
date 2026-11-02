@@ -134,6 +134,21 @@ ul.list a::after{content:" ↗";color:var(--red);font-weight:700}
 .tool .test{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 .empty-line{font-size:14px;color:var(--muted);margin:0}
 
+/* more stories */
+.more{border-top:1px solid var(--line);padding:26px 0 30px}
+.more-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;display:flex;flex-direction:column;min-width:0}
+.card h3{font-size:17px;line-height:1.4;margin:0 0 10px}
+.card h3 a{text-decoration:none}
+.card h3 a:hover{color:var(--red)}
+.card p{font-family:var(--f-head);font-size:14px;line-height:1.65;margin:0 0 10px}
+.card p.kicker{font-family:var(--f-ui)}
+.card .take{font-size:13.5px}
+.card .byline{margin-top:auto;padding-top:6px}
+.tool-item.next{border-top:1px solid var(--line);margin-top:18px;padding-top:18px}
+@media (max-width:980px){.more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.more-grid{grid-template-columns:minmax(0,1fr)}}
+
 /* question band */
 .qband{background:var(--red);color:var(--on-red);border-radius:16px;padding:30px 32px;margin-top:6px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 28px;align-items:start}
 .qband .kicker{color:var(--on-red);opacity:.85}
@@ -203,6 +218,7 @@ section,.col{scroll-margin-top:12px}
 
   <nav class="tabs" aria-label="Sections" id="tabs">
     <a href="#top" class="on">Latest</a>
+    <a href="#more">More stories</a>
     <a href="#models">Models</a>
     <a href="#tool">Tool</a>
     <a href="#concept">Concept</a>
@@ -329,7 +345,7 @@ section,.col{scroll-margin-top:12px}
 
     // right: stories 2–3
     const right = el('div', {class:'col c-right'});
-    top.slice(1).forEach((t, i) => {
+    top.slice(1, 3).forEach((t, i) => {
       right.append(el('article', {class:'side'},
         el('span', {class:'num', 'aria-hidden':'true'}, String(i + 2)),
         el('p', {class:'kicker'}, 'Story ' + (i + 2)),
@@ -344,11 +360,27 @@ section,.col{scroll-margin-top:12px}
     const mp = arr(d.modelsPricing), ind = arr(d.india);
     const models = el('section', {id:'models'}, el('p', {class:'kicker'}, 'Models & pricing'), el('h3', {class:'sec-title'}, 'What changed'),
       mp.length ? list(mp) : el('p', {class:'empty-line'}, 'No notable changes.'));
-    const tool = el('section', {class:'tool', id:'tool'}, el('p', {class:'kicker'}, 'Tool to try today'));
-    if (d.tool && d.tool.name){
-      tool.append(el('h3', {class:'name'}, link(d.tool.name, d.tool.url)), d.tool.what ? el('p', null, d.tool.what) : null,
-        d.tool.test ? el('div', {class:'test'}, el('span', {class:'label'}, '10-minute test'), el('p', {style:'margin:0'}, d.tool.test)) : null);
+    const tools = arr(d.tools).length ? arr(d.tools) : (d.tool && d.tool.name ? [d.tool] : []);
+    const tool = el('section', {class:'tool', id:'tool'}, el('p', {class:'kicker'}, tools.length > 1 ? 'Tools to try today' : 'Tool to try today'));
+    if (tools.length){
+      tools.forEach((x, i) => tool.append(el('div', {class: i ? 'tool-item next' : 'tool-item'},
+        el('h3', {class:'name'}, link(x.name || 'Untitled tool', x.url)), x.what ? el('p', null, x.what) : null,
+        x.test ? el('div', {class:'test'}, el('span', {class:'label'}, '10-minute test'), el('p', {style:'margin:0'}, x.test)) : null)));
     } else tool.append(el('p', {class:'empty-line'}, 'No new tool today.'));
+
+    // more stories (beyond the top 3)
+    let more = null;
+    if (top.length > 3){
+      const grid = el('div', {class:'more-grid'});
+      top.slice(3).forEach((t, i) => grid.append(el('article', {class:'card'},
+        el('p', {class:'kicker'}, 'Story ' + (i + 4)),
+        el('h3', null, link(t.title || 'Untitled', t.url)),
+        t.what ? el('p', null, t.what) : null,
+        t.why ? el('p', {class:'why'}, el('span', {class:'label'}, 'Why it matters for a PM'), t.why) : null,
+        t.take ? el('p', {class:'take'}, el('span', {class:'label'}, 'Interview take'), t.take) : null,
+        el('div', {class:'byline'}, el('span', null, t.source || ''), el('span', null, dateLine)))));
+      more = el('section', {class:'more', id:'more'}, el('p', {class:'kicker'}, 'More stories'), el('h3', {class:'sec-title'}, (top.length - 3) + ' more worth knowing today'), grid);
+    }
     const india = el('section', {id:'india'}, el('p', {class:'kicker'}, 'India corner'), el('h3', {class:'sec-title'}, 'From the Indian AI scene'),
       ind.length ? list(ind) : el('p', {class:'empty-line'}, 'Nothing notable today.'));
 
@@ -376,7 +408,7 @@ section,.col{scroll-margin-top:12px}
         el('p', null, el('b', null, 'Single-source items: '), arr(sn.singleSource).join('; ') || 'none'),
         d.subject ? el('p', null, el('b', null, 'Email subject: '), d.subject) : null));
 
-    page.append(el('div', {class:'front'}, left, lead, right), el('div', {class:'lower'}, models, tool, india), qband, bottom);
+    page.append(el('div', {class:'front'}, left, lead, right), more, el('div', {class:'lower'}, models, tool, india), qband, bottom);
     renderMast();
   }
 
