@@ -159,6 +159,21 @@ ul.list a::after{content:" ↗";color:var(--red);font-weight:700}
 @media (max-width:980px){.more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:680px){.more-grid{grid-template-columns:minmax(0,1fr)}}
 
+/* PM AI toolkit */
+.kitsec{border-top:1px solid var(--line);padding:28px 0 30px}
+.kit-intro{font-family:var(--f-head);font-size:14.5px;color:var(--muted);margin:-6px 0 18px;max-width:70ch}
+.kit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.kit{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0;display:flex;flex-direction:column;gap:2px}
+.kit-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.chip{font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:var(--red-soft);color:var(--red);padding:4px 9px;border-radius:999px;white-space:nowrap}
+.visit{font-weight:600;font-size:12.5px;color:var(--red);text-decoration:none;white-space:nowrap}
+.visit:hover{text-decoration:underline}
+.kit h3{font-size:21px;line-height:1.3;margin:0 0 8px}
+.kit p{font-family:var(--f-head);font-size:14px;line-height:1.65;margin:0 0 10px}
+.kit .ex{margin:2px 0 10px;padding-left:18px;font-size:13.5px;line-height:1.55;display:flex;flex-direction:column;gap:4px}
+.kit .price{font-family:var(--f-ui);font-size:12px;color:var(--muted);margin:auto 0 0;padding-top:10px;border-top:1px solid var(--line)}
+@media (max-width:680px){.kit-grid{grid-template-columns:minmax(0,1fr)}}
+
 /* question band */
 .qband{background:var(--red);color:var(--on-red);border-radius:16px;padding:30px 32px;margin-top:6px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 28px;align-items:start}
 .qband .kicker{color:var(--on-red);opacity:.85}
@@ -232,6 +247,7 @@ section,.col{scroll-margin-top:12px}
     <a href="#models">Models</a>
     <a href="#tool">Tool</a>
     <a href="#concept">Concept</a>
+    <a href="#toolkit">PM toolkit</a>
     <a href="#india">India</a>
     <a href="#question">Interview</a>
     <a href="#notable">Also notable</a>
@@ -471,7 +487,28 @@ section,.col{scroll-margin-top:12px}
         el('p', null, el('b', null, 'Single-source items: '), arr(sn.singleSource).join('; ') || 'none'),
         d.subject ? el('p', null, el('b', null, 'Email subject: '), d.subject) : null));
 
-    page.append(el('div', {class:'front'}, left, lead, right), more, el('div', {class:'lower'}, models, tool, india), qband, bottom);
+    // PM AI toolkit
+    let kit = null;
+    const tk = arr(d.pmToolkit);
+    if (tk.length){
+      const grid = el('div', {class:'kit-grid'});
+      tk.forEach(x => {
+        const ex = el('ul', {class:'ex'}); arr(x.examples).forEach(e => ex.append(el('li', null, e)));
+        const h = safeUrl(x.url);
+        grid.append(el('article', {class:'kit'},
+          el('div', {class:'kit-top'}, x.category ? el('span', {class:'chip'}, x.category) : null, h ? el('a', {class:'visit', href:h, target:'_blank', rel:'noopener'}, 'Visit site ↗') : null),
+          el('h3', null, x.name || 'Tool'),
+          x.what ? el('p', null, el('span', {class:'label'}, 'What it is'), x.what) : null,
+          x.does ? el('p', null, el('span', {class:'label'}, 'What it does for a PM'), x.does) : null,
+          arr(x.examples).length ? el('div', null, el('span', {class:'label'}, 'Where you would use it'), ex) : null,
+          x.pricing ? el('p', {class:'price'}, x.pricing) : null));
+      });
+      kit = el('section', {class:'kitsec', id:'toolkit'}, el('p', {class:'kicker'}, 'PM AI toolkit'),
+        el('h3', {class:'sec-title'}, tk.length + ' AI tools product managers use'),
+        el('p', {class:'kit-intro'}, 'A rotating set of tools for discovery, specs, prototyping, research and delivery. Pricing changes often: check the site before you rely on it.'), grid);
+    }
+
+    page.append(el('div', {class:'front'}, left, lead, right), more, el('div', {class:'lower'}, models, tool, india), kit, qband, bottom);
     renderMast();
   }
 

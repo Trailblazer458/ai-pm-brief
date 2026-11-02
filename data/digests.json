@@ -104,6 +104,138 @@
     "Agent spending-cap study"
    ]
   },
-  "createdAt": "2026-11-02T09:36:51Z"
+  "createdAt": "2026-11-02T09:36:51Z",
+  "pmToolkit": [
+   {
+    "name": "Lovable",
+    "category": "Prototyping",
+    "url": "https://lovable.dev",
+    "what": "An AI app builder that generates a working web app from a plain-English prompt.",
+    "does": "Lets a PM build a clickable, functional prototype without engineering help, to test an idea with users or hand a concrete reference to engineers.",
+    "examples": [
+     "Build a working prototype of a new onboarding flow before a discovery session",
+     "Test two versions of a pricing page with five users in an afternoon",
+     "Show engineers a live reference instead of a static mock-up"
+    ],
+    "pricing": "Free tier with daily build credits; Pro from about $25/month (2026 list price, may change)."
+   },
+   {
+    "name": "v0 by Vercel",
+    "category": "UI prototyping",
+    "url": "https://v0.app",
+    "what": "Vercel's tool that turns a description or a Figma design into React and Next.js interface code.",
+    "does": "Produces real front-end code rather than a picture, so a prototype can become the starting point for production work.",
+    "examples": [
+     "Describe a dashboard and get a working component in minutes",
+     "Import a Figma frame and turn it into code for the engineering team",
+     "Mock up an internal admin tool for a stakeholder demo"
+    ],
+    "pricing": "Free tier with monthly credits; Premium about $20/month (2026 list price, may change)."
+   },
+   {
+    "name": "Figma Make",
+    "category": "Design prototyping",
+    "url": "https://www.figma.com/make",
+    "what": "Figma's prompt-to-app feature, built into the Figma platform.",
+    "does": "Turns static designs into interactive prototypes by describing the behaviour you want, with no code.",
+    "examples": [
+     "Make a static checkout screen respond to clicks and show error states",
+     "Create a desktop version of a mobile design",
+     "Prototype with realistic data by uploading a file"
+    ],
+    "pricing": "Included with Figma plans through monthly AI credits; amounts vary by plan."
+   },
+   {
+    "name": "Cursor",
+    "category": "Building",
+    "url": "https://cursor.com",
+    "what": "An AI-powered code editor where you describe changes in plain English and the AI writes and edits the code.",
+    "does": "Helps technical PMs check feasibility, build a proof of concept from a spec, and read an existing codebase to answer their own questions.",
+    "examples": [
+     "Ask how a feature is implemented before scoping a change",
+     "Build a quick internal tool or proof of concept from a one-page spec",
+     "Estimate the effort of a change by exploring the relevant code"
+    ],
+    "pricing": "Free tier available; paid plans for heavier use."
+   },
+   {
+    "name": "Notion AI",
+    "category": "Docs and specs",
+    "url": "https://www.notion.com/product/ai",
+    "what": "AI built into Notion's workspace of docs, wikis, roadmaps and meeting notes.",
+    "does": "Searches across your connected workspace, drafts documents from templates, and runs agents for multi-step tasks.",
+    "examples": [
+     "Ask the workspace why a past product decision was made",
+     "Draft a PRD (product requirements document) from a template and earlier notes",
+     "Summarise an out-of-date spec before a review"
+    ],
+    "pricing": "AI is included from the Business plan (about $20/user/month annually); Free and Plus have no AI (2026, may change)."
+   },
+   {
+    "name": "Dovetail",
+    "category": "Customer research",
+    "url": "https://dovetail.com",
+    "what": "A customer intelligence platform that pulls feedback from calls, tickets, surveys and interviews into one searchable place.",
+    "does": "Classifies raw feedback into themes ranked by customer and business impact, answers questions with citations, and runs agents for recurring work such as stakeholder reports.",
+    "examples": [
+     "Rank feature requests by how many customers and how much revenue sit behind them",
+     "Ask a question across hours of interview recordings and get cited answers",
+     "Have an agent draft the monthly voice-of-customer report"
+    ],
+    "pricing": "Free tier for one project; Enterprise pricing on request."
+   },
+   {
+    "name": "Granola",
+    "category": "Meetings",
+    "url": "https://www.granola.ai",
+    "what": "An AI notepad that captures meeting audio from your device without a bot joining the call.",
+    "does": "Turns your rough notes into structured notes with action items and quotes, and lets you search across past meetings.",
+    "examples": [
+     "Stay present in a customer discovery call while it takes notes",
+     "Pull action items out of sprint planning",
+     "Find what a customer said about pricing across last month's calls"
+    ],
+    "pricing": "Free tier available; paid plans for teams."
+   },
+   {
+    "name": "Productboard Spark",
+    "category": "Feedback and roadmap",
+    "url": "https://www.productboard.com",
+    "what": "Productboard's AI agent for product management workflows.",
+    "does": "Clusters customer feedback from support, sales and surveys into themes, links insights back to the source, and drafts product briefs and competitive analysis.",
+    "examples": [
+     "Find which requests recur most in support tickets this quarter",
+     "Back each roadmap item with the customer feedback behind it",
+     "Generate a first-draft product brief for a new initiative"
+    ],
+    "pricing": "Free tier with limited AI credits; Plus from about $19/maker/month (2026, may change)."
+   },
+   {
+    "name": "Maze",
+    "category": "Usability testing",
+    "url": "https://maze.co",
+    "what": "A platform for running unmoderated usability tests, with AI summaries of the results.",
+    "does": "Lets PMs test prototypes with real users without a dedicated research team, and summarises sessions so you don't watch every recording.",
+    "examples": [
+     "Test a clickable Figma prototype with 20 users over a weekend",
+     "Compare task success rates between two navigation designs",
+     "Get a summary of where users got stuck"
+    ],
+    "pricing": "Free tier; paid plans from about $99/month; participant recruitment billed separately (2026, may change)."
+   },
+   {
+    "name": "Jira Product Discovery with Rovo",
+    "category": "Prioritisation",
+    "url": "https://www.atlassian.com/software/jira/product-discovery",
+    "what": "Atlassian's idea-intake and prioritisation board, with Rovo, its AI layer, across Jira and Confluence.",
+    "does": "Collects and scores ideas, summarises them, surfaces patterns, and links discovery work directly to delivery tickets.",
+    "examples": [
+     "Collect feature ideas from sales and support in one place",
+     "Summarise a batch of submitted ideas before a prioritisation meeting",
+     "Move an approved idea straight into an engineering epic"
+    ],
+    "pricing": "Free for up to 3 creators; paid plans from about $10/user/month (2026, may change)."
+   }
+  ]
  }
 ]
