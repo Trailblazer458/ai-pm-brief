@@ -309,15 +309,18 @@ section,.col{scroll-margin-top:12px}
     ['Building AI for India: Indic languages, voice-first users, price sensitivity', 'India has 22 scheduled languages, much code-mixed speech (Hinglish) and hundreds of millions of first-time internet users who prefer voice to typing. That shapes AI products: voice in and voice out, regional language support, low-bandwidth and low-end-phone performance, and very low price points.\n\nModel choice matters. Global models are strong in English but weaker and costlier per word in Indic scripts, since those scripts take more tokens. Indian models such as Sarvam and BharatGen target this gap. Digital public infrastructure (Aadhaar, UPI, ONDC) is an integration advantage. Test with real users in their language, not translated English.'],
     ['AI-native PM workflows: prototyping, discovery, smaller teams', 'AI is changing how PMs work, not only what they build. Prototyping tools let a PM build a clickable or working prototype in hours, so teams test ideas with users before writing a long specification. AI speeds up discovery: synthesising interviews, clustering feedback and analysing data.\n\nThe results: smaller teams, faster cycles, and PMs expected to be more hands-on and technical. What stays human: choosing the right problem, judgment on trade-offs, taste, and stakeholder alignment. In interviews, show how you use AI in your own workflow and where you deliberately don’t.']
   ];
-  function conceptCarousel(today){
-    const todayN = today && Number(today.number) >= 1 && Number(today.number) <= 20 ? Number(today.number) : 0;
+  function conceptCarousel(today, fresh){
+    // A digest with its own "concepts" list (a new set of 20 each day) replaces the fixed library.
+    const own = arr(fresh).filter(c => c && c.title).map(c => [c.title, c.body || '']);
+    const LIB = own.length ? own : CONCEPTS, N = LIB.length;
+    const todayN = own.length ? 1 : (today && Number(today.number) >= 1 && Number(today.number) <= 20 ? Number(today.number) : 0);
     let k = todayN || 1;
     const box = el('div', {class:'concept', id:'concept'});
     const kicker = el('p', {class:'kicker'});
-    const track = el('div', {class:'track', role:'tablist', 'aria-label':'All 20 concepts'});
+    const track = el('div', {class:'track', role:'tablist', 'aria-label':'All ' + N + ' concepts'});
     const segs = [];
-    for (let i = 1; i <= 20; i++){
-      const b = el('button', {type:'button', role:'tab', 'aria-label':'Concept ' + i + ': ' + CONCEPTS[i-1][0]});
+    for (let i = 1; i <= N; i++){
+      const b = el('button', {type:'button', role:'tab', 'aria-label':'Concept ' + i + ': ' + LIB[i-1][0]});
       b.addEventListener('click', () => { k = i; show(); });
       segs.push(b); track.append(b);
     }
@@ -327,19 +330,19 @@ section,.col{scroll-margin-top:12px}
     const next = el('button', {type:'button', class:'nav', 'aria-label':'Next concept'}, 'Next →');
     const todayBtn = el('button', {type:'button', class:'nav today'}, 'Today’s concept');
     const count = el('span', {class:'count'});
-    prev.addEventListener('click', () => { k = k === 1 ? 20 : k - 1; show(); });
-    next.addEventListener('click', () => { k = k === 20 ? 1 : k + 1; show(); });
+    prev.addEventListener('click', () => { k = k === 1 ? N : k - 1; show(); });
+    next.addEventListener('click', () => { k = k === N ? 1 : k + 1; show(); });
     todayBtn.addEventListener('click', () => { k = todayN; show(); });
     box.addEventListener('keydown', e => { if (e.target.closest('.track,.cnav')){ if (e.key === 'ArrowLeft'){ prev.click(); e.preventDefault(); } if (e.key === 'ArrowRight'){ next.click(); e.preventDefault(); } } });
     function show(){
       const isToday = k === todayN;
-      kicker.textContent = (isToday ? 'Concept of the day' : 'Concept library') + ' · ' + k + ' / 20';
+      kicker.textContent = (own.length ? 'Today’s concepts' : isToday ? 'Concept of the day' : 'Concept library') + ' · ' + k + ' / ' + N;
       segs.forEach((s, i) => { s.className = (i + 1 === k ? 'on' : '') + (i + 1 === todayN ? ' today' : ''); s.setAttribute('aria-selected', String(i + 1 === k)); });
-      title.textContent = isToday && today.title ? today.title : CONCEPTS[k-1][0];
+      title.textContent = !own.length && isToday && today.title ? today.title : LIB[k-1][0];
       body.textContent = '';
-      paras(isToday && today.body ? today.body : CONCEPTS[k-1][1]).forEach(p => body.append(p));
-      count.textContent = k + ' of 20';
-      todayBtn.hidden = !todayN || isToday;
+      paras(!own.length && isToday && today.body ? today.body : LIB[k-1][1]).forEach(p => body.append(p));
+      count.textContent = k + ' of ' + N;
+      todayBtn.hidden = own.length > 0 || !todayN || isToday;
     }
     box.append(kicker, track, title, body, el('div', {class:'cnav'}, prev, count, next), todayBtn);
     show();
@@ -404,7 +407,7 @@ section,.col{scroll-margin-top:12px}
 
     // left column: status + concept
     const left = el('div', {class:'col c-left'}, statusCard());
-    left.append(el('div', {class:'rule'}), conceptCarousel(d.concept));
+    left.append(el('div', {class:'rule'}), conceptCarousel(d.concept, d.concepts));
 
     // centre: lead
     const lead = el('div', {class:'col c-lead lead', id:'top'});
@@ -413,7 +416,7 @@ section,.col{scroll-margin-top:12px}
       const t = top[0];
       lead.append(
         el('div', {class:'panel'}, el('div', {class:'lbl'}, fmt(dayOf(d.date), {weekday:'long'}) + ' edition'), el('div', {class:'big'}, fmt(dayOf(d.date), {day:'numeric', month:'long'})),
-          el('div', {class:'meta'}, top.length + ' top stories' + (d.concept && d.concept.number ? ' · concept ' + d.concept.number + ' of 20' : '') + (d.question && d.question.q ? ' · 1 interview question' : ''))),
+          el('div', {class:'meta'}, top.length + ' top stories' + (arr(d.concepts).length ? ' · ' + arr(d.concepts).length + ' new concepts' : d.concept && d.concept.number ? ' · concept ' + d.concept.number + ' of 20' : '') + (d.question && d.question.q ? ' · 1 interview question' : ''))),
         el('p', {class:'kicker'}, 'Top story'),
         el('h2', null, link(t.title || 'Untitled', t.url)),
         t.what ? el('p', {class:'what'}, t.what) : null,
