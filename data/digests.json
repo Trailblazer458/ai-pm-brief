@@ -1,5 +1,333 @@
 [
  {
+  "date": "2026-11-04",
+  "subject": "AI PM Digest – Wed, 04 Nov 2026 – Google makes school AI opt-in",
+  "headline": "Google makes AI opt-in for schools, tied to Search",
+  "quiet": false,
+  "topStories": [
+   {
+    "title": "Google will switch off its AI tools for kindergarten-to-12th-grade (K-12) students by default, but schools that block AI entirely will also lose Search",
+    "what": "Google said on 3 November that Gemini, Gemini Notebook, Gemini in Classroom and Google Search will be turned off on K-12 student accounts until school administrators enable them, reversing its August move that switched Gemini on for many students. Because Google says it cannot cleanly separate AI Overviews and AI Mode from core Search, districts that reject AI completely will lose Search too; reports put the change in early 2027.",
+    "why": "This is a live case study in opt-in versus opt-out defaults and in bundling: Google gives control back to schools while tying its most valuable product to AI adoption. Critics, including New York City Mayor Zohran Mamdani (per The Washington Post), called it monopoly power, so expect regulatory and trust questions around any AI feature that cannot be separated from a core product.",
+    "take": "When AI is baked into the core product, an off switch for AI can become an off switch for the product, and that design choice is a policy and trust decision, not just an engineering one.",
+    "url": "https://www.washingtonpost.com/education/2026/11/03/google-turn-off-search-schools-that-dont-want-students-using-ai/",
+    "source": "The Washington Post; also TechCrunch, Quartz, Fox 29"
+   },
+   {
+    "title": "Update: Anthropic's amended initial public offering (IPO) filing shows compute eating 58% of revenue, up from 48%",
+    "what": "TechCrunch reports that Anthropic's updated S-1 (the US Securities and Exchange Commission registration form for an IPO) shows compute costs rose to 58% of revenue in the quarter to 30 September, from 48%, on quarterly revenue of about $17 billion. The compute bill reached about $10 billion, including about $5 billion of short-term committed compute, which costs significantly more than multi-year commitments; Anthropic says compute will remain its largest operating expense.",
+    "why": "Even the fastest-growing AI lab is margin-squeezed when demand outruns planned capacity, so inference cost is a first-class product metric. PMs pricing AI features should model cost per task and know that capacity bought in a hurry costs more.",
+    "take": "Revenue growth is not the same as healthy unit economics: in AI, the cost of serving each user can rise as fast as demand.",
+    "url": "https://techcrunch.com/2026/11/03/anthropic-is-still-grappling-with-the-economics-of-compute/",
+    "source": "TechCrunch; also Yahoo Finance and others"
+   },
+   {
+    "title": "Netflix launches AI Discover, a mood-and-theme recommendation tab on TV",
+    "what": "Netflix began rolling out AI Discover on 3 November to a small group of US members using English on supported TVs, describing it as a 'test kitchen' for discovery ideas. The first version is organised around mood-based themes rather than a search box, each title has a 'Tune Your Recommendations' control, rejected titles should not reappear, and kids' profiles are excluded.",
+    "why": "It shows a mature consumer company shipping generative AI as a contained experiment with explicit feedback controls, rather than replacing its core recommendation experience. The theme-first design is a deliberate choice: most people on a TV remote do not want to type prompts.",
+    "take": "Ship AI as a labelled experiment with a feedback loop and a narrow audience first; let the interface fit the device and context.",
+    "url": "https://techcrunch.com/2026/11/03/netflixs-new-ai-discover-tab-helps-you-find-something-to-watch-based-on-your-mood/",
+    "source": "TechCrunch; also Variety, Deadline, Forbes, Tom's Guide"
+   },
+   {
+    "title": "Inference platform Fal raises $1.3 billion at a $16 billion valuation",
+    "what": "Fal, which hosts and runs image, video and audio generation models through an application programming interface (API), raised a $1.3 billion Series F led by Bessemer Venture Partners, doubling its valuation from $8 billion in April. Nvidia, Sound Ventures and T. Rowe Price participated; Fal says the money goes to inference capacity and new research.",
+    "why": "Investors are betting that running models (inference) is a large business in its own right, separate from building them. For PMs, a deep market of inference providers makes 'buy' a stronger option than self-hosting for generative media features.",
+    "take": "The inference layer is becoming a competitive market, which pushes down prices and strengthens the case for buying rather than building model infrastructure.",
+    "url": "https://techcrunch.com/2026/11/03/ai-inference-startup-fal-doubles-its-valuation-to-16b-as-demand-surges/",
+    "source": "TechCrunch; also SiliconANGLE"
+   },
+   {
+    "title": "Proton's chief executive cancels AI 're-interviews' of staff after an internal revolt",
+    "what": "Proton had told staff they would be re-interviewed about how they use AI, with jobs potentially at stake, and had installed software that tracks how much code AI writes. After a 404 Media report and staff backlash, chief executive Andy Yen cancelled the re-interviews at an all-hands meeting, admitted a 'communication failure', and said AI-use metrics will instead become part of performance reviews.",
+    "why": "AI adoption mandates are now an organisational-change problem, and measuring 'how much code AI wrote' is a vanity metric if it is not tied to outcomes. PMs leading AI adoption need change management, not just tools.",
+    "take": "Measure outcomes (cycle time, quality, customer impact), not AI usage itself, and bring the team along before you mandate.",
+    "url": "https://404media.co/protons-ceo-cancels-ai-re-interviews",
+    "source": "404 Media; also AI Weekly, The Neuron"
+   }
+  ],
+  "modelsPricing": [],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Opt-in versus opt-out defaults for AI features",
+    "body": "A default is what users get if they do nothing. Opt-out means the AI feature is on until someone switches it off; opt-in means it stays off until someone switches it on. Because most people never change defaults, the default largely decides adoption.\n\nFor a PM this is a trade-off between adoption and trust. Opt-out maximises usage but invites backlash where users are vulnerable (children, health, finance), as Google found with schools. Opt-in respects consent but needs a clear value moment to drive activation. Decide per segment, make the switch easy to find, and avoid bundling where turning AI off also removes the core product."
+   },
+   {
+    "title": "Tokens and tokenisation",
+    "body": "Large language models (LLMs) read and write text in tokens, chunks of characters rather than whole words. A tokenizer splits text into these chunks, and API pricing, speed and context limits are all counted in tokens.\n\nFor a PM, tokens are the unit of cost. The same sentence can need more tokens in some languages than in English, especially Indian scripts on tokenizers trained mostly on English, so an Indic-language feature can cost more and feel slower. Estimate tokens per task early, test in your target languages, and include them in your pricing model."
+   },
+   {
+    "title": "Reasoning models and test-time compute",
+    "body": "Reasoning models 'think' before answering: they generate intermediate reasoning steps, using extra computation at the moment of the request (test-time compute). This usually improves accuracy on maths, coding and multi-step problems, at the cost of more tokens and more waiting.\n\nFor a PM the decision is routing: which requests deserve a slow, expensive reasoning model and which need a fast, cheap one? Use reasoning for high-stakes or complex tasks, keep simple ones on lighter models, and watch latency and cost per task, the very compute costs squeezing Anthropic's margins today."
+   },
+   {
+    "title": "Multimodal models",
+    "body": "Multimodal models take in or produce more than one kind of data: text, images, audio and video. One model can read a screenshot, listen to a voice note or generate an image from a description.\n\nFor a PM, multimodality opens new inputs, such as photographing a bill or speaking in a local language instead of typing. That matters in voice-first, mobile-first markets like India. The trade-offs are higher cost per request, new failure modes (misreading images, accents), and privacy questions about cameras and microphones, as Apple's always-listening watch features show."
+   },
+   {
+    "title": "Tool use (function calling)",
+    "body": "Tool use lets a model call external functions, such as searching a database, booking a slot or sending a message, instead of only producing text. The developer describes the available tools; the model decides when to call one and with what inputs, and the system runs it and returns the result.\n\nFor a PM, tools turn a chatbot into a product that acts. Each tool is a capability and a risk: define which actions need user confirmation, what happens when a call fails, and how you log every action. Start with read-only tools before allowing actions that change data or spend money."
+   },
+   {
+    "title": "Structured outputs",
+    "body": "Structured outputs force a model to answer in a fixed, machine-readable format, such as JSON (JavaScript Object Notation) that matches a schema, instead of free text. Many model APIs can constrain responses so the fields and types are always valid.\n\nFor a PM, this is what makes AI dependable inside a workflow: downstream code, dashboards and other systems can use the output without fragile parsing. Specify the schema in your product spec, decide what happens when a field is empty or uncertain, and track the rate of valid but wrong values, which a schema alone cannot catch."
+   },
+   {
+    "title": "Model Context Protocol (MCP)",
+    "body": "The Model Context Protocol (MCP) is an open standard for connecting AI applications to external tools and data sources. A service exposes its capabilities once through an MCP server, and any compatible AI client can use them, much like a universal adapter.\n\nFor a PM, MCP changes build-versus-integrate maths: instead of building custom integrations for each AI assistant, you can expose your product once and be reachable from many. The trade-offs are security (what an agent can see and do through your server), permission design, and losing some control over how your product appears inside someone else's interface."
+   },
+   {
+    "title": "Hallucination",
+    "body": "Hallucination is when a model states something false with confidence, such as an invented fact, citation or number. It happens because models generate likely-sounding text rather than looking up verified truth.\n\nFor a PM, hallucination is a product risk to be managed, not a bug that will vanish. Reduce it with grounding in trusted sources, citations users can check, and instructions to say 'I don't know'. Measure it with evaluations on real tasks, and design the experience so that errors are cheap to spot and fix, especially in high-stakes domains like health, money or elections."
+   },
+   {
+    "title": "Guardrails",
+    "body": "Guardrails are checks placed around a model to keep its inputs and outputs within acceptable limits: filters for harmful content, topic restrictions, personal-data detection, and rules that block certain actions. They can run before the model, after it, or both.\n\nFor a PM, guardrails are a precision-recall trade-off. Too strict and you block legitimate users and frustrate them; too loose and you ship harm. Define policies by user segment (for example, stricter for students, as Google's school controls show), measure false-block and miss rates, and give users a clear path when something is blocked."
+   },
+   {
+    "title": "Human-in-the-loop",
+    "body": "Human-in-the-loop means a person reviews, approves or corrects the AI's work at key points, rather than the system acting fully on its own. Examples include approving an agent's email before it sends, or an expert checking low-confidence answers.\n\nFor a PM, the question is where to place humans so you get safety without killing speed and cost. Route by risk and confidence: let low-risk, high-confidence cases go automatically and send the rest to people. India's telecom regulator requiring human support alongside AI agents is a regulatory version of the same idea."
+   },
+   {
+    "title": "Unit economics of inference",
+    "body": "Inference is the cost of running a model each time a user makes a request. Unit economics asks whether each unit (a query, a task, a user) earns more than it costs to serve, including compute, retrieval and human review.\n\nFor a PM, AI flips software's usual near-zero marginal cost: heavy users can be unprofitable. Anthropic's filing, with compute at 58% of revenue, shows the pressure even at scale. Track cost per successful task, use smaller models and caching where quality allows, and design pricing (usage limits, tiers, credits) around your cost curve."
+   },
+   {
+    "title": "Build versus buy for model infrastructure",
+    "body": "Teams can self-host models on their own graphics processing units (GPUs), or buy inference from model labs and specialised providers through an API. Building gives control and can be cheaper at very large, steady scale; buying gives speed, flexibility and access to many models.\n\nFor a PM the decision rests on volume, latency needs, data rules and team skills. Fal's $1.3 billion raise shows a deep market of inference providers, which makes buying attractive early. Revisit the decision when usage becomes predictable and large, and avoid lock-in by keeping a routing layer between your product and any one provider."
+   },
+   {
+    "title": "Platform risk",
+    "body": "Platform risk is the danger of depending on another company's platform, such as a model provider, app store or distribution channel, that can change prices, rules or access, or compete with you. In AI, model providers increasingly launch products that overlap with their customers.\n\nFor a PM, map what would break if your model provider raised prices, retired a model or launched your feature itself. Reduce risk with multi-model support, owning proprietary data and workflows, and direct customer relationships. Google tying Search to its AI choices for schools shows how a platform's bundling can shape your users' options."
+   },
+   {
+    "title": "North-star and guardrail metrics for AI products",
+    "body": "A north-star metric captures the core value users get, for example tasks completed successfully per week. Guardrail metrics are the numbers you must not damage while chasing it, such as error rate, complaints, latency and cost per task.\n\nFor AI products, outputs are probabilistic, so pair outcome metrics with quality metrics. A recommendation feature like Netflix's AI Discover might track 'titles started and finished from the tab' as its north star, with guardrails on rejections, time-to-play and overall viewing. Define both before launch so a usage spike does not hide falling quality or rising cost."
+   },
+   {
+    "title": "A/B testing AI features",
+    "body": "A/B testing compares a new version (B) against the current one (A) with randomly assigned users to measure real impact. AI features complicate this: outputs vary even for the same input, novelty effects can inflate early results, and model updates can change behaviour mid-test.\n\nFor a PM, run tests long enough to outlast novelty, fix the model version during the test, and measure downstream outcomes (retention, task success) rather than just clicks. Netflix's 'test kitchen' approach, shipping to a small group and learning from feedback, is a staged way to de-risk before a full experiment."
+   },
+   {
+    "title": "Large language model (LLM) as judge",
+    "body": "LLM-as-judge means using a language model to grade another model's outputs against a rubric, for example rating answers for accuracy, tone or policy compliance. It lets teams evaluate thousands of outputs quickly instead of relying only on human reviewers.\n\nFor a PM, it makes continuous evaluation affordable, but the judge has its own biases, such as favouring longer answers or its own style. Calibrate it against a set of human-labelled examples, check agreement rates regularly, and keep humans on high-stakes or ambiguous cases. Treat the judge's rubric as part of your product spec."
+   },
+   {
+    "title": "Theme-first versus prompt-first AI discovery",
+    "body": "Prompt-first interfaces give users an empty box to type requests. Theme-first interfaces offer ready-made choices, such as moods, categories or suggested questions, that the AI then personalises. Netflix's AI Discover chose themes over a search bar for the TV.\n\nFor a PM, an empty prompt box puts the work on the user, who must know what to ask and how. Themes lower that effort and suit devices like remotes or phones, but limit expressiveness. Choose based on context and user intent; many products combine both, with suggested prompts that teach users what the AI can do."
+   },
+   {
+    "title": "Feedback controls and user steering",
+    "body": "Feedback controls let users correct AI behaviour directly: thumbs up or down, 'not interested', 'tune recommendations', or editing an answer. They give users a sense of control and give the product a signal to learn from.\n\nFor a PM, good controls build trust and improve quality over time, but only if the system visibly responds; Netflix promises that rejected titles stop reappearing. Design controls where errors are most annoying, keep them one tap away, and track how often they are used, since rising use can signal falling quality."
+   },
+   {
+    "title": "Children's data and AI under India's Digital Personal Data Protection (DPDP) Act",
+    "body": "India's Digital Personal Data Protection (DPDP) Act, 2023 treats anyone under 18 as a child. It requires verifiable parental consent before processing a child's personal data and bars tracking, behavioural monitoring and targeted advertising directed at children, subject to exemptions set by rules.\n\nFor a PM building AI for Indian students or families, this shapes the whole design: age assurance, consent flows, what data you log for personalisation or model improvement, and whether features default on or off. Google's school controls show that defaults for young users are now a regulatory and reputational issue worldwide."
+   },
+   {
+    "title": "Sovereign and Indic foundation models",
+    "body": "Sovereign foundation models are built within a country, often with public support, so that critical sectors are not wholly dependent on foreign providers. In India, the IndiaAI Mission funds domestic models, such as the EKA-1 and Dhir models launched today, often focused on Indian languages and offline deployment.\n\nFor a PM, these models can matter where data residency, offline use or Indian-language quality outweigh frontier capability, for example in banking, defence or government services. Evaluate them on your own tasks and languages, weigh licensing and support, and consider routing between a local model and a global one."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Opt-in versus opt-out defaults for AI features",
+   "body": "A default is what users get if they do nothing. Opt-out means the AI feature is on until someone switches it off; opt-in means it stays off until someone switches it on. Because most people never change defaults, the default largely decides adoption.\n\nFor a PM this is a trade-off between adoption and trust. Opt-out maximises usage but invites backlash where users are vulnerable (children, health, finance), as Google found with schools. Opt-in respects consent but needs a clear value moment to drive activation. Decide per segment, make the switch easy to find, and avoid bundling where turning AI off also removes the core product."
+  },
+  "india": [
+   {
+    "text": "Soket Labs and ZenteiQ AiTech launched indigenous foundation models under the IndiaAI Mission on 3 November in New Delhi: Soket's EKA-1 (focused on mathematical reasoning and multilingual use, aimed at banking, financial services and cybersecurity) and ZenteiQ's open-source Dhir 2B and Dhir 5B (English plus 10 Indian languages, built to run offline, available on the AIKosh platform). Both firms received subsidised national compute.",
+    "url": "https://inc42.com/buzz/soket-labs-zenteiq-launch-indigenous-ai-models/"
+   }
+  ],
+  "question": {
+   "q": "Google will make its AI tools opt-in for K-12 students, but schools that block AI entirely also lose Search. As the PM for Google's education products, how would you design AI controls for schools, and how would you measure success?",
+   "framing": "Identify the stakeholders (administrators, teachers, students, parents) and their jobs: teachers want help without cheating, administrators want control and compliance, parents want safety. Segment by age and school policy, and list the controls each needs (by grade, by feature, by time of day).",
+   "tradeoff": "Granular controls and opt-in defaults build trust but slow adoption; bundling AI into Search simplifies engineering but removes real choice and invites regulatory and reputational risk. Weigh offering a 'Search without AI features' mode for students against its cost and product complexity.",
+   "metric": "North star: share of districts actively using AI tools with administrator-configured settings (adoption with consent). Guardrails: districts disabling Google services, complaints and policy violations, teacher-reported misuse. Recommend opt-in by default for under-18s, per-feature controls, and a separable AI-free Search option for younger grades."
+  },
+  "alsoNotable": [
+   {
+    "text": "Apple began testing its always-listening Apple Watch conversation-recap features in beta; full rollout is planned for December and the features must be switched on manually (single source).",
+    "url": "https://gizmodo.com/apple-begins-testing-its-controversial-always-listening-ai-feature-2000834615"
+   },
+   {
+    "text": "TechCrunch: inside Palantir's strong quarter, enterprise sales growth shows signs of slowing (single source).",
+    "url": "https://techcrunch.com/2026/11/03/hiding-inside-palantirs-skyrocketing-quarter-is-a-foreboding-signal"
+   },
+   {
+    "text": "New York City Mayor Zohran Mamdani told WIRED he backs New York state's proposed one-year pause on large data-centre construction (single source).",
+    "url": "https://aiweekly.co/alerts/mamdani-ties-ai-boom-to-housing-bubble-backs-ny-data-pause"
+   },
+   {
+    "text": "OpenAI and Anthropic set up election-monitoring teams for the 3 November US midterm elections (single source).",
+    "url": "https://www.theneuron.ai/digest/everything-that-happened-in-ai-today-tuesday-november-3-2026/"
+   },
+   {
+    "text": "A Chinese financial regulator warned that AI investment is becoming overly concentrated (single source).",
+    "url": "https://www.theneuron.ai/digest/everything-that-happened-in-ai-today-tuesday-november-3-2026/"
+   }
+  ],
+  "pmToolkit": [
+   {
+    "name": "Gamma",
+    "category": "Presentations and communication",
+    "url": "https://gamma.app",
+    "what": "An AI tool that turns a prompt, notes or a document into a presentation, document or simple web page.",
+    "does": "It drafts structured, designed decks from rough material so a PM can spend time on the story rather than formatting.",
+    "examples": [
+     "Turn a one-page product requirements document (PRD) into a 10-slide review deck for leadership",
+     "Convert interview research notes into a findings presentation for stakeholders",
+     "Draft a case-study deck for a PM interview presentation round"
+    ],
+    "pricing": "Free plan with limited AI credits; paid plans from about $8–10 per month (may change)"
+   },
+   {
+    "name": "ChatPRD",
+    "category": "Specs and docs",
+    "url": "https://www.chatprd.ai",
+    "what": "An AI assistant built specifically for product managers' documents.",
+    "does": "It drafts and critiques product requirements documents (PRDs), user stories and strategy docs, acting like a coach that asks the questions a senior PM would.",
+    "examples": [
+     "Turn a feature idea into a first-draft PRD with goals, non-goals and success metrics",
+     "Ask it to review your PRD for missing edge cases and unclear requirements",
+     "Generate user stories and acceptance criteria for an engineering handoff"
+    ],
+    "pricing": "Free plan; paid Pro and Teams plans (may change)"
+   },
+   {
+    "name": "Julius AI",
+    "category": "Data and SQL",
+    "url": "https://julius.ai",
+    "what": "An AI data analyst that analyses spreadsheets and data files through plain-language questions.",
+    "does": "It lets a PM upload CSV (comma-separated values) or Excel files and get charts, statistics and summaries without writing code.",
+    "examples": [
+     "Upload a feature-usage export and ask which user segments drive retention",
+     "Chart weekly signups by acquisition channel for a review meeting",
+     "Run a quick check of whether an experiment's difference looks meaningful"
+    ],
+    "pricing": "Free tier with limited monthly messages; paid plans available (may change)"
+   },
+   {
+    "name": "Outset",
+    "category": "Discovery and customer research",
+    "url": "https://outset.ai",
+    "what": "An AI-moderated research platform that runs one-on-one user interviews at scale.",
+    "does": "An AI interviewer follows your discussion guide, asks follow-up questions over video, audio or text, and synthesises themes across many sessions.",
+    "examples": [
+     "Run dozens of discovery interviews in a week instead of a month",
+     "Test a new concept with users in several languages at once",
+     "Gather qualitative reasons behind a drop in a funnel metric"
+    ],
+    "pricing": ""
+   },
+   {
+    "name": "Lyssna",
+    "category": "Usability testing",
+    "url": "https://www.lyssna.com",
+    "what": "A user research platform for quick usability tests and surveys (formerly UsabilityHub).",
+    "does": "It runs first-click tests, five-second tests, preference tests, prototype tests and card sorts so a PM can validate designs before building.",
+    "examples": [
+     "Run a preference test between two onboarding screen designs",
+     "Use a first-click test to see whether users can find a new feature",
+     "Card-sort your navigation labels before a redesign"
+    ],
+    "pricing": "Free plan (recruit your own participants); paid Growth plan from about $165–199 per month (may change)"
+   },
+   {
+    "name": "Bolt.new",
+    "category": "Prototyping",
+    "url": "https://bolt.new",
+    "what": "A browser-based AI app builder that creates and runs full-stack web apps from prompts.",
+    "does": "It lets a PM turn an idea into a clickable, working prototype in minutes to test with users or show to engineers.",
+    "examples": [
+     "Build a working prototype of a new checkout flow for a user test",
+     "Create an internal tool such as a feedback tracker without engineering time",
+     "Prototype an interview take-home idea to show rather than describe it"
+    ],
+    "pricing": "Free tier with daily token limits; Pro from about $25 per month (may change)"
+   },
+   {
+    "name": "Otter.ai",
+    "category": "Meetings and notes",
+    "url": "https://otter.ai",
+    "what": "An AI meeting assistant that transcribes and summarises conversations.",
+    "does": "Its meeting assistant can join Zoom, Google Meet and Microsoft Teams calls, then produce transcripts, summaries and action items a PM can share.",
+    "examples": [
+     "Capture customer interview transcripts for later synthesis",
+     "Share an automatic summary and action items after a sprint review",
+     "Search past meetings for what a stakeholder actually agreed to"
+    ],
+    "pricing": "Free Basic plan (300 minutes a month, 30 minutes per conversation); paid plans from about $8.33 per user per month billed annually (may change)"
+   },
+   {
+    "name": "Amplitude",
+    "category": "Analytics and experimentation",
+    "url": "https://amplitude.com",
+    "what": "A product analytics and experimentation platform with built-in AI features.",
+    "does": "It tracks how users move through a product, builds funnels and retention charts, and runs experiments, with AI features to ask questions in plain language.",
+    "examples": [
+     "Build an activation funnel and find the step with the biggest drop-off",
+     "Compare retention of users who adopted an AI feature versus those who did not",
+     "Set up an A/B test for a new onboarding flow"
+    ],
+    "pricing": "Free Starter plan (up to 2 million events a month); paid plans above that (may change)"
+   },
+   {
+    "name": "Zapier Agents",
+    "category": "Automation and agents",
+    "url": "https://zapier.com/agents",
+    "what": "AI agents from Zapier that carry out tasks across thousands of connected apps.",
+    "does": "A PM can describe a recurring job in plain language and have an agent do it across tools such as Slack, Gmail, Jira and spreadsheets.",
+    "examples": [
+     "Summarise new app-store reviews into a weekly Slack digest",
+     "Tag and route incoming feedback emails to the right product area",
+     "Compile a weekly competitor-update brief from chosen websites"
+    ],
+    "pricing": "Free Agents plan (400 activities a month); Pro from about $33 per month billed annually (may change)"
+   },
+   {
+    "name": "ChatGPT",
+    "category": "General AI assistants",
+    "url": "https://chatgpt.com",
+    "what": "OpenAI's general-purpose AI assistant for writing, analysis, research and coding.",
+    "does": "It helps a PM brainstorm, draft, analyse files and research quickly, and can be customised with project instructions for repeat work.",
+    "examples": [
+     "Pressure-test a product strategy by asking for the strongest counter-arguments",
+     "Rewrite release notes for customers, sales and engineers",
+     "Practise PM interview questions with a mock interviewer"
+    ],
+    "pricing": "Free plan; paid Go and Plus plans (Plus is $20 a month in the US) (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 26,
+   "failed": [
+    "TLDR AI feed",
+    "TLDR Product Management feed",
+    "Hacker News RSS",
+    "Techmeme feed",
+    "Product Hunt feed",
+    "Simon Willison feed",
+    "Lenny's Newsletter feed",
+    "Product Compass feed",
+    "Product Growth feed",
+    "One Useful Thing feed",
+    "Direct article fetches (network policy blocked all page fetches; items written from search-result summaries)"
+   ],
+   "singleSource": [
+    "Apple Watch recap beta (Gizmodo)",
+    "Palantir enterprise slowdown (TechCrunch)",
+    "Mamdani backs data-centre pause (AI Weekly citing WIRED)",
+    "OpenAI and Anthropic election teams (The Neuron)",
+    "Chinese regulator on AI investment concentration (The Neuron)"
+   ]
+  },
+  "createdAt": "2026-11-04T02:00:00Z"
+ },
+ {
   "alsoNotable": [
    {
     "text": "Goldman Sachs restricted Claude Code and GitHub Copilot to its engineers, removing access for bankers and traders (single source).",
