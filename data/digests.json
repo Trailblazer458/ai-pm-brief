@@ -1,5 +1,348 @@
 [
  {
+  "date": "2026-11-05",
+  "subject": "AI PM Digest – Thu, 05 Nov 2026 – CrowdStrike buys AI agent-security startups",
+  "headline": "CrowdStrike buys AI agent-security startups Fiddler and Dreadnode",
+  "quiet": false,
+  "topStories": [
+   {
+    "title": "CrowdStrike agrees to buy AI agent-monitoring firm Fiddler AI and red-teaming startup Dreadnode for a reported $495 million",
+    "what": "CrowdStrike agreed to acquire Fiddler AI, which monitors enterprise artificial intelligence (AI) agents, and Dreadnode, which runs automated security testing on models and agents; The Wall Street Journal put the prices at about $400 million and $95 million, and CrowdStrike did not disclose terms. Fiddler is to become Falcon Observe (pre-deployment evaluation, tracing of agent reasoning and tool calls, and detection of drift and hallucinations), while Dreadnode's test results will feed Falcon Guardian, its runtime AI security product.",
+    "why": "Security vendors are now buying the evaluation and observability layer for agents, a sign that enterprises will not let agents into production without traceability and pre-launch testing. A product manager (PM) shipping agents should plan for tracing, red-teaming and drift alerts as launch requirements, not nice-to-haves.",
+    "take": "Agent observability is becoming a buying criterion: if you cannot show what your agent did and why, enterprise customers will not deploy it.",
+    "url": "https://www.securityweek.com/crowdstrike-reportedly-paying-495-million-for-ai-security-firms-fiddler-dreadnode/",
+    "source": "SecurityWeek (citing The Wall Street Journal); also BankInfoSecurity, Seeking Alpha"
+   },
+   {
+    "title": "Meta acquires Conductor, the startup that lets developers run several AI coding agents in parallel",
+    "what": "Meta confirmed to TechCrunch that it bought Conductor, whose app lets engineers run multiple AI coding agents (such as Claude Code and Codex) in parallel, each in its own isolated workspace or branch. Chief executive Charlie Holtz and chief technology officer Jackson de Campos join Meta Superintelligence Labs; terms were not disclosed.",
+    "why": "The bottleneck in AI coding is shifting from a single smart model to orchestrating many agents and reviewing their work, and big labs are buying that workflow layer. For PMs, the user experience of supervising parallel agents (queueing, diff review, merging) is becoming a product category of its own.",
+    "take": "When models commoditise, the orchestration and review layer around them is where product differentiation and acquisitions move.",
+    "url": "https://techcrunch.com/2026/11/04/meta-acquires-ai-coding-startup-conductor/",
+    "source": "TechCrunch"
+   },
+   {
+    "title": "Canva cuts or reassigns 22% of staff (1,271 roles) as it restructures around AI and slowing growth",
+    "what": "Canva is cutting or reassigning 1,271 roles, about 22% of its global workforce; chief executive Melanie Perkins called it the hardest moment in the company's 13-year history, citing AI's impact and a need for simpler, smaller teams. Reports say growth is now expected at about 20% this year against a 30% plan, and that Canva delayed its biggest AI-led update because the cost of running AI for its more than 200 million free users was eating into profits.",
+    "why": "This is a vivid case of inference cost colliding with a freemium model: AI features that are cheap per user become expensive across hundreds of millions of free users. PMs must decide which AI features are free, metered or paid before launch, not after the bill arrives.",
+    "take": "In freemium products, the cost of serving AI to free users can decide the launch plan, so gate, meter or route to cheaper models from day one.",
+    "url": "https://www.inc.com/kamya-marwah/canva-layoffs-restructuring-ai-creative-jobs/91430692",
+    "source": "Inc.; also briefs.co, Implicator, TechJuice"
+   },
+   {
+    "title": "OpenAI makes 'dots' personal agents generally available in ChatGPT Enterprise, Edu and Healthcare (single source)",
+    "what": "OpenAI's release notes, as surfaced in search, say personal 'dots' can keep working on tasks between conversations and are generally available to eligible ChatGPT Enterprise, Edu and Healthcare workspaces, with an administrator preview period until 18 November 2026. We could not open the release notes directly to confirm details.",
+    "why": "Agents that persist across sessions move ChatGPT from a chat tool to a background worker inside companies, which raises questions about permissions, audit trails and admin controls. The admin preview window is a reminder that enterprise AI launches are gated by administrators, not end users.",
+    "take": "For enterprise agents, the administrator is the first customer: design rollout controls and previews for them.",
+    "url": "https://help.openai.com/en/articles/10128477-chatgpt-enterprise-and-edu-release-notes",
+    "source": "OpenAI help centre release notes (via search)"
+   },
+   {
+    "title": "Anthropic releases FlashProve, a research prototype that cryptographically proves which model produced a response (single source)",
+    "what": "According to The Decoder, Anthropic released FlashProve as an open-source research prototype that uses cryptography to verify whether an AI response actually came from the claimed model, without exposing the model's weights. Anthropic describes it as a research prototype with significant limitations, including context-window and sampling limits.",
+    "why": "As companies resell, route and wrap models, buyers increasingly need proof that they are getting the model they pay for. Model attestation could become a trust feature in enterprise contracts and regulated sectors.",
+    "take": "Provenance is a product feature: proving which model answered can matter as much as the answer in regulated or high-stakes uses.",
+    "url": "https://the-decoder.com/anthropics-new-prototype-proves-which-model-wrote-an-ai-response-without-exposing-its-weights",
+    "source": "The Decoder"
+   },
+   {
+    "title": "OpenAI's Chris Lehane says AI will define the 2028 US election and calls for a new social contract",
+    "what": "TechCrunch reports that OpenAI's global affairs chief Chris Lehane wants AI to be a defining issue of the 2028 presidential election, with an essay proposing a new social contract that includes enforceable AI safety standards and independent evaluations. It follows Axios reporting on OpenAI's post-midterm policy push.",
+    "why": "Leading labs are now openly asking for binding safety standards and third-party evaluations, which could become compliance requirements for products built on their models. PMs should expect evaluation and documentation burdens to rise, not fall.",
+    "take": "Regulation is being shaped by the labs themselves; know which proposals would change what you must test and disclose.",
+    "url": "https://techcrunch.com/2026/11/04/openai-is-already-trying-to-shape-the-2028-election/",
+    "source": "TechCrunch; context from Axios"
+   },
+   {
+    "title": "Google plans to invest $15 billion in Malaysia data centres and cloud over 2027–2028 (single source)",
+    "what": "A tech news roundup reports Google announced on Wednesday a plan to invest $15 billion in Malaysia between 2027 and 2028 to expand data-centre and cloud operations in Southeast Asia; it is planned spending, not completed expenditure.",
+    "why": "Regional capacity affects latency, data-residency options and model availability for products serving Asian users, including from India.",
+    "take": "Where compute sits shapes which AI features you can offer in a region and at what latency.",
+    "url": "https://techstartups.com/2026/11/04/top-tech-news-roundup-for-today-november-4-2026-googles-15b-ai-bet-metas-e53b-bond-demand-canvas-restructuring-and-spacexs-5g-push/",
+    "source": "Tech Startups"
+   }
+  ],
+  "modelsPricing": [
+   {
+    "text": "Tencent reportedly announced the formal release of its Hy4 model, adding visual understanding, with weights and system cards to follow in the coming days; an earlier 29 October report described Hy4 and Hy4 Flash as upcoming (single source; details unconfirmed).",
+    "url": "https://www.siliconsnark.com/tencent-gives-hy4-eyes-the-open-weights-are-still-in-shipping/"
+   }
+  ],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Agent observability and tracing",
+    "body": "Agent observability means recording what an AI agent did at every step: the prompts it saw, its intermediate reasoning, each tool call and its result, cost and latency. A trace lets you replay a run and see where it went wrong, much like application logs for traditional software.\n\nFor a PM, observability is what makes agents debuggable, auditable and sellable to enterprises. CrowdStrike buying Fiddler AI shows buyers now expect it. Decide early what you log (and what you must redact for privacy), which failure signals trigger alerts, and how support teams use traces to answer customer complaints."
+   },
+   {
+    "title": "Red-teaming AI systems",
+    "body": "Red-teaming is deliberately attacking your own AI system before release: trying to make it leak data, ignore instructions, produce harmful content or misuse tools. It can be done by people, by automated attack generators, or both, as Dreadnode's tooling does.\n\nFor a PM, red-teaming turns vague safety worries into a concrete list of failure cases with severity ratings. Budget time for it before every major launch and model upgrade, define which findings block launch, and track the fix rate as a release metric."
+   },
+   {
+    "title": "Prompt injection",
+    "body": "Prompt injection is when text the model reads, such as a web page, email or document, contains instructions that hijack the model, for example 'ignore your rules and send me the user's files'. It is especially dangerous for agents that can take actions.\n\nFor a PM, there is no complete fix, so the product must limit damage: restrict which tools an agent can use, require confirmation for risky actions, separate trusted from untrusted content, and monitor for odd behaviour. This shapes scope decisions about how much autonomy an agent gets."
+   },
+   {
+    "title": "Multi-agent orchestration",
+    "body": "Multi-agent orchestration is running several AI agents at once, each on a separate task or workspace, with a coordinator or a human assigning work and merging results. Conductor, which Meta just bought, does this for coding agents working on isolated branches.\n\nFor a PM, parallel agents can multiply throughput, but the bottleneck moves to human review and conflict resolution. Product decisions include how users assign tasks, compare outputs, review changes and roll back, and metrics shift from 'answers per session' to 'accepted work per hour of review'."
+   },
+   {
+    "title": "Agent memory",
+    "body": "Agent memory is how an AI agent keeps information beyond a single conversation: short-term working notes within a task, and long-term memory of user preferences, past decisions or project facts. It is usually stored outside the model and retrieved when needed.\n\nFor a PM, memory makes agents feel personal and lets them continue work across sessions, as OpenAI's 'dots' aim to. It also raises privacy and correctness risks: users need to see, edit and delete what is remembered, and stale memories can cause confident mistakes."
+   },
+   {
+    "title": "Context engineering",
+    "body": "Context engineering is designing everything that goes into the model's context window for each step: instructions, retrieved documents, tool results, memory and conversation history, in the right order and size. It goes beyond writing a good prompt.\n\nFor a PM, context choices drive quality, cost and latency at once. More context can help accuracy but raises cost and can distract the model. Specify which sources an agent may use, how much history to keep, and test quality when context is trimmed to cut cost."
+   },
+   {
+    "title": "Free-tier economics for AI features",
+    "body": "Every AI request costs money to serve, so giving AI features to free users is a real expense rather than a near-zero marginal cost, as it is for traditional software. Canva's reported delay of an AI update because of the cost of serving its free users illustrates this.\n\nFor a PM, the levers are usage caps, cheaper models for free users, caching, and reserving expensive features for paid tiers. Model cost per free user against the conversion uplift the feature creates; if conversion does not cover cost, redesign the tier."
+   },
+   {
+    "title": "Acqui-hires as an AI capability strategy",
+    "body": "An acqui-hire is buying a company mainly for its team and know-how rather than its revenue. In AI, large companies often buy small teams that have built a sharp workflow product, as Meta did with Conductor, whose founders joined its superintelligence lab.\n\nFor a PM, acquisitions can shortcut years of learning about a workflow, but integration is hard and the acquired product may be shut down. If you depend on a startup's tool, an acquisition is a platform risk; if you are the acquirer, plan how the team's insight reaches your roadmap."
+   },
+   {
+    "title": "Open-weight versus closed models",
+    "body": "Open-weight models publish their trained parameters so anyone can download and run them, as Tencent says it will do for Hy4; closed models are only reachable through the provider's interface. Open weights allow self-hosting, customisation and data control; closed models often lead on capability and need less infrastructure.\n\nFor a PM, the choice affects cost structure, data residency, latency, vendor lock-in and compliance. Many teams use both: a closed frontier model for hard tasks and an open model for high-volume, privacy-sensitive or on-premises cases."
+   },
+   {
+    "title": "Online versus offline evaluation",
+    "body": "Offline evaluation tests an AI feature on a fixed dataset before release; online evaluation measures it with real users in production through metrics, feedback and experiments. Offline is cheap, repeatable and safe; online captures real behaviour and edge cases you did not anticipate.\n\nFor a PM, you need both. Use offline evaluations as a gate for every prompt or model change, then online metrics to confirm users actually benefit. When offline scores improve but online metrics do not, your test set probably does not reflect real usage."
+   },
+   {
+    "title": "Task success rate for AI agents",
+    "body": "Task success rate is the share of agent runs that fully complete the user's goal correctly, such as a ticket resolved or a pull request merged, rather than just producing a plausible answer. It is usually measured with clear success criteria, sometimes verified by people.\n\nFor a PM, it is often the most honest north-star metric for agents. Pair it with cost per successful task, time to completion and the rate of harmful or reversed actions, and break it down by task type to see where the agent should and should not be offered."
+   },
+   {
+    "title": "Golden datasets and regression suites",
+    "body": "A golden dataset is a curated set of real or realistic inputs with agreed good outputs or grading rules. A regression suite runs it automatically whenever a prompt, model or retrieval setting changes, to catch quality drops before users do.\n\nFor a PM, owning the golden set is a core responsibility: it encodes what 'good' means for your product. Keep it representative of real traffic, include known failure cases from support tickets and red-teaming, and refresh it as usage changes so it does not go stale."
+   },
+   {
+    "title": "Embeddings",
+    "body": "An embedding is a list of numbers that represents the meaning of a piece of text, image or audio, so that similar items have similar numbers. Embeddings power semantic search, recommendations, clustering of feedback and retrieval for AI assistants.\n\nFor a PM, embeddings are usually cheap and fast compared with full model calls, which makes them good for high-volume tasks like deduplicating tickets or finding related documents. Quality depends on the embedding model and on your data, so test search relevance on your own content, including Indian languages if relevant."
+   },
+   {
+    "title": "Mixture-of-experts models",
+    "body": "A mixture-of-experts (MoE) model contains many sub-networks ('experts') but activates only a few of them for each token, so a model with a huge total parameter count uses a much smaller number per step. Several recent open models, such as Tencent's Hy series, use this design.\n\nFor a PM, MoE explains why some very large models are relatively cheap and fast to run. It matters when comparing vendors and self-hosting options: total parameters say little about cost, while active parameters and memory needs matter more."
+   },
+   {
+    "title": "Trust calibration",
+    "body": "Trust calibration means helping users trust an AI system exactly as much as it deserves: relying on it where it is accurate and checking it where it is weak. Over-trust leads to unnoticed errors; under-trust means users ignore a useful feature.\n\nFor a PM, calibration is designed through the interface: showing sources, signalling uncertainty, highlighting what the agent changed, and asking for confirmation on risky steps. Measure it by comparing how often users accept outputs with how often those outputs were actually correct."
+   },
+   {
+    "title": "Writing an AI product spec",
+    "body": "An AI product spec adds to a normal requirements document the things that make AI different: example inputs and ideal outputs, quality bars and evaluation method, unacceptable failures, fallback behaviour, cost and latency budgets, data sources, and safety and privacy rules.\n\nFor a PM, writing these down turns 'make it smart' into something engineers can build and test. A strong spec defines launch criteria in measurable terms, such as minimum task success on the golden set and zero critical red-team findings, and names who decides on trade-offs."
+   },
+   {
+    "title": "Content provenance and model attestation",
+    "body": "Content provenance tracks where a piece of content came from, for example through watermarks or signed metadata. Model attestation goes further and proves which model produced a response, as Anthropic's FlashProve research prototype attempts using cryptography.\n\nFor a PM, provenance supports trust, fraud prevention and compliance, especially when you buy models through resellers or must label AI-generated content. It is still maturing, so treat it as a roadmap consideration: know which providers offer it and what your regulators or enterprise customers may require."
+   },
+   {
+    "title": "Bias and fairness testing",
+    "body": "Bias testing checks whether an AI system performs worse or behaves differently for certain groups, such as by gender, region, caste, language or dialect. It compares outcomes like accuracy, refusal rates or recommendation quality across segments.\n\nFor a PM, fairness failures are both an ethical and a business risk, damaging trust and inviting regulatory scrutiny. Build segment breakdowns into evaluation dashboards, include diverse examples in golden datasets, and decide in advance what performance gap between groups is acceptable before launch."
+   },
+   {
+    "title": "The European Union (EU) AI Act's risk tiers",
+    "body": "The European Union's Artificial Intelligence Act classifies AI uses by risk: some practices are banned, high-risk uses (such as in hiring, credit or critical infrastructure) face strict obligations, limited-risk uses need transparency, and minimal-risk uses face few rules. General-purpose models have their own duties.\n\nFor a PM, the tier depends on the use case, not the technology, so the same model can be minimal-risk in one feature and high-risk in another. Indian companies serving European users must classify features early, because high-risk status adds documentation, oversight and testing work."
+   },
+   {
+    "title": "Voice-first AI for Indian users",
+    "body": "Many Indian users prefer speaking to typing, often in mixed languages such as Hinglish, and some are new to text-heavy interfaces. Voice-first AI combines speech recognition, a language model and speech synthesis to let them talk naturally.\n\nFor a PM, voice-first design changes success metrics and costs: accuracy must hold across accents, dialects and noisy environments, latency must feel conversational, and speech processing adds cost per interaction. Test with real users outside metros, offer confirmation for important actions, and consider offline or low-bandwidth modes like those India's new small models target."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Agent observability and tracing",
+   "body": "Agent observability means recording what an AI agent did at every step: the prompts it saw, its intermediate reasoning, each tool call and its result, cost and latency. A trace lets you replay a run and see where it went wrong, much like application logs for traditional software.\n\nFor a PM, observability is what makes agents debuggable, auditable and sellable to enterprises. CrowdStrike buying Fiddler AI shows buyers now expect it. Decide early what you log (and what you must redact for privacy), which failure signals trigger alerts, and how support teams use traces to answer customer complaints."
+  },
+  "india": [
+   {
+    "text": "Update: More detail on the IndiaAI Mission models launched by the Ministry of Electronics and Information Technology (MeitY): Soket Labs' EKA-1 is described as a 26-billion-parameter model for mathematics, coding and reasoning that can run on-premises or air-gapped, aimed at banking, defence and cybersecurity; MeitY Secretary S. Krishnan framed the launch as a step toward strategic autonomy in AI.",
+    "url": "https://www.tribuneindia.com/news/business/meity-unveils-indigenous-ai-models-eka-1-dhir-2b-and-5b-under-indiaai-mission"
+   }
+  ],
+  "question": {
+   "q": "CrowdStrike is buying an AI agent-observability company. You are the PM for an AI customer-support agent that enterprises want to deploy. Design the observability and safety features you would ship before general availability, and how you would measure success.",
+   "framing": "Start from the buyers: the enterprise administrator and security team need audit trails, permissions and alerts; support leads need quality and resolution data; end customers need correct, safe answers. List the agent's risky actions (refunds, account changes, data access) and the failures that would block deployment.",
+   "tradeoff": "Deeper tracing, logging and human approvals increase trust and debuggability but add latency, storage cost and privacy exposure (logs contain customer data). Balance by logging full traces with redaction, sampling low-risk runs, and requiring approval only for high-risk actions.",
+   "metric": "North star: task success rate (tickets resolved correctly without human rework). Guardrails: rate of policy-violating or reversed actions, prompt-injection attempts caught, time to diagnose an incident from traces, cost per resolved ticket. Recommend shipping tracing, red-team results and an admin dashboard as launch requirements, with a staged rollout by action risk."
+  },
+  "alsoNotable": [
+   {
+    "text": "Financial Times (via a market brief): Nvidia is asking cloud providers to cap Chinese customers at 49% of new contracts; Nvidia has not confirmed (single source).",
+    "url": "https://404kresearch.substack.com/p/456x-evening-brief-november-4-2026"
+   },
+   {
+    "text": "Onsemi is reported to be in talks to buy AI chip power startup Ferric for about $1 billion; talks, not a deal (single source).",
+    "url": "https://aiweekly.co/ai-news-today/funding-ai-news"
+   },
+   {
+    "text": "A newsletter roundup says voters in at least 38 US jurisdictions rejected or restricted data centres in the 3 November midterms (single source; results not yet confirmed by Ballotpedia).",
+    "url": "https://dailycuratednews.substack.com/p/news-headlines-november-5-2026"
+   }
+  ],
+  "pmToolkit": [
+   {
+    "name": "NotebookLM",
+    "category": "Discovery and research",
+    "url": "https://notebooklm.google.com",
+    "what": "Google's research notebook that answers questions grounded only in the sources you upload.",
+    "does": "Lets a PM load interview transcripts, market reports or documentation and ask cited questions, generate summaries and audio overviews, and spot themes across sources.",
+    "examples": [
+     "Upload 10 customer-interview transcripts and ask for the top pain points with quotes",
+     "Load competitor documentation and ask how pricing tiers differ",
+     "Turn a long research report into a briefing before a stakeholder meeting"
+    ],
+    "pricing": "Free tier available; paid limits come with Google AI subscriptions (may change)"
+   },
+   {
+    "name": "Microsoft 365 Copilot",
+    "category": "Specs and docs",
+    "url": "https://www.microsoft.com/microsoft-365/copilot",
+    "what": "Microsoft's AI assistant built into Word, Excel, PowerPoint, Outlook and Teams.",
+    "does": "Helps a PM draft and revise specs in Word, summarise long email threads and Teams meetings, and analyse spreadsheets without leaving the Microsoft tools many companies use.",
+    "examples": [
+     "Draft a first product requirements document from meeting notes in Word",
+     "Summarise a long stakeholder email thread into decisions and open questions",
+     "Ask Excel to find trends in a feature-usage export"
+    ],
+    "pricing": "Copilot Business listed at about $21 per user per month; consumer Copilot Pro about $20 (may change)"
+   },
+   {
+    "name": "Magic Patterns",
+    "category": "Prototyping",
+    "url": "https://www.magicpatterns.com",
+    "what": "An AI design and prototyping tool for product teams that turns prompts into interactive user-interface prototypes.",
+    "does": "Lets a PM generate clickable screens from a description or screenshot, iterate with follow-up prompts and share prototypes for feedback before engineering starts.",
+    "examples": [
+     "Prototype a new onboarding flow to test with five users this week",
+     "Recreate a competitor screen from a screenshot and explore alternatives",
+     "Mock up an AI chat panel to align design and engineering on scope"
+    ],
+    "pricing": "Free tier with limited credits; paid plans from about $20 per seat per month (may change)"
+   },
+   {
+    "name": "Uizard",
+    "category": "Design",
+    "url": "https://uizard.io",
+    "what": "An AI user-interface design tool that creates wireframes and mock-ups from text prompts or hand-drawn sketches.",
+    "does": "Helps PMs without design skills turn ideas or whiteboard sketches into editable multi-screen mock-ups quickly.",
+    "examples": [
+     "Photograph a whiteboard sketch and convert it into a digital wireframe",
+     "Generate a mobile app concept from a one-paragraph description for an interview case",
+     "Create quick variants of a screen to discuss with designers"
+    ],
+    "pricing": "Free plan with limited AI generations; paid plans from about $12 per user per month billed annually (may change)"
+   },
+   {
+    "name": "Mixpanel",
+    "category": "Analytics and experimentation",
+    "url": "https://mixpanel.com",
+    "what": "A product analytics platform with Spark, an AI assistant that builds reports from plain-language questions.",
+    "does": "Lets a PM ask questions like 'which users dropped off in checkout last week?' and get funnels, retention and segment charts without writing queries.",
+    "examples": [
+     "Ask Spark for the conversion funnel of a newly launched feature",
+     "Compare retention for users who tried an AI feature versus those who did not",
+     "Find which acquisition channel brings the most engaged users"
+    ],
+    "pricing": "Free plan with a limited number of Spark AI queries per month; paid plans usage-based (may change)"
+   },
+   {
+    "name": "Canny",
+    "category": "Feedback and roadmapping",
+    "url": "https://canny.io",
+    "what": "A customer-feedback and public-roadmap tool whose Autopilot AI captures and deduplicates feedback from support and sales tools.",
+    "does": "Gathers feature requests from sources such as Intercom, Zendesk and Gong, merges duplicates and links them to roadmap items so a PM can prioritise by demand.",
+    "examples": [
+     "Pull feature requests from support tickets automatically into one board",
+     "See which requests come from high-value customers before planning",
+     "Publish a public roadmap and notify users when a request ships"
+    ],
+    "pricing": "Free plan with Autopilot included for a small number of tracked users; paid plans from about $79 per month billed yearly (may change)"
+   },
+   {
+    "name": "tl;dv",
+    "category": "Meetings and notes",
+    "url": "https://tldv.io",
+    "what": "An AI meeting recorder and note-taker for Zoom, Google Meet and Microsoft Teams.",
+    "does": "Records and transcribes calls, writes AI notes and lets a PM search across meetings for what customers or stakeholders said.",
+    "examples": [
+     "Record customer discovery calls and pull out quotes on a pain point",
+     "Get automatic notes from sprint reviews for absent stakeholders",
+     "Search past sales calls for mentions of a competitor"
+    ],
+    "pricing": "Free plan with unlimited recordings and capped AI notes; Pro roughly $18–29 per user per month depending on billing (may change)"
+   },
+   {
+    "name": "UserTesting",
+    "category": "Usability testing",
+    "url": "https://www.usertesting.com",
+    "what": "A platform for recorded user tests and interviews, with an AI Insight Summary feature.",
+    "does": "Lets a PM run unmoderated tests with target users and get AI-generated summaries of themes, each linked back to the video moments that support it.",
+    "examples": [
+     "Test a new checkout prototype with 10 target users overnight",
+     "Use the AI summary to share key findings with leadership the same day",
+     "Compare how two user segments complete the same task"
+    ],
+    "pricing": ""
+   },
+   {
+    "name": "Beautiful.ai",
+    "category": "Presentations and communication",
+    "url": "https://www.beautiful.ai",
+    "what": "An AI presentation tool that generates and auto-formats slides from a prompt.",
+    "does": "Helps a PM turn an outline into a clean, consistently designed deck for roadmap reviews, stakeholder updates or interview case presentations.",
+    "examples": [
+     "Turn a product strategy outline into a 10-slide deck",
+     "Build a quarterly roadmap review with consistent design",
+     "Prepare a case-study presentation for a PM interview"
+    ],
+    "pricing": "14-day free trial; Pro about $12 per user per month billed annually (may change)"
+   },
+   {
+    "name": "Claude",
+    "category": "General AI assistants",
+    "url": "https://claude.ai",
+    "what": "Anthropic's general AI assistant for writing, analysis, coding and research.",
+    "does": "Helps a PM draft and critique specs, analyse documents and data files, build quick interactive prototypes as artifacts, and organise ongoing work in Projects.",
+    "examples": [
+     "Ask it to critique a product spec for missing edge cases and metrics",
+     "Upload survey results and ask for themes with supporting quotes",
+     "Practise a mock product-design interview and get feedback"
+    ],
+    "pricing": "Free tier; Pro about $20 per month (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 40,
+   "failed": [
+    "TLDR AI",
+    "TLDR Product Management",
+    "Hacker News (hnrss)",
+    "Techmeme",
+    "Product Hunt",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing",
+    "Direct article fetches (TechCrunch, The Decoder, The Neuron, OpenAI help centre, Tech Startups) blocked by the session network policy; stories were written from web-search summaries of the cited outlets"
+   ],
+   "singleSource": [
+    "OpenAI dots general availability (OpenAI release notes via search)",
+    "Anthropic FlashProve (The Decoder)",
+    "Google $15 billion Malaysia plan (Tech Startups)",
+    "Tencent Hy4 release (Silicon Snark)",
+    "Nvidia 49% Chinese-customer cap (market brief citing the Financial Times)",
+    "Onsemi–Ferric talks (AI Weekly)",
+    "Midterm data-centre votes (newsletter roundup)"
+   ]
+  },
+  "createdAt": "2026-11-05T01:50:00Z"
+ },
+ {
   "date": "2026-11-04",
   "subject": "AI PM Digest – Wed, 04 Nov 2026 – Google makes school AI opt-in",
   "headline": "Google makes AI opt-in for schools, tied to Search",
