@@ -1,5 +1,319 @@
 [
  {
+  "date": "2026-11-06",
+  "subject": "AI PM Digest – Fri, 06 Nov 2026 – Claude adds Personal Finance beta",
+  "headline": "Claude adds Personal Finance beta",
+  "quiet": false,
+  "topStories": [
+   {
+    "title": "Anthropic launches Personal Finance in Claude (beta), letting users link bank, card, loan and investment accounts",
+    "what": "Anthropic's release notes dated 5 November say users can now link bank, credit card, loan and investment accounts to Claude, see balances and spending on one page, and ask questions about their finances. The beta is limited to Pro, Max and Ultra plans in the United States.",
+    "why": "This moves a general assistant into a high-trust, regulated data category, where consent flows, data minimisation and accuracy on numbers decide adoption more than model quality. It also puts Claude head-to-head with OpenAI, which already offers a finance experience in ChatGPT for eligible US users (reported by secondary sources).",
+    "take": "Expect questions on how you would earn trust for an AI that reads your bank data: permission scopes, read-only access, clear provenance of every number, and a measured, plan-gated rollout.",
+    "url": "https://support.claude.com/en/articles/12138966-release-notes",
+    "source": "Anthropic release notes"
+   },
+   {
+    "title": "Claude Enterprise adds a security center, inference hooks, centralised management and new access controls",
+    "what": "The same 5 November release notes list new security and admin features for Claude Enterprise, several in beta: a security center, inference hooks, centralised management and additional access controls. Anthropic's documentation describes inference hooks as sending each governed prompt to a security server the customer chooses and waiting for an allow or deny verdict before Claude processes it.",
+    "why": "Enterprise AI deals are increasingly won or lost in the security review, not the demo. Admin controls, data loss prevention hooks and audit tooling are product features that unblock procurement and expand seats.",
+    "take": "A good answer on enterprise AI go-to-market names the buyer (the security and IT admin) separately from the user, and treats governance features as a growth lever.",
+    "url": "https://support.claude.com/en/articles/12138966-release-notes",
+    "source": "Anthropic release notes; Claude platform docs"
+   },
+   {
+    "title": "OpenAI hires Cat Wu, Anthropic's former head of product for Claude Code and Cowork, to lead product for Core Products",
+    "what": "Cat Wu, who led product for Claude Code and Cowork at Anthropic, is joining OpenAI to lead product management for its Core Products group; OpenAI confirmed the hire to Business Insider, according to multiple reports. She reports to Tibo Sottiaux, and her last day at Anthropic was reported as 30 October.",
+    "why": "Coding agents are the most contested AI product category, and the war for proven AI product leaders is now as visible as the war for researchers. Her move follows other reported departures from the Claude Code team weeks before Anthropic's planned initial public offering (IPO).",
+    "take": "Use it to show you understand what an AI-native PM does differently: shipping fast with evaluations, dogfooding agents, and keeping users in control of what agents do.",
+    "url": "https://winbuzzer.com/2026/11/05/openai-hires-anthropics-ai-coding-product-leader-cat-wu-xcxwbn/",
+    "source": "WinBuzzer; FourWeekMBA; AI Weekly"
+   }
+  ],
+  "modelsPricing": [
+   {
+    "text": "Google is rolling out Gemini Omni 1.2 Flash in Google Vids from 5 November, with longer 15-second video generations and better quality (per Google Workspace Updates, seen via search). A separate report says Google cut Gemini Omni 1.2 Flash video prices by 30% (single source).",
+    "url": "https://techbuzz.ai/articles/google-slashes-gemini-video-prices-30-as-ai-race-heats-up"
+   }
+  ],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Consent and data minimisation for connected-account AI",
+    "body": "When an AI feature connects to sensitive accounts such as banking, consent means the user knowingly approves exactly what is shared, for what purpose and for how long. Data minimisation means pulling only the fields the feature needs, for example balances and transactions but not credentials, and keeping them no longer than necessary.\n\nFor a PM, this shapes the onboarding flow, the permission screen and the retention policy, and it is a launch blocker in regulated markets. Claude's new Personal Finance beta is a live example. Track consent completion rate, revocation rate and support tickets about \"why does it know this\" as trust signals."
+   },
+   {
+    "title": "Pre-inference policy enforcement (data loss prevention for AI)",
+    "body": "Pre-inference enforcement checks a prompt against company policy before the model ever sees it, for example blocking customer card numbers or source code from leaving the organisation. Data loss prevention (DLP) tools have done this for email for years; AI makes every chat box a new exit route.\n\nAnthropic's inference hooks for Claude Enterprise are this pattern. For a PM, the trade-off is protection versus friction and latency: every check adds delay and false blocks frustrate users. Measure block rate, false-positive appeals and added latency, and make block messages explain what to do next."
+   },
+   {
+    "title": "Fail-open versus fail-closed design",
+    "body": "When a safety dependency, such as a policy server or moderation service, is down, the product must choose: fail open (let requests through unchecked) or fail closed (block everything until the check works again).\n\nFail-closed protects data but turns an outage into a full product outage; fail-open keeps users working but creates a compliance gap. The right answer depends on the risk of the content and the customer. Good enterprise products let admins choose, alert them when the breaker trips, and log what happened. PMs should decide this explicitly in the spec, not leave it to engineers during an incident."
+   },
+   {
+    "title": "Least-privilege permissions for AI agents",
+    "body": "Least privilege means an agent gets only the access it needs for the current task: read-only where possible, limited to specific accounts or folders, and for a limited time. It is a long-standing security principle applied to software that can now take actions.\n\nFor a PM, scopes are a product decision. Broad access makes demos impressive but magnifies the damage from a prompt injection or a wrong action. Design permission tiers (read, draft, act), make escalation explicit, and measure how often users grant broader scopes and whether incidents correlate with them."
+   },
+   {
+    "title": "India's Account Aggregator framework",
+    "body": "The Account Aggregator framework, regulated by the Reserve Bank of India, lets people share their financial data between institutions through licensed consent managers. The user approves each data request, which states the purpose, the data types and the duration.\n\nFor an AI PM in India, it is the natural, regulated path for any personal-finance assistant like the one Anthropic just launched in the US. It shapes what data is available, how consent is captured and how long data can be held. Interviewers like candidates who connect global AI launches to Indian rails such as Account Aggregator and UPI."
+   },
+   {
+    "title": "Confirm-before-act patterns for high-stakes AI",
+    "body": "Confirm-before-act means the AI prepares an action, shows a clear preview (what will change, where, and how to undo it), and waits for the user's approval before executing. It is the user-interface counterpart of human-in-the-loop.\n\nThe PM trade-off is speed versus safety: confirming every step makes agents tedious, confirming nothing makes them dangerous. A common approach is to tier actions by reversibility and cost, auto-running safe ones and confirming money movement, deletions and external messages. Track approval rate, edits before approval and undo rate to tune the thresholds."
+   },
+   {
+    "title": "Context windows and long-context trade-offs",
+    "body": "A context window is the maximum amount of text, measured in tokens, a model can consider in one request, including instructions, documents and conversation history. Larger windows let products pass whole contracts or codebases at once.\n\nBut bigger is not free: cost and latency grow with input length, and models can attend less reliably to details buried in the middle of very long inputs. PMs decide when to stuff everything into context versus retrieving only relevant parts. Benchmark answer quality, latency and cost at realistic input sizes rather than trusting the headline window size."
+   },
+   {
+    "title": "Distillation",
+    "body": "Distillation trains a smaller \"student\" model to imitate a larger \"teacher\" model's outputs, so the small model keeps much of the quality at a fraction of the serving cost and latency. Many \"mini\" and \"flash\" model tiers come from this kind of process.\n\nFor a PM, distillation is a cost and speed lever once a feature's behaviour is well understood: use the big model to discover what good looks like, then serve a distilled model at scale. The risks are quality loss on rare cases and the effort of maintaining your own model, so it needs a strong evaluation set."
+   },
+   {
+    "title": "Chunking and reranking in retrieval",
+    "body": "In retrieval-augmented generation (RAG), documents are split into chunks before indexing. Chunk size and boundaries decide whether the retriever finds a complete, useful passage. Reranking is a second step where a more precise model re-orders the top candidates before they reach the generator.\n\nMany \"the model is wrong\" complaints are retrieval failures. PMs should insist on measuring retrieval separately from generation, for example whether the right passage was in the top five, and treat chunking and reranking as tunable product choices with real cost and latency trade-offs."
+   },
+   {
+    "title": "Prompt caching",
+    "body": "Prompt caching lets a provider reuse the processed form of a repeated prompt prefix, such as a long system prompt or a reference document, across requests. Cached input is typically billed at a lower rate and returns faster.\n\nFor PMs, caching changes unit economics: features that resend the same large context, such as chat over a fixed manual or agents with long instructions, become much cheaper. It also influences design, since you want stable content at the start of the prompt and variable content at the end. Track cache hit rate alongside cost per request."
+   },
+   {
+    "title": "Model routing and cascades",
+    "body": "Model routing sends each request to the most suitable model, for example a small, cheap model for simple questions and a large reasoning model for hard ones. A cascade tries the cheap model first and escalates only when confidence is low or a check fails.\n\nRouting is one of the biggest levers on gross margin for AI products. The PM trade-off is complexity and inconsistent behaviour across models versus cost savings. Define a quality bar per task type, measure the share of traffic each model handles, and watch for quality dips on the escalation boundary."
+   },
+   {
+    "title": "Bundling AI into existing plans versus selling it as an add-on",
+    "body": "Companies can include AI in existing subscriptions, which drives adoption and defends against rivals, or sell it as a paid add-on, which protects margins and shows willingness to pay. Plan-gating, as with Claude's Personal Finance beta on paid tiers, is a middle path.\n\nThe decision depends on inference cost per user, competitive pressure and whether AI is the core value or a supporting feature. PMs should model usage distributions, since heavy users drive cost, and track attach rate, upgrade rate and gross margin per plan before committing."
+   },
+   {
+    "title": "Enterprise readiness as a go-to-market lever",
+    "body": "Enterprise readiness is the set of features that large buyers require before rollout: single sign-on, role-based access control, audit logs, data retention controls, admin consoles and compliance certifications. They rarely excite end users but decide procurement.\n\nFor an AI PM, these features expand the addressable market and shorten security reviews; Anthropic's new Claude Enterprise security center is an example. Prioritise them with sales and security teams using lost-deal reasons, time to close and seat expansion after approval as the metrics."
+   },
+   {
+    "title": "Workflow lock-in as an AI moat",
+    "body": "When models from different labs perform similarly, the durable advantage often comes from owning a workflow: the data, integrations, habits and team processes built around a product. Switching then means retraining people and rebuilding connections, not just changing a model.\n\nFor PMs, this argues for investing in integrations, shared artefacts and team features rather than only model quality. The hiring battle around coding-agent leaders shows how much labs value products people use daily. Measure depth of use, such as integrations per account and weekly active teams, not just sign-ups."
+   },
+   {
+    "title": "Guardrail precision and false-block rate",
+    "body": "Every guardrail is a classifier that makes two kinds of mistakes: missing harmful content (false negatives) and blocking legitimate requests (false positives). Precision is the share of blocks that were correct; the false-block rate is how often good users are stopped.\n\nPMs often watch only the harm metric, but over-blocking silently drives users away or toward unsanctioned tools. Set targets for both, sample blocked requests for human review, and give users a path to appeal or explain. Tune thresholds per surface, since a bank-data feature and a brainstorming tool deserve different settings."
+   },
+   {
+    "title": "Cost per successful task",
+    "body": "Cost per successful task divides the total inference and tool cost by the number of tasks the AI actually completed correctly, not by the number of requests. It captures retries, failed attempts and escalations to larger models.\n\nFor agent products this is a better economic metric than cost per token or per call, because a cheaper model that fails more often can cost more per success. PMs can use it to compare models, routing strategies and prompt changes, and to set pricing that stays profitable as usage grows."
+   },
+   {
+    "title": "Holdout groups for long-term AI impact",
+    "body": "A holdout group is a small share of users who are deliberately kept without a feature for weeks or months, so the team can measure long-term effects such as retention, satisfaction or support load, not just the first-week novelty spike.\n\nAI features often show strong early engagement that fades, or hidden costs that appear later, such as users trusting wrong answers. PMs should keep a holdout for major AI launches, agree on long-term success metrics in advance, and weigh the ethical and business cost of withholding a useful feature."
+   },
+   {
+    "title": "Designing AI error states and graceful fallbacks",
+    "body": "AI features fail in more ways than normal software: a refusal, a timeout, a low-confidence answer, a blocked prompt or a tool error. Error-state design decides what the user sees and can do next in each case.\n\nGood fallbacks explain what happened in plain words, keep the user's work, offer a next step (retry, rephrase, hand off to a human or a non-AI path), and never present a guess as fact. PMs should list failure modes in the spec and measure recovery rate: the share of failed attempts that still end in a completed task."
+   },
+   {
+    "title": "Admin and governance user experience for enterprise AI",
+    "body": "Enterprise AI has two sets of users: employees who use the assistant and administrators who configure who can use what, which connectors are allowed, spend limits and logging. The admin experience is a product in its own right.\n\nPoor admin tools slow rollout even when end users love the product. PMs should design clear defaults, bulk controls, previews of policy effects and readable audit trails. Useful metrics include time from contract to full rollout, the number of admin support tickets and the share of organisations using advanced controls."
+   },
+   {
+    "title": "Intermediary liability and safe harbour",
+    "body": "Safe harbour protects online platforms from liability for user content as long as they act as neutral intermediaries and follow due-diligence and takedown rules. In India this comes from Section 79 of the Information Technology Act, 2000.\n\nAlgorithmic ranking and AI-generated content blur the neutral-intermediary line, and the government is reportedly weighing withdrawing protection for algorithmically ranked feeds. For PMs, this affects recommendation design, labelling of AI content, grievance workflows and the cost of compliance in India. Expect interviewers to ask how you would design an AI feed under stricter liability."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Consent and data minimisation for connected-account AI",
+   "body": "When an AI feature connects to sensitive accounts such as banking, consent means the user knowingly approves exactly what is shared, for what purpose and for how long. Data minimisation means pulling only the fields the feature needs, for example balances and transactions but not credentials, and keeping them no longer than necessary.\n\nFor a PM, this shapes the onboarding flow, the permission screen and the retention policy, and it is a launch blocker in regulated markets. Claude's new Personal Finance beta is a live example. Track consent completion rate, revocation rate and support tickets about \"why does it know this\" as trust signals."
+  },
+  "india": [
+   {
+    "text": "MediaNama (5 Nov), citing Business Standard: the Indian government is considering withdrawing blanket Section 79 safe-harbour protection under the Information Technology Act for social media platforms that use algorithms to rank user content. Any AI-ranked feed in India would face more liability if this goes ahead (single source).",
+    "url": "https://medianama.com/2026/11/223-government-safe-harbour-social-media-algorithm"
+   },
+   {
+    "text": "Inc42: Venomics AI, a Bengaluru biotech spun out of the Indian Institute of Science (IISc), raised USD 2.7 million pre-seed, co-led by Speciale Invest and South Park Commons, to expand its venom-derived compound dataset and its artificial intelligence (AI) and lab screening work.",
+    "url": "https://inc42.com/buzz/venomics-ai-raises-2-7-mn-to-turn-venom-into-medicine/"
+   }
+  ],
+  "question": {
+   "q": "You are the PM for an AI assistant launching a feature that connects to users' bank accounts. How would you design the launch and measure success?",
+   "framing": "Clarify the user (busy professionals who want to understand spending), the core job (answers about their own money they can trust), and the constraints: consent, regulation (in India, the Account Aggregator framework and the Digital Personal Data Protection Act), and the cost of a wrong number. Scope a read-only, insight-only version first.",
+   "tradeoff": "Usefulness versus risk: broader data and the ability to act (move money, cancel subscriptions) add value but raise the cost of errors and breaches. Start read-only with clear provenance for every figure, confirm-before-act for any future actions, and a plan-gated or region-limited beta.",
+   "metric": "North star: weekly users who get a finance answer they act on. Guardrails: numerical accuracy on a golden set of statements, consent completion and revocation rates, false-answer reports, and support tickets. Recommend a staged rollout with a holdout group."
+  },
+  "alsoNotable": [
+   {
+    "text": "Post-midterm analysis (5 Nov): incoming Democratic majorities in the US Congress are expected to scrutinise AI companies, including data-centre energy costs, ending a largely hands-off period (single source).",
+    "url": "https://ktul.com/news/nation-world/incoming-democratic-majorities-put-ai-giants-on-notice-artificial-intelligence-energy-costs"
+   },
+   {
+    "text": "Agiloft, a contract lifecycle management vendor, launched three execution agents (bulk update, contract request, and e-signature via Adobe Acrobat Sign) and previewed a Model Context Protocol (MCP) approach so outside agents such as Claude can work with it.",
+    "url": "https://www.morningstar.com/news/pr-newswire/20261105ph89233/agiloft-targets-enterprise-value-leakage-with-new-suite-of-execution-focused-ai-agents"
+   },
+   {
+    "text": "Atheer launched an agent library for industrial frontline work: routing agents, step-by-step guidance agents, assurance agents that check completed work, and knowledge agents that turn manuals into guided tasks.",
+    "url": "https://www.einpresswire.com/article/954192426/atheer-introduces-ai-agents-and-industry-accelerators-to-bring-governed-ai-to-operations-and-frontline-teams"
+   },
+   {
+    "text": "Product Hunt's 5 November leaderboard was heavy on agent infrastructure, including Living Brain (a memory layer for agentic AI) and Clocknext (pricing and billing infrastructure for AI agents); details from taglines only.",
+    "url": "https://www.producthunt.com/leaderboard/daily/2026/11/5"
+   }
+  ],
+  "pmToolkit": [
+   {
+    "name": "Great Question",
+    "category": "Customer research",
+    "url": "https://greatquestion.co",
+    "what": "A user research platform that combines participant recruitment, scheduling, interviews, surveys and a research repository.",
+    "does": "Lets a PM recruit customers, run interviews or AI-moderated studies, and keep insights in a searchable repository so discovery evidence is reusable.",
+    "examples": [
+     "Recruit ten existing customers for interviews about a new AI feature and auto-schedule them",
+     "Search the repository for every past quote about onboarding before writing a spec",
+     "Run an AI-moderated interview study when the team has no researcher bandwidth"
+    ],
+    "pricing": "Modular, per-seat pricing; check the site for current plans (may change)"
+   },
+   {
+    "name": "Google Stitch",
+    "category": "UI design",
+    "url": "https://stitch.withgoogle.com",
+    "what": "A Google Labs tool that generates user-interface designs and front-end code from text prompts or sketches.",
+    "does": "Helps a PM turn a feature idea into clickable-looking screens in minutes to align stakeholders before design time is committed.",
+    "examples": [
+     "Generate three layout options for a finance-insights screen from a one-paragraph brief",
+     "Turn a whiteboard sketch photo into a cleaner mock-up for a review",
+     "Create a quick variant of a settings page to test copy with users"
+    ],
+    "pricing": "Free in Google Labs with daily usage limits, per third-party guides (may change)"
+   },
+   {
+    "name": "Statsig",
+    "category": "Experimentation",
+    "url": "https://statsig.com",
+    "what": "A product experimentation and feature-flag platform with analytics and session replay.",
+    "does": "Lets a PM roll out AI features behind flags, run A/B tests and holdouts, and read the impact on metrics without building in-house tooling.",
+    "examples": [
+     "Ship a new model version to 10% of users behind a flag and compare task completion",
+     "Keep a long-term holdout group for a major AI launch",
+     "Check guardrail metrics such as latency and error rate during a rollout"
+    ],
+    "pricing": "Free tier available; Pro reported from USD 150 per month (may change)"
+   },
+   {
+    "name": "Miro AI",
+    "category": "Roadmapping and workshops",
+    "url": "https://miro.com",
+    "what": "AI features inside the Miro online whiteboard for clustering, summarising and generating content on boards.",
+    "does": "Speeds up workshops and planning: grouping sticky notes into themes, summarising boards and drafting diagrams or roadmaps from prompts.",
+    "examples": [
+     "Cluster 200 sticky notes from a discovery workshop into themes",
+     "Summarise a retrospective board into action items",
+     "Draft a user-journey map from a short prompt before a team session"
+    ],
+    "pricing": "Free plan for boards; AI credits mainly on paid plans (may change)"
+   },
+   {
+    "name": "Fathom",
+    "category": "Meetings and notes",
+    "url": "https://www.fathom.ai",
+    "what": "An AI meeting recorder and notetaker for Zoom, Google Meet and Microsoft Teams.",
+    "does": "Records, transcribes and summarises calls, and pulls out action items so a PM can stay present in customer and stakeholder meetings.",
+    "examples": [
+     "Capture verbatim customer quotes from discovery calls",
+     "Share a summary and action items after a cross-team planning meeting",
+     "Search past calls for every mention of a competitor"
+    ],
+    "pricing": "Free plan available; paid team plans per user (may change)"
+   },
+   {
+    "name": "Hotjar",
+    "category": "Usability and feedback",
+    "url": "https://www.hotjar.com",
+    "what": "A behaviour analytics tool with heatmaps, session recordings, on-site surveys and AI survey analysis.",
+    "does": "Shows a PM where users click, scroll and struggle, and uses AI to draft surveys and summarise open-text responses.",
+    "examples": [
+     "Watch recordings of users abandoning a new AI onboarding flow",
+     "Generate and launch an exit survey asking why users skipped an AI suggestion",
+     "Summarise 500 open-text survey answers into themes"
+    ],
+    "pricing": "Free plan available; AI survey features on paid plans (may change)"
+   },
+   {
+    "name": "GitHub Copilot",
+    "category": "Building and coding",
+    "url": "https://github.com/features/copilot",
+    "what": "GitHub's AI coding assistant with code completion, chat and agent modes in the editor and on GitHub.",
+    "does": "Helps a technical PM read unfamiliar code, build small prototypes and scripts, and understand engineering trade-offs firsthand.",
+    "examples": [
+     "Ask Copilot Chat to explain how a feature flag is wired in the codebase",
+     "Build a small internal prototype to test an idea before a sprint",
+     "Write a script to pull and clean product metrics"
+    ],
+    "pricing": "Free tier; Pro reported at USD 10 per month (may change)"
+   },
+   {
+    "name": "Napkin AI",
+    "category": "Presentations and visuals",
+    "url": "https://www.napkin.ai",
+    "what": "A tool that turns text into editable diagrams, flowcharts and infographics.",
+    "does": "Lets a PM convert a written strategy, process or framework into a clear visual for docs and slides in seconds.",
+    "examples": [
+     "Turn a paragraph about a rollout plan into a phased timeline graphic",
+     "Visualise a metric tree for a product review",
+     "Create a flow diagram of an agent's confirm-before-act steps for a spec"
+    ],
+    "pricing": "Free tier with weekly credits; paid Plus plan (may change)"
+   },
+   {
+    "name": "Google Gemini",
+    "category": "General AI assistant",
+    "url": "https://gemini.google.com",
+    "what": "Google's general-purpose AI assistant, integrated with Google Workspace apps.",
+    "does": "Helps a PM research, draft and analyse across Gmail, Docs, Sheets and Drive, including long documents.",
+    "examples": [
+     "Summarise a long Docs thread of stakeholder comments into decisions and open questions",
+     "Draft a launch email from a product requirements document",
+     "Analyse a Sheets export of feature usage and explain the trends"
+    ],
+    "pricing": "Free app; Google AI Pro reported at USD 19.99 per month in the US (may change)"
+   },
+   {
+    "name": "Make",
+    "category": "Automation and agents",
+    "url": "https://www.make.com",
+    "what": "A visual workflow automation platform with AI agent modules and thousands of app integrations.",
+    "does": "Lets a PM automate repetitive work, such as routing feedback, enriching tickets or posting summaries, without engineering help.",
+    "examples": [
+     "Send every new app-store review to an AI step that tags the theme and posts it to Slack",
+     "Create a weekly digest of support tickets about an AI feature",
+     "Sync interview notes into the roadmap tool automatically"
+    ],
+    "pricing": "Free plan with monthly credits; paid plans from about USD 9 to 12 per month (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 16,
+   "failed": [
+    "TLDR AI RSS",
+    "TLDR Product Management RSS",
+    "Hacker News (hnrss.org)",
+    "Techmeme",
+    "Product Hunt feed",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing"
+   ],
+   "singleSource": [
+    "Gemini Omni 1.2 Flash 30% video price cut",
+    "India Section 79 safe-harbour review (MediaNama citing Business Standard)",
+    "Post-midterm AI scrutiny analysis"
+   ]
+  },
+  "createdAt": "2026-11-06T01:55:00Z"
+ },
+ {
   "date": "2026-11-05",
   "subject": "AI PM Digest – Thu, 05 Nov 2026 – CrowdStrike buys AI agent-security startups",
   "headline": "CrowdStrike buys AI agent-security startups Fiddler and Dreadnode",
