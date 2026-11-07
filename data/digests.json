@@ -1,5 +1,343 @@
 [
  {
+  "date": "2026-11-07",
+  "subject": "AI PM Digest – Sat, 07 Nov 2026 – OpenAI gates GPT-6 Cyber to defenders",
+  "headline": "OpenAI gates GPT-6 Cyber to vetted defenders",
+  "quiet": false,
+  "topStories": [
+   {
+    "title": "OpenAI releases GPT-6 Cyber only to vetted defenders, rating it 'Critical' for cybersecurity risk",
+    "what": "OpenAI launched GPT-6 Cyber, a security-focused model for vulnerability research, exploit validation and patch work, available only through the application programming interface (API) and Codex to approved customers in its Daybreak Red programme after identity and use-case checks. OpenAI rates it 'Critical' under its Preparedness Framework, one level above GPT-5.6 Cyber, and says researchers used it to find 81 previously unknown high-severity Firefox vulnerabilities.",
+    "why": "This is a live example of releasing a dual-use capability through gated access rather than a public launch: who gets in, how they are verified, and what monitoring wraps the model become core product decisions. It also shows frontier labs turning safety ratings into packaging and go-to-market choices.",
+    "take": "If asked how to launch a powerful but risky capability, describe staged, verified access with monitoring and a clear path to wider release, and name the metric that would justify widening it.",
+    "url": "https://fortune.com/2026/11/05/openai-debuts-new-cybersecurity-focused-ai-model-amid-growing-alarm-about-ai-driven-cyber-attacks/",
+    "source": "Fortune; The Register; Technology.org"
+   },
+   {
+    "title": "Perplexity launches Teammates, persistent AI agents for ongoing work, for Max subscribers",
+    "what": "Perplexity launched Teammates, agents built on Perplexity Computer that take on long-running work: they plan and coordinate projects, adjust as priorities change and present results for review, with connections to tools such as Slack, GitHub and Gmail. It launched on the web for Perplexity Max subscribers, with iOS coming soon; reports put Max at around $200 a month.",
+    "why": "The product shift is from answering one question to owning an ongoing task, which changes the user experience (delegation, check-ins, review) and the pricing (premium tier rather than free). Gating agents behind the top tier is a deliberate bet that heavy users will pay for autonomy.",
+    "take": "Use it to discuss how you would measure an asynchronous agent: tasks completed without intervention, review time saved, and retention of the premium tier.",
+    "url": "https://www.perplexity.ai/en-GB/hub/blog/teammates-are-agents-for-complex-ongoing-work",
+    "source": "Perplexity blog; Yahoo Tech; ITdaily"
+   },
+   {
+    "title": "After a midterm rebuke, OpenAI publishes a National Community Compact for its data centres",
+    "what": "After voters backed limits on data centres in 40 of 41 local ballot questions (per CNBC), OpenAI published a National Community Compact and a Compute Campus Policy Blueprint: each future site it owns and operates gets a local agreement and an annual public report, and OpenAI says it will pay the full cost of its electricity and grid upgrades, publish per-site water and power use and stop asking officials to sign non-disclosure agreements (NDAs). Chief Financial Officer Sarah Friar told CNBC the company will keep spending on computing capacity, while policy chief Chris Lehane acknowledged some projects could be delayed.",
+    "why": "Compute supply is now constrained by local politics, not just chips, which can affect capacity, prices and rate limits for every product built on these models. The commitments are voluntary and cover only sites OpenAI owns, not partner-built capacity, so watch whether they become binding.",
+    "take": "A strong strategy answer treats 'social licence to operate' as a supply risk for AI products, alongside chip supply and energy cost.",
+    "url": "https://www.engadget.com/2307590/openai-says-it-will-protect-local-resources-and-report-on-the-impact-of-its-data-centers/",
+    "source": "Engadget; The Decoder; The National; Quartz"
+   },
+   {
+    "title": "Ramp data: business AI token use keeps climbing while AI spending stalls",
+    "what": "TechCrunch reports Ramp data showing AI token spending grew only about 1.5% across August and September, against 42% month-over-month growth in July, even as token volumes kept rising. Ramp's economist attributed this to cheaper AI rather than less AI, and said spending is concentrated in venture-backed, high-growth tech companies.",
+    "why": "Falling prices mean usage growth no longer translates into revenue growth one-for-one, which matters for any AI business priced per token. PMs should separate volume, price and mix when reading AI revenue or cost dashboards.",
+    "take": "Be ready to explain why revenue can stall while usage grows, and what pricing changes (seats, outcomes, tiers) protect revenue.",
+    "url": "https://techcrunch.com/2026/11/06/ramp-data-shows-ai-spending-stalling-just-as-anthropic-nears-its-ipo/",
+    "source": "TechCrunch; Unite.AI"
+   },
+   {
+    "title": "Palo Alto Networks reportedly in talks to buy Clutch Security, which secures AI agents' credentials, for about $500 million",
+    "what": "Palo Alto Networks is in early talks to acquire Israeli startup Clutch Security for about $500 million in cash plus milestone payments, first reported by The Information. Clutch secures non-human identities such as service accounts, application programming interface (API) keys and AI agents; neither company has confirmed the deal.",
+    "why": "Securing what agents can log into is becoming its own product category, a week after CrowdStrike's agent-security acquisitions. Enterprise buyers will increasingly ask how an agent product handles credentials and permissions.",
+    "take": "When designing an enterprise agent, name identity and credential management as a launch requirement, not an afterthought.",
+    "url": "https://en.globes.co.il/en/article-palo-alto-networks-in-talks-to-buy-clutch-security-for-500m-1001562156",
+    "source": "Globes; Calcalist; Techzine; Benzinga"
+   },
+   {
+    "title": "Democrats plan a wave of AI bills when they take control of Congress",
+    "what": "Reuters reports that Democrats, who won control of both chambers in the midterms, plan bills to shield consumers from data-centre electricity costs, require independent testing of advanced AI systems and clarify when AI companies are liable for harm. Nothing can move until the new Congress convenes in January.",
+    "why": "Independent testing and liability rules would add launch gates and documentation to AI products sold in the United States. PMs at AI companies should expect evaluation evidence to become a compliance artefact, not just an internal quality check.",
+    "take": "Show you can anticipate regulation: build evaluation records and incident logs now so a future testing mandate is cheap to meet.",
+    "url": "https://investing.com/news/stock-market-news/democrats-planning-flood-of-ai-bills-when-they-take-control-of-congress-5007213",
+    "source": "Reuters via Investing.com; CBS2 Iowa"
+   },
+   {
+    "title": "Claude Enterprise adds project tags to track spend by cost code (beta)",
+    "what": "Anthropic's release notes for 6 November say eligible Enterprise organisations can tag projects with existing codes, such as charge codes or client-matter numbers, and view most project spend by tag.",
+    "why": "Cost attribution is what lets finance teams approve wider AI rollouts: once spend maps to clients or departments, it can be charged back and justified. It also signals that AI spend is becoming a budget line that needs the same controls as cloud spend.",
+    "take": "In an enterprise AI question, mention cost attribution and chargeback as features that unblock expansion.",
+    "url": "https://support.claude.com/en/articles/12138966-release-notes",
+    "source": "Anthropic release notes (single source)"
+   }
+  ],
+  "modelsPricing": [
+   {
+    "text": "Update: Google's Gemini Omni 1.2 Flash video model is reported as generally available, following its 5 November rollout (single source).",
+    "url": "https://www.university-365.com/post/ai-news-friday-6-november-2026-openai-gpt-6-cyber-perplexity-teammates-claude-plaid"
+   }
+  ],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Gated access for dual-use AI capabilities",
+    "body": "Some capabilities, such as finding software vulnerabilities, help defenders and attackers alike. Gated access means releasing them only to verified users who pass identity, use-case and security checks, often with monitoring, network allow-lists and usage limits, instead of a public launch.\n\nFor a PM, the gate is the product: you decide eligibility criteria, verification friction, monitoring and the evidence needed to widen access. OpenAI's GPT-6 Cyber launch to vetted Daybreak Red customers is today's example. Track approval time, misuse flags and value delivered per approved customer."
+   },
+   {
+    "title": "Small language models and on-device inference",
+    "body": "Small language models have far fewer parameters than frontier models and can run on a phone or laptop without sending data to a server. They trade some reasoning ability for lower cost, lower latency, offline use and better privacy.\n\nFor a PM, this opens features for patchy connectivity or sensitive data, which matters in India. The trade-off is quality on hard tasks, so many products route simple requests to a small on-device model and escalate the rest to the cloud."
+   },
+   {
+    "title": "Latency metrics: time to first token and throughput",
+    "body": "Time to first token is how long a user waits before any answer starts appearing; throughput is how fast the rest of the text streams. Total response time depends on both, plus any tool calls or reasoning steps.\n\nFor a PM, perceived speed often matters more than raw speed: streaming, progress indicators and fast first tokens keep users engaged. Set latency budgets per feature and watch them when switching models, because a smarter model that thinks longer can hurt completion rates."
+   },
+   {
+    "title": "Knowledge cutoffs and model freshness",
+    "body": "A model only knows what was in its training data up to its knowledge cutoff date. Anything later must be supplied at run time through search, retrieval or connected tools.\n\nFor a PM, freshness is a product requirement: news, prices and policies go stale. Decide which answers need live data, show sources and dates to users, and test what happens when the model confidently answers from outdated knowledge."
+   },
+   {
+    "title": "Long-running background agents",
+    "body": "A background agent works on a task over minutes, hours or days, checking in, adjusting and returning results for review, instead of answering one prompt in real time. Perplexity's new Teammates are an example.\n\nFor a PM, this changes the design from a chat box to delegation: how users assign work, see progress, interrupt and approve results. Key metrics include tasks completed without intervention, time to review and how often users redo the agent's work."
+   },
+   {
+    "title": "Sandboxed execution environments for agents",
+    "body": "A sandbox is an isolated environment where an agent can run code, browse or edit files without touching real systems or data it should not reach. If something goes wrong, the damage is contained.\n\nFor a PM, sandboxes let you offer powerful agent actions with less risk, and they are often a requirement in enterprise security reviews. The trade-off is fidelity: the more isolated the sandbox, the less the agent can do with real data, so define what must cross the boundary and with whose approval."
+   },
+   {
+    "title": "Batch and asynchronous inference",
+    "body": "Batch inference processes many requests together without needing instant answers, usually at a lower price than real-time calls. Asynchronous application programming interfaces (APIs) return results later rather than immediately.\n\nFor a PM, not every AI feature needs real-time answers: nightly summaries, bulk classification or report generation can run in batches and cut cost noticeably. Map each feature to the latency users truly need before choosing the more expensive real-time path."
+   },
+   {
+    "title": "AI incident response and reporting",
+    "body": "An AI incident is a harmful or unexpected outcome, such as leaked data, a dangerous answer or an agent taking a wrong action. Incident response is the plan for detecting, containing, fixing and disclosing it, and some regulators now require reporting within fixed deadlines.\n\nFor a PM, define severity levels, owners, kill switches and user communication before launch. India's CERT-In guidelines ask for AI security incidents to be reported within six hours, so logging and escalation paths are product requirements, not afterthoughts."
+   },
+   {
+    "title": "Secure-by-default configuration for AI tools",
+    "body": "Secure by default means a product ships with safe settings already on: strong authentication, closed network access and minimal permissions, so users do not have to harden it themselves.\n\nFor a PM, defaults decide real-world security because most users never change them. The exposed ARTEX agent consoles found by Censys show the cost of weak defaults. Make the safe path the easy path, and track how many deployments run with risky settings."
+   },
+   {
+    "title": "Seat-based versus usage-based pricing for AI",
+    "body": "Seat-based pricing charges per user per month; usage-based pricing charges for what is consumed, such as tokens, tasks or credits. Many AI products mix the two, for example a seat fee with a usage allowance.\n\nFor a PM, seats give predictable revenue but can lose money on heavy users; usage pricing tracks cost but makes bills harder to predict, which can slow adoption. Choose based on how variable your inference cost per user is and what your buyer can budget for."
+   },
+   {
+    "title": "Price deflation and the Jevons paradox in AI spending",
+    "body": "AI prices per token keep falling. The Jevons paradox is the idea that when something gets cheaper, total use can rise so much that total spending also rises, though not always; Ramp's data shows usage climbing while spending stalls.\n\nFor a PM, falling prices can shrink revenue per task even as engagement grows. Model the effect before committing to per-token pricing, and look for value-based pricing tied to outcomes so price cuts do not automatically cut revenue."
+   },
+   {
+    "title": "Social licence to operate",
+    "body": "A social licence to operate is the ongoing acceptance a company needs from communities and regulators, beyond legal permits. For AI, it increasingly covers data centres' energy, water and noise impact.\n\nFor a PM, it is a supply-side risk: if communities block data centres, compute gets scarcer and pricier, affecting rate limits and margins. OpenAI's community compact shows companies now treat it as strategy. Include compute supply risk in long-term product planning."
+   },
+   {
+    "title": "Cost attribution and chargeback for AI spend",
+    "body": "Cost attribution tags AI usage to a project, team or client so spend can be traced; chargeback bills that spend back to the budget owner. Claude Enterprise's new project tags are an example.\n\nFor a PM building enterprise AI, attribution features help buyers justify wider rollouts because finance can see where money goes. Measure the share of spend that is attributed, and treat cost dashboards as part of the product, not just billing."
+   },
+   {
+    "title": "Intervention rate for AI agents",
+    "body": "Intervention rate is how often a human must step in to correct, approve, unblock or redo an agent's work, per task or per step. It is the mirror image of autonomy.\n\nFor a PM, a falling intervention rate is a strong sign an agent is earning trust, but zero is not always the goal for high-stakes actions. Segment it by task type and by the reason for intervention so you know whether to improve the model, the tools or the user experience."
+   },
+   {
+    "title": "Usage concentration and power-user skew",
+    "body": "In many AI products, a small share of users generates most of the usage and cost. Ramp's data, for example, shows a large gap between median and top AI spenders.\n\nFor a PM, averages hide this skew, so report medians and percentiles alongside means. Power users drive both revenue and inference cost, so pricing tiers, rate limits and roadmap priorities should reflect who actually uses the product most."
+   },
+   {
+    "title": "Designing asynchronous handoffs for agents",
+    "body": "When an agent works in the background, the handoff is the moment it returns results: a summary of what it did, what it is unsure about and what needs a decision. Good handoffs make review quick.\n\nFor a PM, review time is the hidden cost of agents. Design results as review-ready, with sources, diffs and clear choices, and measure time to approve and the rate of accepted outputs without edits."
+   },
+   {
+    "title": "AI teammate framing and anthropomorphism",
+    "body": "Products increasingly present agents as 'teammates' or colleagues with names, roles and personalities. Anthropomorphism is giving human traits to non-human systems.\n\nFor a PM, human framing can make delegation feel natural but can also make users over-trust the system or feel misled. Be clear about what the agent can and cannot do, and test whether the framing raises engagement without raising complaints or errors."
+   },
+   {
+    "title": "India's CERT-In AI Security Auditing Guidelines",
+    "body": "CERT-In, the Indian Computer Emergency Response Team, has issued guidelines that sort AI systems into four risk tiers: low, moderate, high and critical. High-risk and critical systems need independent audits by empanelled auditors, and AI security incidents must be reported within six hours.\n\nFor a PM shipping AI in India, the tier your product falls into shapes audit cost, release timelines and logging requirements. Classify your system early, and build audit evidence and incident reporting into the roadmap."
+   },
+   {
+    "title": "Sector regulators and AI in Indian finance",
+    "body": "In India, sector regulators such as the Reserve Bank of India (RBI), the Securities and Exchange Board of India (SEBI) and the Insurance Regulatory and Development Authority of India (IRDAI) add their own rules on top of general laws. The RBI has just asked banks for security audits amid AI-driven cyber-attacks.\n\nFor a PM in fintech or insurance, sector rules often bite before general AI law. Track regulator advisories, plan for audits of partner integrations, and expect security and explainability requirements to shape AI feature design."
+   },
+   {
+    "title": "Independent third-party testing of AI systems",
+    "body": "Independent testing means an outside party, such as a government body or accredited auditor, evaluates an AI system's capabilities and risks before or after release, rather than relying only on the developer's own tests.\n\nFor a PM, this adds a gate and timeline to launches, but it can also be a trust signal for buyers. US lawmakers plan bills requiring it; keep evaluation records, model cards and test datasets ready so third-party testing is fast and cheap to pass."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Gated access for dual-use AI capabilities",
+   "body": "Some capabilities, such as finding software vulnerabilities, help defenders and attackers alike. Gated access means releasing them only to verified users who pass identity, use-case and security checks, often with monitoring, network allow-lists and usage limits, instead of a public launch.\n\nFor a PM, the gate is the product: you decide eligibility criteria, verification friction, monitoring and the evidence needed to widen access. OpenAI's GPT-6 Cyber launch to vetted Daybreak Red customers is today's example. Track approval time, misuse flags and value delivered per approved customer."
+  },
+  "india": [
+   {
+    "text": "MediaNama (6 Nov): the Reserve Bank of India (RBI) met bankers amid rising AI-driven cyber-attacks and, in a reportedly confidential advisory, asked for security audits; the audit must be done before onboarding new non-banking financial companies (NBFCs) as API users, with existing clients given until 3 February 2027.",
+    "url": "https://www.medianama.com/2026/11/223-rbi-bankers-ai-cyber-attacks-security-audits/"
+   },
+   {
+    "text": "MediaNama explainer: the Indian Computer Emergency Response Team (CERT-In) AI Security Auditing Guidelines (dated 4 November) sort AI systems into four risk tiers, require independent audits by empanelled auditors for high-risk and critical systems, and require AI security incidents to be reported within six hours.",
+    "url": "https://www.medianama.com/2026/11/223-lowdown-cert-in-ai-security-auditing-guidelines/"
+   }
+  ],
+  "question": {
+   "q": "You are the product manager for an AI model that is exceptionally good at finding software vulnerabilities. How would you decide who gets access, and how would you launch it?",
+   "framing": "Clarify the users (security teams, researchers, vendors), the value (finding and fixing flaws faster) and the risk (attackers using the same capability). Define the goal as maximum defensive value at an acceptable misuse risk, and scope a limited first release.",
+   "tradeoff": "Reach versus risk: broad access helps more defenders but raises misuse; tight gating slows adoption and may push users to less safe alternatives. Recommend verified, tiered access (identity checks, use-case review, monitoring, allow-listed networks) with clear criteria for widening.",
+   "metric": "North star: verified vulnerabilities fixed by approved customers. Guardrails: misuse flags per account, time to approve applicants, and incident count. Recommend a staged rollout and a regular review that widens access only when guardrail metrics hold."
+  },
+  "alsoNotable": [
+   {
+    "text": "Censys counted 1,465 internet-exposed consoles of ARTEX, an open-source AI agent framework for autonomous penetration testing; Microsoft says attackers used it against cloud environments, often via weak passwords and no multi-factor authentication.",
+    "url": "https://fourweekmba.com/ai-censys-finds-1465-exposed-artex-ai-hacking-consoles-online/"
+   },
+   {
+    "text": "Dropbox agreed to buy Tigris Data, an object-storage platform for AI workloads, for about $350 million in cash, alongside a new DBX Agent Cloud offering (8-K filing).",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001467623/000146762326000056/dbx-20261103.htm"
+   }
+  ],
+  "pmToolkit": [
+   {
+    "name": "Listen Labs",
+    "category": "Customer research",
+    "url": "https://listenlabs.ai",
+    "what": "An AI platform that runs and analyses customer interviews at scale.",
+    "does": "It recruits or invites participants, conducts AI-moderated interviews and synthesises themes, so a PM can hear from many users in days rather than weeks.",
+    "examples": [
+     "Interview 50 churned users about why they left before a retention review",
+     "Test three value propositions for a new AI feature with target customers",
+     "Gather qualitative reactions to a pricing change before rollout"
+    ],
+    "pricing": ""
+   },
+   {
+    "name": "Kraftful",
+    "category": "Feedback and roadmapping",
+    "url": "https://kraftful.com",
+    "what": "An AI tool that analyses user feedback from reviews, surveys and support tickets.",
+    "does": "It groups feedback into themes, feature requests and complaints, helping a PM decide what to prioritise with evidence.",
+    "examples": [
+     "Summarise top complaints from app store reviews after a release",
+     "Turn a month of support tickets into a ranked list of feature requests",
+     "Prepare evidence for a roadmap debate with stakeholders"
+    ],
+    "pricing": "Team plan $300 per month or $240 per month billed annually (may change)"
+   },
+   {
+    "name": "Tana",
+    "category": "Specs and docs",
+    "url": "https://tana.inc",
+    "what": "An AI-assisted notes and knowledge tool built around structured, linked notes.",
+    "does": "It lets a PM capture meeting notes, ideas and specs as structured items that AI can summarise, tag and turn into tasks.",
+    "examples": [
+     "Capture discovery interview notes and tag them by problem theme",
+     "Draft a one-page spec from linked research notes",
+     "Keep a decision log that AI can search and summarise"
+    ],
+    "pricing": ""
+   },
+   {
+    "name": "Relume",
+    "category": "Prototyping",
+    "url": "https://www.relume.io",
+    "what": "An AI website planning tool that generates sitemaps and wireframes from a prompt.",
+    "does": "It helps a PM go from a product description to a page structure and wireframes that can be exported to Figma or Webflow.",
+    "examples": [
+     "Generate a sitemap for a new landing page in minutes",
+     "Create wireframes to align designers and engineers on scope",
+     "Explore three page structures for a feature launch site"
+    ],
+    "pricing": "Free tier available; paid plans vary by source (may change)"
+   },
+   {
+    "name": "Framer",
+    "category": "Design",
+    "url": "https://www.framer.com",
+    "what": "A website builder with AI features for designing and publishing sites.",
+    "does": "It lets a PM create and publish a realistic landing page or prototype without engineering help, useful for testing demand.",
+    "examples": [
+     "Build a fake-door landing page to test demand for an AI feature",
+     "Publish a beta waitlist page for a launch",
+     "Mock up a marketing page to share with stakeholders"
+    ],
+    "pricing": "Free plan; paid sites from $10 per month billed annually (may change)"
+   },
+   {
+    "name": "LaunchDarkly",
+    "category": "Experimentation",
+    "url": "https://launchdarkly.com",
+    "what": "A feature management platform with feature flags, experiments and controls for AI configurations.",
+    "does": "It lets a PM roll out features gradually, run experiments and switch prompts or models for AI features without a new code release.",
+    "examples": [
+     "Roll out a new AI feature to 5% of users and watch error rates",
+     "A/B test two prompts or models for an AI assistant",
+     "Instantly switch off an AI feature if quality drops"
+    ],
+    "pricing": "Free Developer plan; paid plans are usage-based (may change)"
+   },
+   {
+    "name": "Read AI",
+    "category": "Meetings and notes",
+    "url": "https://www.read.ai",
+    "what": "An AI meeting assistant that records, transcribes and summarises meetings.",
+    "does": "It produces summaries, action items and highlights so a PM can follow up quickly and share decisions with people who missed the meeting.",
+    "examples": [
+     "Auto-summarise a sprint review and send action items",
+     "Review key moments from a customer call",
+     "Share decisions from a stakeholder meeting with absent leads"
+    ],
+    "pricing": "Free plan with 5 meetings a month; Pro from about $15 per user per month billed annually (may change)"
+   },
+   {
+    "name": "Pitch",
+    "category": "Presentations",
+    "url": "https://pitch.com",
+    "what": "A collaborative presentation tool with AI to generate and refine decks.",
+    "does": "It helps a PM draft and polish decks with teammates, from roadmap reviews to launch updates.",
+    "examples": [
+     "Generate a first draft of a quarterly roadmap deck",
+     "Build a launch update deck with the marketing team",
+     "Turn a product strategy memo into slides for leadership"
+    ],
+    "pricing": "Free plan; paid plans from $15 per month (may change)"
+   },
+   {
+    "name": "Le Chat by Mistral",
+    "category": "General AI assistant",
+    "url": "https://chat.mistral.ai",
+    "what": "Mistral AI's general-purpose chat assistant.",
+    "does": "It helps a PM draft, summarise, analyse and research, and offers a European alternative to the largest United States assistants.",
+    "examples": [
+     "Summarise a competitor's product announcement",
+     "Draft user stories from a feature brief",
+     "Compare answers with another assistant to spot hallucinations"
+    ],
+    "pricing": "Free tier; Pro $14.99 per month (may change)"
+   },
+   {
+    "name": "Lindy",
+    "category": "Automation and agents",
+    "url": "https://www.lindy.ai",
+    "what": "A platform for building AI agents that automate business workflows.",
+    "does": "It lets a PM set up agents that handle email, scheduling, meeting follow-ups or research without code.",
+    "examples": [
+     "Create an agent that triages product feedback emails into a tracker",
+     "Automate follow-up emails after customer calls",
+     "Build a weekly competitor-news digest agent"
+    ],
+    "pricing": "No free tier (7-day trial); Plus from $29.99 per user per month (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 16,
+   "failed": [
+    "TLDR AI",
+    "TLDR Product Management",
+    "Hacker News",
+    "Techmeme",
+    "Product Hunt",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing",
+    "Most article pages (blocked by session network policy)"
+   ],
+   "singleSource": [
+    "Claude Enterprise project tags (Anthropic release notes)",
+    "Gemini Omni 1.2 Flash general availability"
+   ]
+  },
+  "createdAt": "2026-11-07T01:18:58Z"
+ },
+ {
   "date": "2026-11-06",
   "subject": "AI PM Digest – Fri, 06 Nov 2026 – Claude adds Personal Finance beta",
   "headline": "Claude adds Personal Finance beta",
