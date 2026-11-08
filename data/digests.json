@@ -1,5 +1,294 @@
 [
  {
+  "date": "2026-11-08",
+  "subject": "AI PM Digest – Sun, 08 Nov 2026 – OpenAI raises $11B, short of target",
+  "headline": "OpenAI raises $11B, short of target",
+  "quiet": true,
+  "topStories": [
+   {
+    "title": "OpenAI closes a first $11 billion tranche at a reported $1.25 trillion valuation, below its earlier targets",
+    "what": "Bloomberg and Reuters reported that OpenAI completed the first close of a new funding round, about $11 billion at a $1.25 trillion valuation, with SoftBank, MGX, Coatue and T. Rowe Price among the investors; the round could reach about $20 billion. Reports say this is below the up to $30 billion and roughly $1.4–1.5 trillion valuation the company had reportedly sought, against a backdrop of a tech-stock sell-off.",
+    "why": "Capital for frontier labs is getting more expensive, and a lab that raises less has to fund compute from revenue sooner. Product managers (PMs) building on OpenAI should expect more pressure on application programming interface (API) margins, rate limits and free tiers, and should keep a second model provider ready.",
+    "take": "Frame it as unit economics: when capital tightens, labs shift from growth-at-any-cost to monetisation, which changes pricing and free-tier policy for everyone downstream.",
+    "url": "https://americanbazaaronline.com/2026/11/07/openai-raises-11-billion-at-1-25-trillion-valuation-491769/",
+    "source": "American Bazaar, citing Bloomberg and Reuters (also mlq.ai, Cryptopolitan)"
+   },
+   {
+    "title": "Google DeepMind says human-guided AI agents found two weaknesses in legacy 1024-bit RSA encryption",
+    "what": "Google DeepMind announced that AI agents, guided by researchers, found two weaknesses in legacy 1024-bit RSA (Rivest–Shamir–Adleman) public-key encryption: a theoretical, roughly 1,600-times more efficient signature forgery in a narrow scenario, and a method that cuts the average cost of factoring additional keys in large batches by about 30 times. Coverage stresses that modern 2048-bit keys are not affected; this summary is based on secondary coverage, as the DeepMind post itself was not reachable.",
+    "why": "It is a concrete example of AI agents accelerating security research, which cuts both ways: defenders can audit faster, and attackers can too. PMs owning products with legacy cryptography, long-lived keys or old devices should treat 'AI-accelerated attacks' as a roadmap risk, not a hypothetical.",
+    "take": "Use it to show you understand dual-use capability: the same agentic research loop that finds bugs for defenders lowers the cost of attacks, so patch velocity becomes a product metric.",
+    "url": "https://cryptobriefing.com/google-deepmind-ai-rsa-1024-bit-weaknesses/",
+    "source": "Crypto Briefing (also WebProNews, Plain English, Datastudios)"
+   }
+  ],
+  "modelsPricing": [],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Capital intensity of frontier AI",
+    "body": "Frontier AI is capital intensive: training runs, inference fleets and data centres cost far more up front than typical software, so labs depend on large, repeated funding rounds or fast-growing revenue to keep shipping. Today's report that OpenAI's first close came in below earlier targets is a reminder that this capital is not unlimited.\n\nFor a product manager (PM), a lab's cost of capital flows into your roadmap. Tighter funding usually means price changes, stricter rate limits, smaller free tiers and more push toward paid plans. Build-on-a-lab decisions should include a 'what if prices rise 2x' scenario, and the business case for an AI feature should survive it."
+   },
+   {
+    "title": "AI-accelerated vulnerability discovery",
+    "body": "AI agents can now search code, protocols and cryptographic schemes for weaknesses much faster than people alone, as in today's Google DeepMind work on legacy 1024-bit RSA (Rivest–Shamir–Adleman) encryption. The same capability helps defenders and attackers.\n\nFor a PM, this shrinks the time between a weakness existing and it being exploited. That raises the value of patch speed, dependency upgrades and retiring legacy components, which are often deprioritised. Treat 'time to remediate' as a product health metric, and budget roadmap space for security debt rather than waiting for an incident."
+   },
+   {
+    "title": "Temperature and sampling settings",
+    "body": "A language model picks each next token from a probability distribution. Temperature and related settings (such as top-p) control how adventurous that choice is: low values give focused, repeatable answers; high values give more varied, creative ones, and more mistakes.\n\nFor a PM, this is a product decision, not just an engineering knob. Extraction, classification and customer support usually want low randomness for consistency; brainstorming or copywriting can use more. Inconsistent answers to the same question often trace back here, so specify the setting in the spec and keep it fixed when you run evaluations."
+   },
+   {
+    "title": "Quantisation",
+    "body": "Quantisation stores a model's numbers at lower precision (for example 8-bit or 4-bit instead of 16-bit). The model becomes smaller and cheaper to run, often with a modest loss in quality that depends on the task.\n\nFor a PM, quantisation is a lever on cost, latency and where a model can run, including on phones or cheaper hardware. The trade-off is quality risk on harder tasks, so insist on running your own evaluation set before and after. It matters especially for India, where on-device or low-cost inference can make a feature viable for price-sensitive users."
+   },
+   {
+    "title": "Scaling laws",
+    "body": "Scaling laws are the empirical finding that model quality improves predictably as you increase training compute, data and parameters, though with diminishing returns. They explain why labs raise so much capital: bigger runs have tended to produce better models.\n\nFor a PM, scaling laws help you reason about the future: capabilities that are weak today may arrive in the next model generation, so avoid over-investing in workarounds a better model will make obsolete. They also explain why compute and funding headlines, like today's OpenAI round, matter to product timelines."
+   },
+   {
+    "title": "Semantic caching",
+    "body": "Semantic caching stores answers to earlier requests and reuses them when a new request means the same thing, even if worded differently, by comparing embeddings rather than exact text. It differs from prompt caching, which reuses a fixed prompt prefix.\n\nFor a PM, it can cut inference cost and latency for repetitive questions such as frequently asked questions (FAQs) or support queries. The risk is serving a cached answer that is subtly wrong for the new question or out of date. Decide which surfaces tolerate that, set expiry rules, and track a cache hit rate alongside answer accuracy."
+   },
+   {
+    "title": "Hybrid search (keyword plus vector)",
+    "body": "Hybrid search combines classic keyword search, which is precise on exact terms like product codes and names, with vector search, which matches meaning. Results from both are merged, often then reranked, before being passed to a model in retrieval-augmented generation (RAG).\n\nFor a PM, pure vector search often fails on exact identifiers, which users notice immediately. Hybrid search is a common fix when answers are 'close but wrong'. Measure retrieval quality directly (did the right document appear in the top results?) rather than only judging the final answer, so you know which layer to fix."
+   },
+   {
+    "title": "Prompt versioning and management",
+    "body": "Prompts are product logic. Prompt versioning treats them like code: each change is tracked, reviewed, tested against an evaluation set, and can be rolled back. Prompt management tools let teams edit and deploy prompts without a full code release.\n\nFor a PM, unversioned prompt edits are a frequent source of silent regressions. Ask for a change log, a test run before each release, and the ability to roll back quickly. Faster prompt deployment speeds iteration, but it also needs the same review discipline as any production change."
+   },
+   {
+    "title": "Sandbagging and capability elicitation",
+    "body": "Sandbagging is when a model performs below its true ability on certain tasks, whether by accident of training or something more strategic. Capability elicitation is the work of drawing out a model's real ceiling through better prompting, tools or fine-tuning before judging what it can do.\n\nFor a PM, it means a single evaluation can understate (or overstate) a model. If a model seems weak on your task, try stronger elicitation before switching vendors. For safety-sensitive products, it is a reason to rely on several independent evaluations rather than one benchmark score."
+   },
+   {
+    "title": "Jailbreaks",
+    "body": "A jailbreak is a user prompt crafted to get a model to ignore its safety rules, for example through role-play or by splitting a forbidden request into harmless-looking parts. It differs from prompt injection, where malicious instructions are hidden in content the model reads.\n\nFor a PM, jailbreaks are a trust and brand risk: screenshots of your assistant saying something harmful spread quickly. Mitigations include layered guardrails, monitoring for known patterns and red-team testing before launch. Decide in advance which failures are unacceptable, and track a jailbreak success rate on a fixed attack set over time."
+   },
+   {
+    "title": "Outcome-based pricing",
+    "body": "Outcome-based pricing charges for results, such as a resolved support ticket or a qualified lead, rather than for seats or raw usage. It is increasingly discussed for AI agents that complete whole tasks.\n\nFor a PM, it aligns price with customer value and makes return on investment (ROI) easy to explain, but it shifts risk to you: you pay inference costs even when the agent fails. It requires a clear, auditable definition of 'outcome' that buyers accept, and strong measurement. It works best where success is unambiguous and your task success rate is already high."
+   },
+   {
+    "title": "Data network effects and their limits",
+    "body": "A data network effect is when more usage creates data that makes the product better, which attracts more users. It is often cited as an AI moat.\n\nFor a PM, test the claim honestly. The effect is real only if the data is proprietary, actually used to improve the model or product, and the improvement is something users notice. Many AI products see diminishing returns quickly, or competitors can get similar data. Strong moats more often come from workflow integration, distribution and trust, with data as a supporting factor."
+   },
+   {
+    "title": "Inter-rater agreement in human evaluation",
+    "body": "When people grade AI outputs, they often disagree. Inter-rater agreement measures how consistently different reviewers score the same outputs, using statistics such as Cohen's kappa.\n\nFor a PM, low agreement means your quality rubric is unclear, and any metric built on it, including a large language model (LLM) acting as judge calibrated against those humans, is noisy. Before trusting a quality score, have several reviewers grade a shared sample, discuss disagreements and tighten the rubric. High agreement is a precondition for meaningful A/B (split) test results on quality."
+   },
+   {
+    "title": "Benchmark contamination",
+    "body": "Benchmark contamination happens when test questions, or close copies, end up in a model's training data, so the model scores well by memory rather than skill. Public leaderboards are especially exposed.\n\nFor a PM, this is why vendor benchmark claims should not decide a model choice on their own. Build a private evaluation set from your real use cases, keep it out of public view, and refresh it over time. When a new model jumps on public benchmarks but not on your tasks, trust your tasks."
+   },
+   {
+    "title": "Novelty effect in AI feature metrics",
+    "body": "A novelty effect is a temporary spike in engagement because a feature is new, not because it is useful. AI features are especially prone: people try them out of curiosity, then usage fades.\n\nFor a PM, launch-week numbers can mislead. Look at cohort retention over several weeks, repeat use by the same users and task completion rather than first clicks. Run experiments long enough for the effect to wear off, and compare against a holdout group before declaring success or scaling investment."
+   },
+   {
+    "title": "Citations and source attribution",
+    "body": "Citations show which sources an AI answer drew on, usually as links or footnotes next to the claims. They are common in search and research assistants built on retrieval-augmented generation (RAG).\n\nFor a PM, citations build trust and let users verify, but only if they are accurate; a citation that does not support the claim does more harm than none. Track citation accuracy as a quality metric, design so users can check sources in one click, and decide what the product does when no good source exists, such as saying so rather than guessing."
+   },
+   {
+    "title": "Empty-state and prompt-starter design",
+    "body": "The empty state is what users see before they have done anything, such as a blank chat box. Many users do not know what an AI product can do, so a blank box leads to vague requests or abandonment. Prompt starters, examples and templates show what is possible.\n\nFor a PM, this is a high-leverage activation lever. Test which starters lead to successful first tasks, tailor them to the user's role or context, and update them as capabilities change. Measure first-session success and the share of users who send a second request."
+   },
+   {
+    "title": "Labelling AI-generated content",
+    "body": "Labelling means clearly marking images, audio, video or text that was generated or substantially altered by AI, through visible labels, metadata or watermarks. Regulators in several countries, including India, have moved toward disclosure requirements for synthetic media.\n\nFor a PM, labelling affects design (where and how the label appears), engineering (metadata that survives editing and re-sharing) and policy (what counts as 'substantially altered'). Over-labelling erodes meaning; under-labelling creates legal and trust risk. Decide the rules early, especially for political, news or impersonation-prone content."
+   },
+   {
+    "title": "Data localisation and sovereign cloud",
+    "body": "Data localisation rules require certain data to be stored or processed within a country's borders. Sovereign cloud refers to infrastructure, often government-backed, designed to keep sensitive data and workloads under national control, as with India's MeghRaj initiative.\n\nFor a PM selling AI products in India, especially to government, banking or health customers, where the model runs and where data is stored can decide the deal. This affects vendor choice, latency and cost. Ask early which data classes are in scope, and whether your model provider offers in-country hosting."
+   },
+   {
+    "title": "Handling code-mixed language",
+    "body": "Code-mixing is switching between languages within a sentence, such as Hindi and English (Hinglish), often written in Latin script. It is how many Indian users actually type and speak.\n\nFor a PM, models tuned on clean single-language data can misread code-mixed input, mis-transliterate names or reply in the wrong language. Build evaluation sets from real user messages, test both scripts, and decide the reply language rule (match the user, or let them choose). Getting this right can matter more for Indian adoption than a stronger general model."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Capital intensity of frontier AI",
+   "body": "Frontier AI is capital intensive: training runs, inference fleets and data centres cost far more up front than typical software, so labs depend on large, repeated funding rounds or fast-growing revenue to keep shipping. Today's report that OpenAI's first close came in below earlier targets is a reminder that this capital is not unlimited.\n\nFor a product manager (PM), a lab's cost of capital flows into your roadmap. Tighter funding usually means price changes, stricter rate limits, smaller free tiers and more push toward paid plans. Build-on-a-lab decisions should include a 'what if prices rise 2x' scenario, and the business case for an AI feature should survive it."
+  },
+  "india": [
+   {
+    "text": "CareerIndia (7 Nov): the Centre for Development of Advanced Computing (C-DAC) revised IndiaAI compute empanelment closes on 13 November, with technical bids opening 14 November; the Ministry of Electronics and Information Technology (MeitY) has set a 24-month development target for an indigenous graphics processing unit (GPU) under Semicon 2.0 (Elets separately reports the GPU goal is a development target, not a launch date).",
+    "url": "https://www.careerindia.com/news/india-ai-jobs-2026-gpu-targets-compute-tenders-career-skills-011-68293.html"
+   },
+   {
+    "text": "Organiser (7 Nov), on MeghRaj 2.0 and sovereign cloud: more than 45,000 graphics processing units (GPUs) have been onboarded to India's common AI compute facility, framed as part of keeping critical data within national borders (single source).",
+    "url": "https://organiser.org/2026/11/07/423329/bharat/digital-sovereignty-how-india-is-building-its-own-cloud-ecosystem-to-keep-critical-data-within-national-borders/"
+   }
+  ],
+  "question": {
+   "q": "You are the PM for an AI writing assistant built on a frontier lab's API. The lab has just raised less money than expected and signals price rises and tighter free-tier limits. How would you protect your product's margins and user experience?",
+   "framing": "Clarify the business model (free versus paid mix, gross margin today), the share of cost that is inference, and which user segments drive revenue versus cost. Map exposure: one provider or several, and which features depend on the most expensive model.",
+   "tradeoff": "Quality versus cost: routing simple tasks to cheaper or quantised models, caching and shorter prompts cut spend but risk quality drops; tightening the free tier protects margin but can hurt acquisition. Multi-provider resilience adds engineering and evaluation cost.",
+   "metric": "Track gross margin per active user and cost per successful task, with retention and task success as guardrails. Recommend: build a second-provider fallback with an evaluation suite, route by task difficulty, and adjust the free tier based on conversion data rather than cutting blindly."
+  },
+  "alsoNotable": [
+   {
+    "text": "A DEV Community daily digest reports OpenAI announced a partnership on 7 November with security firm Hacktron to probe its systems, focused on how its services interact with third-party platforms, with expanded frontier-model access through the Daybreak Red programme (single source; not confirmed on openai.com).",
+    "url": "https://dev.to/hiroki-ii-ai/ai-daily-digest-november-8-2026-openai-taps-hacktron-for-bug-hunts-muse-wonder-for-everyone-gin"
+   }
+  ],
+  "pmToolkit": [
+   {
+    "name": "Marvin (HeyMarvin)",
+    "category": "Discovery and research",
+    "url": "https://heymarvin.com",
+    "what": "An AI research repository for storing and analysing customer interviews and qualitative data.",
+    "does": "It transcribes and tags interviews, clusters themes and lets you search past research, so insights are reusable instead of buried in recordings.",
+    "examples": [
+     "Upload 10 discovery interview recordings and pull the top recurring pain points with quotes.",
+     "Search past research for everything users said about onboarding before writing a new spec.",
+     "Share a highlight reel of customer clips with engineering to align on a problem."
+    ],
+    "pricing": "Free tier with limited uploads; paid plans by quote (may change)"
+   },
+   {
+    "name": "Kiro",
+    "category": "Building and coding",
+    "url": "https://kiro.dev",
+    "what": "An agentic coding environment from Amazon Web Services (AWS) built around spec-driven development.",
+    "does": "It turns a written requirement into structured requirements, a design and a task list, then implements them task by task, which suits PMs who think in specs.",
+    "examples": [
+     "Turn a one-page feature brief into user stories with acceptance criteria and see them implemented in a prototype.",
+     "Review the generated design document to spot missing edge cases before engineering starts.",
+     "Build a small internal tool, such as a feedback tagger, without waiting for engineering time."
+    ],
+    "pricing": "Free tier with 50 credits a month; paid plans from about $20 a month (may change)"
+   },
+   {
+    "name": "UX Pilot",
+    "category": "Prototyping",
+    "url": "https://uxpilot.ai",
+    "what": "An AI design tool that generates wireframes, high-fidelity screens and prototypes from text prompts.",
+    "does": "It helps a PM go from an idea to clickable screens quickly and export them to Figma, so conversations with designers start from something concrete.",
+    "examples": [
+     "Generate three alternative wireframes for a checkout flow to discuss trade-offs with design.",
+     "Create mobile and desktop versions of a settings page for an early usability check.",
+     "Mock up an AI chat empty state with prompt starters before a design sprint."
+    ],
+    "pricing": "Free plan with limited credits; paid plans reported from about $18–19 a month (may change)"
+   },
+   {
+    "name": "Canva Magic Studio",
+    "category": "Design",
+    "url": "https://www.canva.com/magic/",
+    "what": "Canva's suite of AI features for writing, image generation and editing inside Canva.",
+    "does": "It lets a PM produce polished visuals, one-pagers and launch assets without waiting for a designer, using AI to draft copy and generate or edit images.",
+    "examples": [
+     "Create a launch announcement graphic and a matching social post in minutes.",
+     "Turn a feature brief into a visual one-pager for sales enablement.",
+     "Remove backgrounds and resize product screenshots for release notes."
+    ],
+    "pricing": "Free plan with limited AI use; Pro around $15 a month (may change)"
+   },
+   {
+    "name": "Heap",
+    "category": "Analytics",
+    "url": "https://www.heap.io",
+    "what": "A product analytics platform, now part of Contentsquare, that captures user interactions automatically.",
+    "does": "Its AI features let you ask questions in plain language and get charts, funnels and segments, which speeds up answering product questions without writing queries.",
+    "examples": [
+     "Ask which step of onboarding has the biggest drop-off this month.",
+     "Compare feature adoption between free and paid users for a pricing discussion.",
+     "Check whether a new AI feature is used repeatedly or only once per user."
+    ],
+    "pricing": "Free plan capped at about 10,000 sessions a month; paid plans by quote (may change)"
+   },
+   {
+    "name": "Unwrap",
+    "category": "Feedback and roadmapping",
+    "url": "https://www.unwrap.ai",
+    "what": "An AI customer-intelligence platform that analyses feedback from many channels.",
+    "does": "It clusters support tickets, reviews and survey responses into themes, tracks trends and alerts teams to emerging issues, helping PMs prioritise with evidence.",
+    "examples": [
+     "See the top five complaint themes from app-store reviews after a release.",
+     "Get a Slack alert when complaints about a specific feature spike.",
+     "Quantify how many customers asked for a feature before pitching it for the roadmap."
+    ],
+    "pricing": "Reported from about $2,000 a month with a free trial (may change)"
+   },
+   {
+    "name": "Zoom AI Companion",
+    "category": "Meetings and notes",
+    "url": "https://www.zoom.com/en/products/ai-assistant/",
+    "what": "Zoom's built-in AI assistant for meetings and the wider Zoom Workplace.",
+    "does": "It summarises meetings, lists action items and answers questions about what was discussed, so PMs can run calls without heavy note-taking.",
+    "examples": [
+     "Get an automatic summary and action items after a sprint review.",
+     "Catch up on a stakeholder meeting you joined late by asking what was decided.",
+     "Share a recap of a customer call with the team without writing it yourself."
+    ],
+    "pricing": "Included with paid Zoom Workplace plans; a custom add-on costs extra (may change)"
+   },
+   {
+    "name": "Userbrain",
+    "category": "Usability testing",
+    "url": "https://www.userbrain.com",
+    "what": "An unmoderated usability testing platform with a panel of testers.",
+    "does": "Testers record themselves using your product while thinking aloud, and its AI insights mark key moments, label issues and pull quotes into a report.",
+    "examples": [
+     "Test a new sign-up flow with five users and get clips of where they hesitate.",
+     "Validate whether users understand an AI feature's output before launch.",
+     "Compare two prototype versions with different testers in the same week."
+    ],
+    "pricing": "Paid plans from about $59 a month (may change)"
+   },
+   {
+    "name": "Plus AI",
+    "category": "Presentations",
+    "url": "https://plusai.com",
+    "what": "An AI add-on that creates and edits presentations inside Google Slides and PowerPoint.",
+    "does": "It drafts slides from a prompt or document and edits existing decks, so PMs can produce review and roadmap decks quickly in tools their company already uses.",
+    "examples": [
+     "Turn a product requirements document into a 10-slide review deck.",
+     "Rewrite a technical update deck for an executive audience.",
+     "Create a quarterly roadmap presentation from bullet notes."
+    ],
+    "pricing": "Paid plans reported at about $10–20 a month, with a trial (may change)"
+   },
+   {
+    "name": "Relay.app",
+    "category": "Automation and agents",
+    "url": "https://www.relay.app",
+    "what": "A workflow automation tool with AI steps and built-in human approval points.",
+    "does": "It connects apps and adds AI steps such as summarising or classifying, with human-in-the-loop checks, so PMs can automate routine work without code.",
+    "examples": [
+     "Summarise new support tickets tagged 'bug' and post them to a Slack channel daily.",
+     "Classify incoming feature requests and add them to a roadmap tool for review.",
+     "Draft a weekly stakeholder update from project tracker changes for you to approve."
+    ],
+    "pricing": "Paid plans reported from about $19 a month (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 16,
+   "failed": [
+    "TLDR AI",
+    "TLDR Product Management",
+    "Hacker News (hnrss.org)",
+    "Techmeme",
+    "Product Hunt",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing",
+    "All direct page fetches (network policy blocked WebFetch and curl); web search only"
+   ],
+   "singleSource": [
+    "OpenAI–Hacktron partnership (DEV Community digest)",
+    "45,000+ GPUs onboarded (Organiser)"
+   ]
+  },
+  "createdAt": "2026-11-08T01:19:31Z"
+ },
+ {
   "date": "2026-11-07",
   "subject": "AI PM Digest – Sat, 07 Nov 2026 – OpenAI gates GPT-6 Cyber to defenders",
   "headline": "OpenAI gates GPT-6 Cyber to vetted defenders",
