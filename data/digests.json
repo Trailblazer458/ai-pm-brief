@@ -1,5 +1,322 @@
 [
   {
+    "date": "2026-11-12",
+    "subject": "AI PM Digest – Thu, 12 Nov 2026 – OpenAI quarterly revenue reportedly tops $10B",
+    "headline": "OpenAI's quarterly revenue reportedly tops $10 billion",
+    "quiet": false,
+    "topStories": [
+      {
+        "title": "OpenAI's quarterly revenue reportedly crosses $10 billion for the first time",
+        "what": "TechCrunch, citing Bloomberg, reports that OpenAI's revenue for a single quarter has passed $10 billion for the first time; a daily roundup puts the rise at about $6.7 billion in the second quarter to about $10 billion in the third, while noting the company still posts large operating losses. One newsletter headline says enterprise revenue doubled to about 50% of the total (single source for that split).",
+        "why": "For a product manager (PM), the story is the revenue mix: if business customers are becoming half of the revenue of the leading consumer artificial intelligence (AI) app, roadmaps tilt toward admin controls, security, integrations and contract pricing. It also shows that rapid revenue growth and heavy inference costs can coexist, so margins, not just top-line growth, decide durability.",
+        "take": "Be ready to explain how a shift from consumer subscriptions to enterprise contracts changes a product's roadmap, pricing and success metrics.",
+        "url": "https://techcrunch.com/2026/11/11/openais-quarterly-revenue-reportedly-crosses-10b-for-the-first-time/",
+        "source": "TechCrunch (citing Bloomberg)"
+      },
+      {
+        "title": "Google DeepMind releases a new advanced robotics model and a next-generation gene-prediction model (single source)",
+        "what": "SiliconANGLE reports that Google DeepMind released the next generation of its Gemini Robotics vision-language-action model, which acts as a robot's 'brain', together with AlphaGenome 2, a model that predicts how DNA (deoxyribonucleic acid) sequences and variants affect different cell types. Version naming differs across reports, so treat details beyond the announcement as unconfirmed.",
+        "why": "Frontier labs are pushing AI from screens into physical work and science, where errors are costlier and evaluation needs real-world trials, not just benchmarks. Product managers (PMs) in manufacturing, logistics or health should expect pilots that are judged on task success rates and safety, not demos.",
+        "take": "If asked about AI beyond chat, describe how you would evaluate and launch an AI model that acts in the physical world: staged pilots, safety cases and human override.",
+        "url": "https://siliconangle.com/2026/11/11/google-deepmind-releases-new-advanced-robotics-ai-model-and-next-generation-gene-prediction-model/",
+        "source": "SiliconANGLE"
+      },
+      {
+        "title": "Update: Nvidia shares drop as its board reportedly prepares to oust chief executive Jensen Huang (single source)",
+        "what": "TechCrunch reports that Nvidia's board could decide as soon as Wednesday evening to remove founder and chief executive officer (CEO) Jensen Huang, and that the shares fell about 8% in after-hours trading. This follows the board's investigation covered in the 10 November digest; no decision had been confirmed at the time of writing.",
+        "why": "Nvidia supplies most of the chips behind AI products, so leadership turmoil there is a supplier-concentration and key-person risk for the whole AI stack. Product managers (PMs) do not buy chips directly, but cloud capacity, inference prices and model launch timelines all depend on this supply chain.",
+        "take": "Use this to show you think about upstream dependencies: how would a disruption at a critical supplier change your capacity, pricing and launch plans?",
+        "url": "https://techcrunch.com/2026/11/11/nvidias-stock-drops-as-board-reportedly-preps-to-oust-ceo-jensen-huang",
+        "source": "TechCrunch"
+      },
+      {
+        "title": "New York lawmakers propose the RAISE Act 2.0 with heavier penalties for frontier AI developers (single source)",
+        "what": "PYMNTS reports that New York's proposed Responsible AI Safety and Education (RAISE) Act 2.0 would raise fines to up to $1 million a day for a first AI safety violation and $3 million a day for later ones, and would cover any developer that spent more than $1 billion on its models over three years. Another report says the bill is pending in the New York Senate Rules Committee.",
+        "why": "State laws in the United States (US) are becoming the practical rulebook for frontier models, adding safety-disclosure and incident-reporting duties that shape launch processes. Product managers (PMs) at model providers, and at companies building on them, should expect more documentation, incident playbooks and compliance review before releases.",
+        "take": "Be ready to explain how you would build incident reporting and safety disclosure into a launch checklist without slowing every release.",
+        "url": "https://pymnts.com/news/artificial-intelligence/2026/new-york-proposes-3-million-daily-fines-for-ai-safety-violations",
+        "source": "PYMNTS"
+      }
+    ],
+    "modelsPricing": [],
+    "tools": [],
+    "tool": {},
+    "concepts": [
+      {
+        "title": "Revenue mix: consumer subscriptions versus enterprise contracts",
+        "body": "Revenue mix is the share of revenue coming from different customer types. Consumer subscriptions are many small, self-serve payments that can churn monthly; enterprise contracts are fewer, larger, negotiated deals with security reviews, admin needs and longer commitments.\n\nFor a product manager (PM), the mix decides the roadmap. OpenAI's reported $10 billion quarter, with enterprise said to be rising toward half, shows how a consumer brand can become a business vendor. Enterprise growth needs single sign-on, audit logs, data controls and integrations, and is measured by contract value, seat expansion and net revenue retention rather than daily active users."
+      },
+      {
+        "title": "Key-person and supplier risk in the AI stack",
+        "body": "Key-person risk is the danger that one leader's departure disrupts a company; supplier risk is the danger that a critical vendor fails, raises prices or changes direction. In AI, a few chip makers, clouds and model labs sit under almost every product.\n\nA product manager (PM) should map which suppliers the product cannot work without, as Nvidia's leadership turmoil reminds us. Mitigations include multi-model support, contracts with capacity guarantees, fallbacks to smaller models and monitoring of price and availability. The trade-off is engineering cost versus resilience; quantify it as revenue at risk per day of outage."
+      },
+      {
+        "title": "World models and embodied AI",
+        "body": "Embodied AI is AI that perceives and acts in the physical world through a robot or device. A world model is a model's internal sense of how the environment works and how it will change after an action, which lets a system plan before moving.\n\nFor a product manager (PM), embodied AI changes the cost of mistakes: a wrong answer in chat is annoying, a wrong grasp on a factory line breaks things. Google DeepMind's new robotics model is an example. Plan for simulation testing, staged pilots, safety stops and success metrics such as task completion rate and interventions per hour."
+      },
+      {
+        "title": "Model snapshots and version pinning",
+        "body": "Model providers publish dated snapshots of a model, such as a specific version string, alongside a moving alias that always points to the latest. Pinning means your product calls a fixed snapshot so behaviour does not change underneath you.\n\nProduct managers (PMs) face a trade-off: pinning gives stable, tested behaviour; following the alias gives improvements automatically but can break prompts and evaluations. Providers also retire old snapshots on announced dates, forcing migrations. Track deprecation calendars, keep a regression evaluation suite ready and budget time each quarter for planned upgrades."
+      },
+      {
+        "title": "Tokenizer efficiency across languages",
+        "body": "A tokenizer splits text into tokens, the units models read and bill by. Tokenizers trained mostly on English often split Indian scripts such as Hindi or Tamil into many more tokens for the same meaning.\n\nThis matters to a product manager (PM) because more tokens mean higher cost, slower responses and less room in the context window for Indic users. Before launching in Indian languages, measure tokens per sentence for each language and model, compare cost per conversation, and consider models with better Indic tokenizers."
+      },
+      {
+        "title": "Retrieval freshness and index update latency",
+        "body": "In retrieval-augmented generation (RAG), the model answers using documents fetched from an index. Freshness is how up to date that index is; update latency is the delay between a document changing and the index reflecting it.\n\nFor a product manager (PM), stale retrieval produces confident but outdated answers, such as an old price or policy. Decide freshness requirements per content type (minutes for inventory, days for help articles), monitor index lag as a metric, and show 'last updated' dates to users where accuracy depends on recency."
+      },
+      {
+        "title": "Idempotent tool calls and safe retries for agents",
+        "body": "An action is idempotent if doing it twice has the same effect as doing it once. Agents retry tool calls after time-outs or errors, so a non-idempotent action such as 'send payment' or 'create order' can accidentally run twice.\n\nProduct managers (PMs) specifying agent features should require idempotency keys or duplicate checks for every action with side effects, and confirmation for irreversible ones. This is invisible in demos but critical in production: track duplicate-action rate and make sure users can see and undo what an agent did."
+      },
+      {
+        "title": "Agent skills: packaged, reusable instructions",
+        "body": "Agent skills are packaged bundles of instructions, scripts and reference files that an AI agent loads only when a task needs them, such as 'create a slide deck' or 'review a contract'. They let one agent handle many specialised jobs without a giant prompt.\n\nFor a product manager (PM), skills turn team know-how into reusable assets that can be versioned, tested and shared. Decide who may author skills, how they are reviewed and how you measure them, for example task success rate with and without the skill. Poorly written skills can conflict, so keep them small and focused."
+      },
+      {
+        "title": "Automation bias and overreliance",
+        "body": "Automation bias is people's tendency to accept a system's output without checking it, even when it is wrong. With fluent AI answers, users may stop verifying, especially when tired or rushed.\n\nA product manager (PM) should design against overreliance where errors are costly: show sources, highlight uncertainty, require review steps for high-stakes actions and sometimes add friction. Measure it by sampling cases where the AI was wrong and checking how often users caught the error, not just by satisfaction scores."
+      },
+      {
+        "title": "Safety cases for physical-world AI",
+        "body": "A safety case is a structured, evidence-backed argument that a system is acceptably safe for a specific use in a specific setting. It is common in aviation and automotive engineering and is now applied to robots and other AI that acts physically.\n\nFor a product manager (PM) on robotics or devices, the safety case defines launch scope: which tasks, environments and speeds are allowed, what evidence supports them and what triggers a stop. It slows early launches but speeds enterprise sales, because customers and regulators can review the argument instead of trusting demos."
+      },
+      {
+        "title": "Vertical integration across the AI stack",
+        "body": "Vertical integration means one company owns several layers of its supply chain. In AI the stack runs from chips and data centres to models, developer platforms and end-user apps; some firms now span many layers.\n\nProduct managers (PMs) should know whether their partners are integrated competitors. A model provider that also builds apps may compete with you; a cloud provider with its own chips may offer cheaper inference. Integration can lower cost and speed up launches but increases dependence, so weigh it in build-versus-buy and partnership decisions."
+      },
+      {
+        "title": "Net revenue retention for AI products",
+        "body": "Net revenue retention (NRR) measures how much revenue a group of existing customers generates now compared with a year ago, including expansions, downgrades and churn. Above 100% means existing customers are spending more.\n\nFor AI products with usage-based pricing, net revenue retention shows whether customers deepen use or merely experiment. A product manager (PM) can raise it by helping customers find more use cases, adding seats and integrations, and reducing failed tasks. Read it alongside gross margin, because growing usage on expensive models can lift revenue while hurting profit."
+      },
+      {
+        "title": "Time to first value in AI onboarding",
+        "body": "Time to first value is how long a new user takes to get a first meaningful result from a product. AI products often promise a lot but leave users facing an empty prompt box, so first value can be slow or never arrive.\n\nProduct managers (PMs) should define the 'aha' moment, such as a first useful summary or completed task, and measure the minutes and steps to reach it. Templates, sample data, connected accounts and guided first tasks shorten it. Track activation rate by cohort, since a shorter time to value usually predicts better retention."
+      },
+      {
+        "title": "Leading versus lagging indicators for AI adoption",
+        "body": "Lagging indicators, such as revenue or annual retention, confirm results after the fact. Leading indicators, such as weekly repeat use, tasks completed or features adopted in the first month, move earlier and predict those results.\n\nFor an AI product manager (PM), leading indicators let you steer within a quarter instead of waiting a year. Pick a few that correlate with retention in your data, such as 'three successful tasks in week one', set targets and review them weekly. Validate the link regularly, because novelty can inflate early usage."
+      },
+      {
+        "title": "Summarising user-generated content faithfully",
+        "body": "Many products now use AI to summarise reviews, comments or community threads. A faithful summary reflects the real balance of opinions, including minority complaints, without inventing claims or overweighting the loudest posts.\n\nFor a product manager (PM), as with Reddit's AI-powered product reviews, the risks are misrepresentation, manipulation by fake posts and loss of community trust. Link summary points to source posts, show how many opinions each theme reflects and let users report errors. Measure accuracy with human spot checks, not just click-through rates."
+      },
+      {
+        "title": "Prototype-first product development with AI",
+        "body": "Prototype-first development means building a working, clickable version of an idea with AI tools before writing a long specification. Product managers can now generate realistic prototypes in hours rather than waiting for design and engineering time.\n\nThis changes the product manager (PM) job: decisions can be tested with users earlier, and specs can describe tested behaviour. The risk is mistaking a prototype for a product, because prototypes skip security, scale and edge cases. Use prototypes to answer specific questions, record what was learned and then write the spec."
+      },
+      {
+        "title": "Wizard-of-Oz testing for AI features",
+        "body": "In a Wizard-of-Oz test, users interact with what looks like an automated system while a human secretly produces the responses. It lets a team learn what users want from an AI feature before building the model or pipeline.\n\nFor a product manager (PM), this is a cheap way to test demand, the ideal output format and acceptable response time. It reveals what 'good' looks like, which becomes the evaluation dataset later. Be transparent in research consent, keep sessions small and note that humans set a quality bar the AI may not match at first."
+      },
+      {
+        "title": "United States state laws for frontier AI: New York's RAISE Act",
+        "body": "New York's Responsible AI Safety and Education (RAISE) Act requires large frontier AI developers to publish safety protocols and report serious incidents, with civil penalties for violations. Lawmakers have now proposed a stricter version 2.0.\n\nFor a product manager (PM), state laws like this and California's similar rules add launch requirements: documented safety frameworks, incident reporting within set time limits and disclosures. Even companies that only build on frontier models may face contract terms passing these duties down. Build compliance checkpoints into the release process early to avoid last-minute delays."
+      },
+      {
+        "title": "Talent-led AI strategy: India's position",
+        "body": "Countries differ in AI strengths: some lead on computing capacity and frontier models, others on skilled people, adoption and applications. Boston Consulting Group's latest readiness ranking places India in a tier built mainly on talent rather than compute.\n\nFor a product manager (PM) in India, this suggests where advantage lies: building applications, services and local-language products on top of global or Indian models, rather than training frontier models. Factor in compute costs and access, for example through subsidised programmes, and differentiate on distribution, domain knowledge and local user insight."
+      },
+      {
+        "title": "Accessibility as a design requirement for AI products",
+        "body": "Accessibility means people with disabilities can use a product fully, for example through screen readers, captions, voice input and adjustable text. AI can greatly expand accessibility, such as reading text aloud or restoring a voice, but AI interfaces can also exclude users.\n\nA product manager (PM) should include accessibility in AI specs and acceptance criteria: streaming text that works with screen readers, keyboard access, alternatives to voice-only flows and plain-language outputs. Test with disabled users, not just automated checkers. In India, combining voice and local-language accessibility can open large underserved markets."
+      }
+    ],
+    "concept": {
+      "number": 1,
+      "title": "Revenue mix: consumer subscriptions versus enterprise contracts",
+      "body": "Revenue mix is the share of revenue coming from different customer types. Consumer subscriptions are many small, self-serve payments that can churn monthly; enterprise contracts are fewer, larger, negotiated deals with security reviews, admin needs and longer commitments.\n\nFor a product manager (PM), the mix decides the roadmap. OpenAI's reported $10 billion quarter, with enterprise said to be rising toward half, shows how a consumer brand can become a business vendor. Enterprise growth needs single sign-on, audit logs, data controls and integrations, and is measured by contract value, seat expansion and net revenue retention rather than daily active users."
+    },
+    "india": [
+      {
+        "text": "Deccan Herald reports that Boston Consulting Group (BCG) placed India in the 'Rising Contenders' tier of its 2026 artificial intelligence (AI) readiness ranking, crediting workforce skills and returning specialists: India's strength is talent rather than computing capacity.",
+        "url": "https://www.deccanherald.com/technology/artificial-intelligence/india-ranked-an-ai-rising-contender-by-bcg-built-on-talent-rather-than-compute-4214861"
+      },
+      {
+        "text": "The Hans India reports that an artificial intelligence (AI)-led stock sell-off abroad has pushed foreign portfolio investors (FPIs) back into Indian equities, with a net investment of Rs 53,739 crore during 2–9 November. (single source)",
+        "url": "https://www.thehansindia.com/business/ai-sell-off-abroad-sends-fpis-rushing-back-to-indian-equities-1140957"
+      }
+    ],
+    "question": {
+      "q": "You are the product manager for an AI assistant whose revenue comes mostly from consumer subscriptions. Leadership wants enterprise contracts to be half of revenue within 18 months. How would you approach this, and how would you measure progress?",
+      "framing": "Clarify why: higher contract value, lower churn, more predictable revenue. Segment target customers (teams already using the consumer product at work versus large enterprises) and list what blocks them today: security, admin controls, data handling, integrations and procurement.",
+      "tradeoff": "Enterprise features (single sign-on, audit logs, data retention controls, connectors) consume roadmap time that would otherwise improve the consumer experience, and enterprise deals bring customisation pressure. Balance by building shared platform capabilities and a self-serve team plan as a bridge from consumer to enterprise.",
+      "metric": "Recommend a phased plan: team plan first, then enterprise controls, then sales-led deals. Track enterprise share of revenue, annual contract value, net revenue retention, seat expansion and time to close, with consumer retention and satisfaction as guardrail metrics."
+    },
+    "alsoNotable": [
+      {
+        "text": "Update: FXStreet, citing the Financial Times, says Anthropic's bankers are prepared to raise its initial public offering (IPO) valuation above $1.5 trillion. (single source)",
+        "url": "https://www.fxstreet.com/analysis/nasdaq-futs-rise-after-crwv-results-favorable-news-headline-on-anthropics-ipo-202611110729"
+      },
+      {
+        "text": "Adobe brings artificial intelligence (AI) agents and new creative tools to Photoshop, Premiere and Firefly, and launches a Model Context Protocol (MCP) server, at its MAX conference.",
+        "url": "https://techcrunch.com/2026/11/10/adobe-adds-more-ai-to-its-products-and-launches-an-mcp/"
+      },
+      {
+        "text": "Reddit is testing artificial intelligence (AI)-generated product reviews that summarise community opinions, with dedicated comparison pages.",
+        "url": "https://techcrunch.com/2026/11/10/reddit-is-turning-user-conversations-into-ai-powered-product-reviews"
+      }
+    ],
+    "pmToolkit": [
+      {
+        "name": "Meta Muse",
+        "category": "General AI assistant",
+        "url": "https://muse.ai",
+        "what": "Muse is Meta's personal AI agent, available on the web, iOS, Android and inside WhatsApp, and recently extended to smartwatches.",
+        "does": "It can research, draft and carry out multi-step tasks for you, which lets a product manager compare a major consumer agent with ChatGPT, Gemini and Claude from a user's point of view.",
+        "examples": [
+          "Ask it to research three competitors' pricing pages and summarise the differences in a table",
+          "Run the same onboarding task in Muse and a rival assistant to compare how each handles clarifying questions",
+          "Draft a stakeholder update from bullet notes and judge the tone for your team"
+        ],
+        "pricing": "Free tier; Power about $20/month and Maximum about $100/month (may change)"
+      },
+      {
+        "name": "Usercall",
+        "category": "Customer research",
+        "url": "https://www.usercall.co",
+        "what": "Usercall is a platform that runs AI-moderated user interviews and analyses the responses.",
+        "does": "It lets a product manager collect many voice interviews quickly, with the AI asking follow-up questions, and then group answers into themes.",
+        "examples": [
+          "Run 20 short interviews on why trial users did not convert",
+          "Test reactions to a new pricing page before launch",
+          "Collect feedback from Hindi- and English-speaking users on an onboarding flow"
+        ],
+        "pricing": "Plans reported from about $89/month (may change)"
+      },
+      {
+        "name": "Anima",
+        "category": "Prototyping",
+        "url": "https://www.animaapp.com",
+        "what": "Anima is an AI design-to-code tool that turns designs or prompts into working front-end code and prototypes.",
+        "does": "It helps a product manager move from a Figma design or idea to a clickable, code-based prototype that engineers can inspect.",
+        "examples": [
+          "Convert a Figma onboarding screen into a live prototype for a user test",
+          "Generate a quick landing page to test interest in a new feature",
+          "Share coded prototypes with engineers to discuss feasibility"
+        ],
+        "pricing": "Free plan with limits; paid tiers vary (may change)"
+      },
+      {
+        "name": "Recraft",
+        "category": "Design",
+        "url": "https://www.recraft.ai",
+        "what": "Recraft is an AI image and vector design tool that generates editable graphics, icons and illustrations.",
+        "does": "It lets a product manager create consistent visuals, such as icons or mock-up imagery, for prototypes, decks and specs without waiting on design.",
+        "examples": [
+          "Generate a matching icon set for a prototype's navigation",
+          "Create illustrations for empty states in a mock-up",
+          "Produce on-brand images for a product review deck"
+        ],
+        "pricing": "Free daily credits (free images are public); paid plans from about $10–12/month (may change)"
+      },
+      {
+        "name": "GrowthBook",
+        "category": "Experimentation",
+        "url": "https://www.growthbook.io",
+        "what": "GrowthBook is an open-source feature-flagging and A/B (split) testing platform that reads results from your own data warehouse.",
+        "does": "It lets a product manager roll out features gradually and run experiments with statistical analysis on metrics the team already tracks, including tests of AI features and model versions.",
+        "examples": [
+          "Compare two prompt versions of an AI summary feature on task completion",
+          "Roll out a new model to 10% of users behind a flag with a kill switch",
+          "Check guardrail metrics like latency and complaints during a launch"
+        ],
+        "pricing": "Free Starter plan for up to 3 users and free self-hosting; paid plans for teams (may change)"
+      },
+      {
+        "name": "Avoma",
+        "category": "Meetings and notes",
+        "url": "https://www.avoma.com",
+        "what": "Avoma is an AI meeting assistant that records, transcribes and summarises calls and tracks topics across them.",
+        "does": "It gives a product manager searchable notes and themes from customer and team calls, so insights do not stay in individual memories.",
+        "examples": [
+          "Search all recent customer calls for mentions of a competitor",
+          "Auto-generate notes and action items from a sprint review",
+          "Share a clip of a customer describing a pain point with engineers"
+        ],
+        "pricing": "Free viewer tier; paid from about $19–29 per seat/month (may change)"
+      },
+      {
+        "name": "Useberry",
+        "category": "Usability testing",
+        "url": "https://www.useberry.com",
+        "what": "Useberry is an unmoderated usability-testing tool for prototypes and live products.",
+        "does": "It lets a product manager test Figma or other prototypes with participants and see clicks, paths, completion and time on task.",
+        "examples": [
+          "Test whether users can find a new AI feature in a redesigned menu",
+          "Compare two onboarding prototypes on completion rate",
+          "Run a first-click test on a pricing page before launch"
+        ],
+        "pricing": "Free tier available; paid plans vary (may change)"
+      },
+      {
+        "name": "Devin",
+        "category": "Building and coding",
+        "url": "https://devin.ai",
+        "what": "Devin is Cognition's autonomous AI software engineer that can plan and carry out coding tasks.",
+        "does": "It lets a product manager hand off small, well-defined engineering tasks, such as internal tools or prototypes, and review the resulting code changes.",
+        "examples": [
+          "Build an internal dashboard that pulls feature-request counts from a spreadsheet",
+          "Fix a small, well-described bug in a prototype repository",
+          "Create a script that cleans survey exports for analysis"
+        ],
+        "pricing": "Free plan; Pro about $20/month; team and enterprise plans higher (may change)"
+      },
+      {
+        "name": "Metabase",
+        "category": "Data and SQL",
+        "url": "https://www.metabase.com",
+        "what": "Metabase is an open-source business-intelligence tool with an AI assistant, Metabot, that turns plain-language questions into charts and SQL (Structured Query Language) queries.",
+        "does": "It lets a product manager explore product data and build dashboards without writing every query by hand, while still seeing the SQL behind each answer.",
+        "examples": [
+          "Ask 'weekly active users by plan for the last 12 weeks' and save it as a chart",
+          "Fix a broken query with Metabot's help",
+          "Build a launch dashboard for a new AI feature"
+        ],
+        "pricing": "Open-source edition free; Metabot on Cloud metered after the first 1M tokens a month free (may change)"
+      },
+      {
+        "name": "Activepieces",
+        "category": "Automation and agents",
+        "url": "https://www.activepieces.com",
+        "what": "Activepieces is an open-source automation platform for building workflows and AI agents that connect hundreds of apps.",
+        "does": "It lets a product manager automate repetitive work, such as routing feedback or compiling reports, with AI steps for classification and summarisation.",
+        "examples": [
+          "Classify new support tickets by theme with an AI step and post a daily summary to Slack",
+          "Pull new app-store reviews into a sheet with sentiment labels",
+          "Send a weekly digest of feature-flag changes to stakeholders"
+        ],
+        "pricing": "Free to self-host (open source); cloud free tier and paid plans (may change)"
+      }
+    ],
+    "sourceNotes": {
+      "checked": 16,
+      "failed": [
+        "TLDR AI",
+        "TLDR Product Management",
+        "Hacker News",
+        "Techmeme",
+        "Product Hunt",
+        "Simon Willison",
+        "Lenny's Newsletter",
+        "Product Compass",
+        "Product Growth",
+        "One Useful Thing",
+        "Article pages (blocked by the session's network policy; web search used instead)"
+      ],
+      "singleSource": [
+        "Google DeepMind robotics model and AlphaGenome 2 (SiliconANGLE)",
+        "Nvidia board reportedly preparing to oust Jensen Huang (TechCrunch)",
+        "New York RAISE Act 2.0 penalties (PYMNTS)",
+        "OpenAI enterprise share of revenue (newsletter headline)",
+        "Anthropic valuation above $1.5 trillion (FXStreet citing Financial Times)",
+        "Foreign investor flows into Indian equities (The Hans India)"
+      ]
+    },
+    "createdAt": "2026-11-12T01:55:00Z"
+  },
+  {
     "date": "2026-11-11",
     "subject": "AI PM Digest – Wed, 11 Nov 2026 – Anthropic launches $1.4T IPO roadshow",
     "headline": "Anthropic launches its IPO roadshow at up to $1.4 trillion",
