@@ -1,5 +1,334 @@
 [
   {
+    "date": "2026-11-13",
+    "subject": "AI PM Digest – Fri, 13 Nov 2026 – Nvidia's Jensen Huang exits as CEO",
+    "headline": "Jensen Huang exits as Nvidia CEO",
+    "quiet": false,
+    "topStories": [
+      {
+        "title": "Update: Jensen Huang resigns as Nvidia's chief executive; finance chief Colette Kress becomes interim CEO",
+        "what": "Nvidia announced that Jensen Huang has resigned as president, chief executive officer (CEO) and board member with immediate effect, naming chief financial officer Colette Kress interim CEO and Harvey C. Jones as its first chair; the board will search internal and external candidates. CNBC, citing a person familiar with the matter, reports the board decided to oust him, the shares fell, and TechCrunch reports Democrats opened an inquiry into Nvidia's chip sales to China.",
+        "why": "Nvidia supplies most of the chips that AI products run on, so a sudden leadership change at the supplier adds uncertainty to roadmaps, pricing and capacity for everyone downstream. For a product manager (PM), it is a live case for designing products that can move across chip vendors and cloud providers rather than depending on one.",
+        "take": "If asked about AI strategy risk, explain how you would keep your product portable across hardware and model vendors, and what that portability costs.",
+        "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+        "source": "Nvidia (also CNBC, NPR, TechCrunch)"
+      },
+      {
+        "title": "Google launches Gemini 4 Hydrogen, a fast, lower-cost model, and brings it to Google Search for all users",
+        "what": "Google introduced Gemini 4 Hydrogen as a fast, cost-efficient model for everyday coding and agentic workflows, rolling out to the Gemini app, Google Search and Google AI Studio for everyone and to all Gemini application programming interface (API) tiers. Google says it surpasses Gemini 4 Argon on the Artificial Analysis Intelligence Index and runs 2.5 times faster than Gemini 3.8 Flash; third-party summaries put developer pricing at $1.50 per million input tokens and $7.50 per million output tokens.",
+        "why": "When a cheaper, faster model matches the previous premium tier, features that were too expensive to run for every user can become default-on. A product manager (PM) should re-run cost and quality evaluations on such launches rather than assume the old model line-up still holds.",
+        "take": "Use this to discuss how you would decide whether to migrate a production feature to a new, cheaper model: evaluation set, latency, cost per task and a staged rollout.",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+        "source": "Google"
+      },
+      {
+        "title": "Meta's Muse AI agent can now phone US businesses for paying users, and reports say humans may handle some calls",
+        "what": "Reports from TechCrunch and Engadget, summarised by Startup Fortune, say Meta has expanded a beta that lets its Muse personal AI agent place outbound calls to US businesses for paying subscribers. Separately, Digital Trends, citing 404 Media, reports that Meta added a layer where trained humans can take over calls, and that testers were not always told when a human made the call; Meta says the feature is still in development.",
+        "why": "Agents that act in the outside world on a user's behalf raise new design questions: disclosure to the person on the other end, what happens when the agent fails, and whether hidden human fallback misleads users. For a product manager (PM), it shows the tension between a reliable experience and honest labelling of automation.",
+        "take": "Be ready to argue how you would disclose human involvement in an AI agent product and how you would measure call success without hiding the human cost.",
+        "url": "https://startupfortune.com/metas-muse-ai-agent-can-now-phone-us-businesses-for-you-if-you-pay",
+        "source": "Startup Fortune (citing TechCrunch and Engadget); Digital Trends"
+      },
+      {
+        "title": "Anthropic's updated Usage Policy takes effect, barring sustained abusive behaviour toward Claude",
+        "what": "Anthropic's revised Usage Policy, announced on 8 October, took effect on 12 November; it now bars users from engaging in sustained and needless abusive or cruel behaviour toward its models. Coverage says Anthropic describes this as aimed only at extreme cases, with ending abusive conversations remaining the main enforcement method.",
+        "why": "Acceptable use policies are part of the product: they decide what users can do, how enforcement shows up in the interface and how support handles appeals. A product manager (PM) building on any model provider must track these policy changes, because they flow through to their own terms and user experience.",
+        "take": "If asked about trust and safety, explain how you would turn a policy rule into product behaviour: detection, a graduated response, user messaging and an appeal path.",
+        "url": "https://www.notebookcheck.net/Anthropic-bans-abusive-behavior-toward-Claude-starting-November-12.1420910.0.html",
+        "source": "Notebookcheck (also Crypto Briefing)"
+      }
+    ],
+    "modelsPricing": [
+      {
+        "text": "Google DeepMind's Gemini Decision 1 application programming interface (API) can answer up to 1,000 questions about the same material in a single request; reported pricing is $0.10 per million input tokens with output free (single source).",
+        "url": "https://dataconomy.com/2026/11/12/google-launches-gemini-decision-1-api-for-1000-questions/"
+      }
+    ],
+    "tools": [],
+    "tool": {},
+    "concepts": [
+      {
+        "title": "Hardware portability: avoiding lock-in to one chip ecosystem",
+        "body": "Hardware portability means your models and serving software can run on more than one kind of chip, for example Nvidia graphics processing units (GPUs), Google tensor processing units (TPUs) or AMD accelerators, usually through abstraction layers, portable model formats and providers that support several back ends.\n\nFor a product manager (PM), portability is insurance. Nvidia's sudden chief executive change is a reminder that a single supplier can face shocks. Portability costs engineering time and sometimes peak performance, so the decision is how much optionality to buy: track the share of inference that could move within a month, and the price gap between vendors."
+      },
+      {
+        "title": "Vendor due diligence for AI suppliers",
+        "body": "Vendor due diligence is the structured check a company does before depending on an AI model, chip or cloud supplier: financial health, governance, security certifications, data handling, service-level commitments, pricing history and exit options.\n\nFor a product manager (PM), this turns vague 'platform risk' into a checklist that procurement, legal and engineering can act on. Leadership changes at major suppliers this week show why governance belongs on the list. The output should be a risk rating per vendor and a documented fallback for anything rated high."
+      },
+      {
+        "title": "Input versus output token pricing asymmetry",
+        "body": "Most model providers charge different prices for input tokens (what you send) and output tokens (what the model writes), with output usually several times more expensive. Gemini 4 Hydrogen's reported $1.50 input and $7.50 output per million tokens is a typical five-to-one ratio.\n\nFor a product manager (PM), this shapes design. Features that read a lot and write a little, such as classification, extraction or scoring, are cheap; long generated reports are expensive. Google's Decision 1 application programming interface (API), with output reportedly free, pushes this to the extreme. Model your feature's input-to-output ratio before estimating cost."
+      },
+      {
+        "title": "Composite benchmark indices and their limits",
+        "body": "A composite benchmark index, such as the Artificial Analysis Intelligence Index, combines many individual tests into one score so models can be ranked on a single number. Vendors often cite them at launch, as Google did for Gemini 4 Hydrogen.\n\nFor a product manager (PM), an index is a useful first filter but not a decision. It averages tasks that may not resemble yours, can hide weak spots, and scores can depend on settings such as reasoning level. Shortlist with the index, then decide with your own evaluation set, latency and cost per successful task."
+      },
+      {
+        "title": "Full-duplex voice models",
+        "body": "A full-duplex voice model listens and speaks at the same time, like a phone call, instead of waiting for the user to finish before replying. This allows natural interruptions, quick back-and-forth and lower perceived latency than chaining speech-to-text, a text model and text-to-speech.\n\nFor a product manager (PM), full duplex changes what voice products feel like, but it brings new problems: handling interruptions, background noise and turn-taking errors. It also matters for agents that phone businesses, such as Meta's Muse beta. Measure interruption handling, task completion and how often users repeat themselves."
+      },
+      {
+        "title": "Query fan-out in AI search",
+        "body": "Query fan-out is when an AI search system breaks one user question into many sub-queries, runs them in parallel, and combines the results into one answer with links. Google says Gemini 4 Hydrogen's reasoning improves its fan-out in Search, connecting users to a broader range of links.\n\nFor a product manager (PM) building search or retrieval features, fan-out trades cost and latency for coverage. More sub-queries find more relevant sources but cost more and can add noise. Decide a fan-out budget per query type, and track answer completeness, source diversity and latency together."
+      },
+      {
+        "title": "Batching many questions over one shared context",
+        "body": "Batching questions over a shared context means sending one long document or dataset once and asking many questions about it in the same request, instead of resending the material for every question. Google's Decision 1 interface reportedly accepts up to 1,000 questions per call.\n\nFor a product manager (PM), this can cut cost and latency sharply for workflows like grading, tagging or compliance checks, where the same material is scored against many criteria. The trade-off is that one failed request affects many answers, and quality may vary across a long question list. Spot-check answers spread across the batch, not just the first few."
+      },
+      {
+        "title": "Outbound action agents: agents that contact others for the user",
+        "body": "An outbound action agent goes beyond answering the user and contacts third parties on their behalf: phoning a business, sending emails or booking appointments. Meta's Muse calling beta is an example.\n\nFor a product manager (PM), the third party is a stakeholder who never signed up for your product. Design must cover disclosure (saying it is an AI), consent, scope limits on what the agent can agree to, and a clear record of what was said. Success metrics should include the business's experience, not only the user's."
+      },
+      {
+        "title": "Disclosing hidden human fallback in AI products",
+        "body": "Hidden human fallback is when people quietly take over tasks that a product presents as fully automated, for example humans handling some AI agent calls, as reports say happened in Meta's Muse beta. It is common while products mature, but becomes a trust problem when users are not told.\n\nFor a product manager (PM), the decision is how to label it. Honest disclosure protects trust and may be legally required, but can make the product feel less magical. Track the share of tasks needing human help as a core metric: it shows true automation progress and the real cost per task."
+      },
+      {
+        "title": "Acceptable use policies as a product surface",
+        "body": "An acceptable use policy (AUP) defines what users may and may not do with a product. Anthropic's updated policy, which now covers sustained abuse toward its models, shows AUPs keep evolving.\n\nFor a product manager (PM), a policy only matters through product behaviour: detection, warnings, conversation ending, account actions and appeals. Building on a model provider means inheriting its policy, so your own terms and interface must stay consistent with it. Watch false-positive enforcement rates and appeal outcomes, because over-enforcement drives churn."
+      },
+      {
+        "title": "Abuse monitoring versus user privacy",
+        "body": "To enforce safety rules, AI products often need to review conversations, automatically or by humans. That creates tension with user privacy and with promises about how data is stored and who can see it.\n\nFor a product manager (PM), the design question is how little you can inspect while still catching real harm: automated classifiers first, human review only on flagged cases, short retention and clear disclosure in the privacy policy. Under India's Digital Personal Data Protection (DPDP) Act, purpose limitation makes this documentation important."
+      },
+      {
+        "title": "Partner and creator backlash risk in AI integrations",
+        "body": "Partner backlash risk is the chance that a brand, creator or partner faces public criticism for working with an AI company, forcing the partnership to end. Bloomberg's report that Bill Simmons cancelled a ChatGPT partnership after fan backlash is an example.\n\nFor a product manager (PM) running AI partnerships or launch marketing, audience sentiment toward AI is now a launch risk. Test reactions with the partner's community before committing, give partners control over how AI is presented, and include an exit clause. Track sentiment alongside reach."
+      },
+      {
+        "title": "Resolution rate for voice and phone agents",
+        "body": "Resolution rate is the share of calls an AI voice agent completes successfully without the caller needing to call back or reach a human. For agents that call businesses, it is the share of calls that achieve the user's goal, such as a confirmed booking.\n\nFor a product manager (PM), resolution rate is more honest than calls handled, because a call can be 'handled' and still fail. Pair it with escalation rate, average handling time and the share of calls needing human takeover, which matters for products like Meta's Muse calling beta. Define resolution per task type before launch."
+      },
+      {
+        "title": "Search answer quality metrics: coverage, link diversity and satisfaction",
+        "body": "AI search answers are judged on more than relevance: coverage (did it answer every part of the question), link diversity (does it point to a range of good sources), groundedness (are claims supported by the links) and user satisfaction signals such as follow-up queries.\n\nFor a product manager (PM) on a search or answer product, a model upgrade like Gemini 4 Hydrogen in Search should be judged on all of these together. One metric alone can mislead: fewer follow-up queries might mean better answers or users giving up. Use paired human ratings plus behavioural metrics."
+      },
+      {
+        "title": "Interleaving experiments for ranking and search changes",
+        "body": "Interleaving is an experiment method for ranking systems: instead of showing group A one ranking and group B another, each user sees a merged list with results from both systems, and clicks reveal which system's results users prefer.\n\nFor a product manager (PM), interleaving needs far fewer users than a standard A/B test to detect ranking differences, so it suits search, recommendations and retrieval for AI answers. Its limit is that it measures preference on individual results, not long-term outcomes like retention, so confirm big changes with a regular A/B test."
+      },
+      {
+        "title": "Deprecation and sunset communication for AI features",
+        "body": "Deprecation is retiring a feature, model or version and moving users to a replacement. AI products do this often as new models launch and older ones are switched off.\n\nFor a product manager (PM), a sunset plan needs advance notice, a migration path, clear differences between old and new behaviour, and a period when both run side by side. Users often build habits or workflows around a specific model's style, so expect pushback. Track migration rate, support tickets and churn among affected users."
+      },
+      {
+        "title": "Pre-mortems for AI feature launches",
+        "body": "A pre-mortem is a planning exercise where the team imagines the launch has failed and lists every reason why, before shipping. For AI features, typical failure stories include harmful outputs, runaway costs, silent quality drops after a model change and users not trusting results.\n\nFor a product manager (PM), pre-mortems turn vague worries into owned mitigations: evaluations, guardrails, cost alerts, kill switches and support scripts. They are especially useful when dependencies sit outside your control, such as a model or chip supplier. Output a ranked risk list with an owner and a trigger for each."
+      },
+      {
+        "title": "Indigenous model mandates in critical sectors",
+        "body": "An indigenous model mandate is a government policy that prefers or requires domestically built AI models for sensitive uses such as defence, finance or public services. MediaNama reports India may push indigenous models in critical sectors under the IndiaAI Mission.\n\nFor a product manager (PM) selling to Indian government or regulated enterprises, such a mandate can decide which models your product may use. Build model-agnostic architecture, test Indian models on your tasks now, and track readiness gaps in Indic language quality, latency and cost compared with global models."
+      },
+      {
+        "title": "Geographic access restrictions and export controls for AI",
+        "body": "AI providers and chipmakers face rules on where their products may be sold or used, from export controls on advanced chips to providers restricting access from certain countries. Political scrutiny of chip sales to China, as in this week's Nvidia inquiry, shows these rules keep shifting.\n\nFor a product manager (PM), geography is a product requirement: which models are available in which markets, where data is processed and how you verify location. A model available in one country may be unavailable in another, so global products need regional fallbacks and compliance checks before launch."
+      },
+      {
+        "title": "Consent for AI-initiated calls and messages",
+        "body": "When an AI agent calls or messages a person or business, rules about unsolicited communications and recording consent can apply. Many countries, including India through telecom regulations on commercial communications, restrict unsolicited calls and messages.\n\nFor a product manager (PM), an outbound AI agent needs consent and disclosure built in: identify itself as AI, respect do-not-disturb preferences, record only with permission and keep logs. Legal review per market is essential before launching agents that place calls, such as the beta Meta is testing in the United States."
+      }
+    ],
+    "concept": {
+      "number": 1,
+      "title": "Hardware portability: avoiding lock-in to one chip ecosystem",
+      "body": "Hardware portability means your models and serving software can run on more than one kind of chip, for example Nvidia graphics processing units (GPUs), Google tensor processing units (TPUs) or AMD accelerators, usually through abstraction layers, portable model formats and providers that support several back ends.\n\nFor a product manager (PM), portability is insurance. Nvidia's sudden chief executive change is a reminder that a single supplier can face shocks. Portability costs engineering time and sometimes peak performance, so the decision is how much optionality to buy: track the share of inference that could move within a month, and the price gap between vendors."
+    },
+    "india": [
+      {
+        "text": "MediaNama reports the government is likely to push the use of indigenous AI models in critical sectors; it says 20 AI models by 12 startups have been approved under the IndiaAI Mission, while a Rajya Sabha reply showed only a fraction of approved funds has been released.",
+        "url": "https://www.medianama.com/2026/11/223-government-indigenous-ai-critical-sectors/"
+      },
+      {
+        "text": "Communications Today says Nvidia's leadership crisis puts India's AI compute plans in focus, noting that Yotta is committing more than 10,000 B300 graphics processing units (GPUs) to the IndiaAI Mission (single source).",
+        "url": "https://www.communicationstoday.co.in/nvidia-leadership-crisis-puts-indias-ai-compute-plans-in-focus/"
+      }
+    ],
+    "question": {
+      "q": "You are the product manager for an AI customer-support product that runs almost entirely on one chip vendor's hardware through one cloud provider. That vendor's leadership has just changed suddenly. Leadership asks: what should we do about it?",
+      "framing": "Separate short-term risk (capacity, price changes, delays to new hardware) from long-term strategy (dependence on one ecosystem). Map the dependency chain: model provider, cloud, chips, and which features are most sensitive to cost and latency.",
+      "tradeoff": "Portability across chip vendors and model providers reduces risk but costs engineering time, may lower peak performance and slows feature work. Over-reacting to news can waste a quarter; ignoring it can leave you exposed if prices or supply shift.",
+      "metric": "Recommend a modest hedge: keep contracts and capacity as they are, make the serving layer able to run a second model or provider for the top workflows, and run a quarterly failover test. Track share of traffic that can switch within 30 days, cost per resolved ticket by provider and quality parity on the evaluation set."
+    },
+    "alsoNotable": [
+      {
+        "text": "Hugging Face chief executive Clément Delangue vows to keep fighting for open-source AI after Jensen Huang's exit from Nvidia.",
+        "url": "https://techcrunch.com/2026/11/12/hugging-face-ceo-vows-to-keep-fighting-for-open-source-ai-after-jensen-huangs-exit/"
+      },
+      {
+        "text": "Venture firm Norwest pushes deeper into AI with a new $4 billion fund (single source; headline only).",
+        "url": "https://techcrunch.com/2026/11/12/norwest-pushes-deeper-into-ai-with-new-4b-fund/"
+      },
+      {
+        "text": "Update: Anthropic begins rolling out Claude Meetings in beta for Team and Enterprise plans; Claude joins Google Meet calls and produces notes and action items.",
+        "url": "https://www.unite.ai/anthropic-launches-claude-meetings-beta-for-live-video-calls/"
+      },
+      {
+        "text": "NiCE launches the next generation of NiCE Cognigy for building and deploying enterprise AI agents at scale (single source: company press release).",
+        "url": "https://finance.yahoo.com/technology/ai/articles/nice-launches-next-generation-nice-130000743.html"
+      },
+      {
+        "text": "Bloomberg reports podcaster Bill Simmons cancelled a ChatGPT partnership after fan backlash (single source).",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-12/bill-simmons-canceled-chatgpt-partnership-after-fan-backlash"
+      }
+    ],
+    "pmToolkit": [
+      {
+        "name": "Typeform",
+        "category": "Customer research",
+        "what": "An online form and survey builder with a conversational, one-question-at-a-time format and AI-assisted features on paid plans.",
+        "does": "Helps a PM collect structured feedback and screener answers that people actually finish, with AI help drafting questions and summarising responses on higher tiers.",
+        "examples": [
+          "Build a five-question screener to recruit users for interviews",
+          "Run a post-launch satisfaction survey on a new AI feature",
+          "Ask churned users why they left and summarise the themes"
+        ],
+        "url": "https://www.typeform.com",
+        "pricing": "Free plan with tight response limits; paid plans reported from about $29–39 per month, AI features on higher tiers (may change)"
+      },
+      {
+        "name": "Writer",
+        "category": "Specs and docs",
+        "what": "An enterprise generative AI platform with its own Palmyra models, writing assistance and a no-code agent builder.",
+        "does": "Lets a PM draft and review documents against company style and terminology, and build simple agents for repeat writing tasks such as release notes.",
+        "examples": [
+          "Turn engineering tickets into customer-facing release notes in the house style",
+          "Check a product requirements document for consistent terminology",
+          "Build a reusable agent that drafts launch announcements from a brief"
+        ],
+        "url": "https://writer.com",
+        "pricing": "Starter plan listed at $29 per user per month billed annually; Enterprise custom (may change)"
+      },
+      {
+        "name": "Adobe Firefly",
+        "category": "Design",
+        "what": "Adobe's generative AI app for creating and editing images, video and audio, built to be commercially safe.",
+        "does": "Lets a PM produce mock visuals, concept images and simple video clips for pitches and prototypes without waiting for design time.",
+        "examples": [
+          "Create hero images for a landing-page test",
+          "Generate concept visuals for a vision deck",
+          "Make a short demo clip to explain a new feature to stakeholders"
+        ],
+        "url": "https://www.adobe.com/products/firefly.html",
+        "pricing": "Free plan with limited generative credits; paid plans from about $9.99 per month (may change)"
+      },
+      {
+        "name": "Contentsquare",
+        "category": "Analytics",
+        "what": "A digital experience analytics platform with session replays, heatmaps, journey analysis and an AI agent called Sense.",
+        "does": "Helps a PM see where users struggle on web and app journeys and ask plain-language questions about behaviour data through Sense.",
+        "examples": [
+          "Find where users drop off in a new onboarding flow",
+          "Ask Sense why conversion fell on a checkout page last week",
+          "Watch replays of sessions where users rage-clicked an AI feature"
+        ],
+        "url": "https://contentsquare.com",
+        "pricing": "Free plan available; Growth and higher tiers quote-based, full Sense Analyst a paid add-on (may change)"
+      },
+      {
+        "name": "Databricks Genie",
+        "category": "Data and SQL",
+        "what": "Databricks' natural-language interface that lets business users ask questions of company data, with Genie One for business users and Genie Agents configured by data teams.",
+        "does": "Lets a PM query trusted product data in plain English without writing SQL, within the metrics and rules the data team has defined.",
+        "examples": [
+          "Ask for weekly active users of a feature split by plan",
+          "Compare retention of users who tried the AI assistant against those who did not",
+          "Pull a quick cohort table before a roadmap review"
+        ],
+        "url": "https://www.databricks.com/product/genie",
+        "pricing": "Databricks docs say Genie One and Genie Agents user usage is free through 31 January 2027; compute billed separately (may change)"
+      },
+      {
+        "name": "Zeda.io",
+        "category": "Feedback and roadmapping",
+        "what": "An AI-powered product discovery platform that gathers customer feedback from many channels and turns it into insights.",
+        "does": "Helps a PM consolidate feedback from support, sales and surveys, group it into themes and link themes to revenue impact for prioritisation.",
+        "examples": [
+          "Pull feedback from support tickets and call notes into one view",
+          "Find the top requested themes among high-value accounts",
+          "Back a roadmap decision with linked customer evidence"
+        ],
+        "url": "https://zeda.io",
+        "pricing": ""
+      },
+      {
+        "name": "Jamie",
+        "category": "Meetings and notes",
+        "what": "An AI meeting note-taker that records from your device rather than sending a bot into the call.",
+        "does": "Gives a PM notes, decisions and action items from customer and team meetings without a visible bot joining, which suits sensitive or external calls.",
+        "examples": [
+          "Capture notes from a customer discovery interview",
+          "Produce action items after a sprint review",
+          "Ask questions across past meetings to recall a decision"
+        ],
+        "url": "https://www.meetjamie.ai",
+        "pricing": "Free plan with about 10 AI notes per month; paid plans reported from about €21–25 per month (may change)"
+      },
+      {
+        "name": "Optimal Workshop",
+        "category": "Usability testing",
+        "what": "A user experience research platform known for card sorting, tree testing and first-click testing, with AI-assisted analysis.",
+        "does": "Helps a PM test whether navigation and information architecture make sense to users before building, and analyse research sessions faster.",
+        "examples": [
+          "Run a tree test on a new settings menu",
+          "Card-sort feature names to see how users group them",
+          "Test where users first click to start a new AI workflow"
+        ],
+        "url": "https://www.optimalworkshop.com",
+        "pricing": "Paid plans reported from about $199 per month billed annually (may change)"
+      },
+      {
+        "name": "Google Antigravity",
+        "category": "Building and coding",
+        "what": "Google's agent-first development platform with a desktop app, command-line tool and software development kit, now offering an Orchestrator that pairs Gemini 4 Hydrogen with Gemini 4 Carbon.",
+        "does": "Lets a PM have AI agents build and modify working prototypes and small tools, delegating tasks and reviewing the results.",
+        "examples": [
+          "Build a clickable prototype of a new feature from a written spec",
+          "Create an internal dashboard from a sample CSV file",
+          "Try the same build task with different models to compare quality and speed"
+        ],
+        "url": "https://antigravity.google",
+        "pricing": "Free baseline quota; higher limits through Google AI Pro and Ultra plans (may change)"
+      },
+      {
+        "name": "Pipedream",
+        "category": "Automation and agents",
+        "what": "A developer-friendly workflow automation and AI agent platform with thousands of app integrations and support for custom code.",
+        "does": "Lets a PM wire up automations, such as routing feedback or posting alerts, and build simple agents that act across tools.",
+        "examples": [
+          "Send new feature requests from a form to the backlog and Slack",
+          "Summarise daily app-store reviews with a model and post them to a channel",
+          "Alert the team when an AI feature's error rate crosses a threshold"
+        ],
+        "url": "https://pipedream.com",
+        "pricing": "Free tier available; paid plans reported from about $29 per month (may change)"
+      }
+    ],
+    "sourceNotes": {
+      "checked": 16,
+      "failed": [
+        "TLDR AI",
+        "TLDR Product Management",
+        "Hacker News",
+        "Techmeme",
+        "Product Hunt",
+        "Simon Willison",
+        "Lenny's Newsletter",
+        "Product Compass",
+        "Product Growth",
+        "One Useful Thing",
+        "Direct article pages (blocked by network policy; web search used instead)"
+      ],
+      "singleSource": [
+        "Gemini Decision 1 API (Dataconomy)",
+        "Yotta GPU commitment (Communications Today)",
+        "Norwest $4 billion fund (TechCrunch headline)",
+        "NiCE Cognigy launch (press release)",
+        "Bill Simmons ChatGPT partnership (Bloomberg)"
+      ]
+    },
+    "createdAt": "2026-11-13T01:45:00Z"
+  },
+  {
     "date": "2026-11-12",
     "subject": "AI PM Digest – Thu, 12 Nov 2026 – OpenAI quarterly revenue reportedly tops $10B",
     "headline": "OpenAI's quarterly revenue reportedly tops $10 billion",
