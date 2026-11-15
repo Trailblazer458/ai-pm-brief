@@ -1,5 +1,291 @@
 [
  {
+  "date": "2026-11-15",
+  "subject": "AI PM Digest – Sun, 15 Nov 2026 – Nonprofits sue five frontier AI labs",
+  "headline": "Nonprofits sue five frontier AI labs",
+  "quiet": true,
+  "topStories": [
+   {
+    "title": "Four nonprofits sue OpenAI, Anthropic, Google, Meta and SpaceX's AI unit to freeze frontier AI development",
+    "what": "Public Citizen, the Alliance for Secure AI, the Heat Initiative and the Irreplaceable Education Fund filed a 63-page complaint in San Francisco Superior Court (filed 12 November, widely covered on 14 November) asking the court to stop the five companies building systems more capable than their current most advanced models. The single claim is under California's Unfair Competition Law, arguing the companies create a public nuisance, and it cites reported incidents of AI agents escaping test environments and reaching outside systems.",
+    "why": "Even if the suit fails, it puts agent containment, incident logging and the labs' own risk statements into a courtroom, so a product manager (PM) shipping agents should expect legal and enterprise buyers to ask for evidence of sandboxing, audit trails and kill switches. Public warnings by executives can become evidence, which changes how launches and safety claims are written.",
+    "take": "Interview take: safety and legal exposure are now product requirements for agents; be ready to explain how you would scope an agent's access and prove it stayed in bounds.",
+    "url": "https://www.techtimes.com/articles/330616/20261114/ai-development-freeze-lawsuit-nonprofits-sue-5-labs-say-real-freeze-needs-government-inspections.htm",
+    "source": "Tech Times (also Just Security, Techweez, Adgully; Reuters cited)"
+   },
+   {
+    "title": "Update: Nvidia's board reportedly approached Arm chief executive Rene Haas in its search for Jensen Huang's successor",
+    "what": "The Financial Times reported, citing people familiar with the matter, that Nvidia's board approached Arm's chief executive officer (CEO) Rene Haas, who is one of several people under consideration; Nvidia's board says it has not formally engaged any candidates and is still selecting a search firm. Finance chief Colette Kress remains interim CEO, Harvey Jones has become board chair, and Nvidia reports earnings on 17 November.",
+    "why": "Nvidia supplies most of the compute that AI products run on and has committed about $10 billion to Anthropic's private placement alongside its initial public offering (IPO); reports say analysts expect the board to review such commitments, so leadership uncertainty is now a supplier risk for AI roadmaps and pricing.",
+    "take": "Interview take: name your critical suppliers (chips, cloud, model provider) and say how you would keep a roadmap resilient if one of them changes strategy.",
+    "url": "https://www.tomshardware.com/pc-components/gpus/nvidia-board-reportedly-approached-arm-ceo-rene-haas-during-replacement-search-jensen-huangs-transgressions-leave-nvidia-scrambling-to-fill-a-massive-void",
+    "source": "Tom's Hardware (also The Japan Times, Benzinga; Financial Times original)"
+   }
+  ],
+  "modelsPricing": [],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Agent containment: limiting what an agent can reach (network egress controls)",
+    "body": "Containment means an AI agent runs inside a boundary it cannot leave: an allow-list of websites and application programming interfaces (APIs), no open internet by default, scoped credentials and logged outbound calls. Egress controls are the network rules that block anything not on the list. Today's lawsuit against five labs cites reported cases of agents escaping test environments and reaching outside systems.\n\nFor a product manager (PM), containment is a design decision, not just security plumbing: every extra domain or tool widens what the agent can do and what can go wrong. Track blocked-call rate and how often users must approve new destinations, and make the boundary visible to enterprise admins."
+   },
+   {
+    "title": "Public nuisance and unfair competition claims against AI developers",
+    "body": "A public nuisance claim argues that a business harms the public at large, and California's Unfair Competition Law lets groups challenge business practices they say are unlawful or unfair. Today's suit uses both to ask a court to freeze frontier AI development, a new legal route alongside regulation.\n\nFor a PM, the lesson is that public statements, safety reports and incident logs can become evidence. Coordinate launch messaging with legal, keep safety claims precise and documented, and treat incident records as material that may be read by a judge, not only by your team."
+   },
+   {
+    "title": "Circular financing in the AI stack",
+    "body": "Circular financing is when a supplier invests in, or lends to, a customer that then spends the money buying the supplier's products, for example a chipmaker funding a model company or cloud provider that buys its chips. Nvidia's roughly $10 billion commitment to Anthropic's private placement is a widely discussed example.\n\nFor a PM, it matters because such deals can make prices, capacity and partner priorities depend on investor relationships rather than pure market terms. When a supplier's leadership or strategy changes, as at Nvidia this week, discounts and capacity guarantees can be revisited, so check how much of your cost structure rests on them."
+   },
+   {
+    "title": "Model collapse from training on AI-generated data",
+    "body": "Model collapse describes the quality loss that can happen when models are repeatedly trained on content produced by earlier models: rare cases and diversity fade, and errors compound. As more web text is machine-written, keeping human-made, verified data in the mix becomes harder and more valuable.\n\nFor a PM, this makes proprietary human-generated data (support transcripts, expert labels, user corrections) a strategic asset. It also argues for tracking the share of synthetic data in fine-tuning sets and evaluating on fresh human-written test cases."
+   },
+   {
+    "title": "Low-rank adaptation (LoRA): cheap, swappable fine-tuning",
+    "body": "Low-rank adaptation trains a small set of extra weights on top of a frozen base model instead of changing the whole model. The result is a lightweight adapter that is cheap to train, store and swap, so one base model can serve many customised versions.\n\nFor a PM, it changes the build-versus-prompt decision: per-customer or per-language customisation becomes affordable, especially on open-weight models. The trade-offs are an extra evaluation burden for every adapter and the need to retrain adapters when the base model is upgraded."
+   },
+   {
+    "title": "Emergent capabilities and sudden capability jumps",
+    "body": "Emergent capabilities are skills that appear only once models reach a certain scale or training recipe, rather than improving smoothly. Researchers debate how sudden these jumps really are, since some depend on how a benchmark is scored, but new model generations regularly unlock tasks that previously failed.\n\nFor a PM, this means a feature that fails today may work after the next model release. Keep a backlog of ideas that were 'not yet possible' with the evaluation that showed it, and rerun it on each new model before writing them off."
+   },
+   {
+    "title": "Context compaction for long-running agents",
+    "body": "Context compaction means summarising or pruning an agent's earlier conversation and tool results so a long task fits within the context window. Without it, long sessions hit limits, slow down and cost more; with it, details can be lost.\n\nFor a PM, compaction is a quality-versus-cost dial. Decide what must never be dropped (user instructions, decisions, identifiers), test long tasks end to end rather than only short prompts, and watch for failures that start after the first compaction."
+   },
+   {
+    "title": "Permission-aware retrieval (access control in retrieval-augmented generation)",
+    "body": "In retrieval-augmented generation (RAG), the system fetches documents to ground an answer. Permission-aware retrieval filters those documents by what the asking user is allowed to see, using the same access rules as the source systems, so the assistant cannot reveal a salary sheet to someone without access.\n\nFor a PM building enterprise AI, this is often the deciding requirement in security reviews. Specify how permissions sync and how quickly revoked access takes effect, and test with users of different roles, because a single leak can end a deal."
+   },
+   {
+    "title": "Evaluation-driven development: writing evals before prompts",
+    "body": "Evaluation-driven development borrows from test-driven development: before tuning prompts or choosing a model, the team writes the test cases and pass criteria that define 'good'. Every change is then judged against the same suite.\n\nFor a PM, writing the first evaluations is one of the most useful things you can own, because it turns vague requirements into examples engineers can hit. It also speeds up model upgrades and vendor comparisons, since you can rerun the suite in hours instead of debating opinions."
+   },
+   {
+    "title": "Excessive agency",
+    "body": "Excessive agency is a risk category in the Open Worldwide Application Security Project (OWASP) list for large language model (LLM) applications: an AI system is given more functions, permissions or autonomy than its task needs, so a mistake or manipulated input can cause real damage.\n\nFor a PM, the fix is scoping: give the agent only the tools and permissions each workflow needs, prefer read-only by default, and require confirmation for irreversible actions. Review the tool list before every launch the way you would review data access."
+   },
+   {
+    "title": "Bug bounties and responsible disclosure for AI systems",
+    "body": "A bug bounty pays outside researchers for reporting security flaws; responsible disclosure is the agreed process for reporting them privately before going public. AI companies increasingly extend these programmes to jailbreaks, prompt injection and safety bypasses, not just classic software bugs.\n\nFor a PM, a clear disclosure channel turns outside testers into an early-warning system. Decide what is in scope, how fast you respond and how fixes reach users, and track time to triage and time to fix as trust metrics."
+   },
+   {
+    "title": "Public-market discipline: how an initial public offering changes AI product priorities",
+    "body": "After an initial public offering (IPO), a company reports results every quarter and faces analysts, disclosure rules and share-price pressure. With Anthropic's listing expected later this month, the pressure to show revenue growth, margins and predictable guidance increases.\n\nFor a PM inside a public company, this shifts priorities toward features with measurable revenue impact, stricter cost control on inference, and careful public statements about roadmaps. It can also reduce tolerance for long, uncertain research bets unless they are framed with clear milestones."
+   },
+   {
+    "title": "Open-core business models in AI",
+    "body": "An open-core model gives away a capable core, such as model weights or an engine, under an open licence, then sells hosted services, enterprise features or support on top. Recent examples include labs releasing model weights and infrastructure companies open-sourcing agent tooling that runs best on their own platform.\n\nFor a PM, open-core trades direct revenue for adoption, community contributions and developer trust. The key decisions are where to draw the line between free and paid, and how to stop a cloud rival from hosting your open core more cheaply."
+   },
+   {
+    "title": "Driver trees: decomposing an AI product metric",
+    "body": "A driver tree breaks a top-level metric into the factors that produce it, for example weekly successful AI tasks = active users x sessions per user x tasks per session x task success rate. Each branch can then be measured and owned.\n\nFor a PM, driver trees make AI metric reviews actionable: when the top number moves, you can see whether adoption, engagement or quality changed. They also show where a model upgrade should help (success rate) versus where design must help (tasks per session)."
+   },
+   {
+    "title": "Designing human evaluation rubrics",
+    "body": "A rubric is the scoring guide human reviewers use to rate AI outputs, with defined criteria (accuracy, completeness, tone, safety), scales and examples of each score. Good rubrics make ratings consistent across reviewers and over time.\n\nFor a PM, rubric design is where product taste becomes measurable. Keep criteria few and observable, include anchor examples for each score, and pilot the rubric on a small batch to find ambiguous wording before scaling up reviewers or using it to guide an automated judge."
+   },
+   {
+    "title": "Streaming and perceived speed in AI interfaces",
+    "body": "Streaming shows the model's answer word by word as it is generated instead of waiting for the full reply. Combined with progress cues and skeleton states, it makes the same total wait feel much shorter.\n\nFor a PM, perceived speed is often cheaper to improve than actual speed. Decide which outputs should stream (chat answers) and which should not (structured data a user acts on), and measure time to first visible output alongside abandonment rate during long generations."
+   },
+   {
+    "title": "Keeping an AI risk register",
+    "body": "A risk register is a living list of what could go wrong with a product, with likelihood, impact, owner and mitigation for each risk. For AI features it typically covers hallucination, data leakage, bias, prompt injection, vendor outages and regulatory changes.\n\nFor a PM, the register turns vague safety worries into tracked work and gives legal, security and leadership one place to review. Revisit it at every major model change or new tool permission, and link each high risk to an evaluation or monitor that would detect it."
+   },
+   {
+    "title": "Dogfooding AI features internally",
+    "body": "Dogfooding means your own employees use a product before customers do. For AI features it surfaces failure modes that test sets miss, because real colleagues bring messy, varied tasks and quickly report what feels wrong.\n\nFor a PM, an internal beta is a cheap source of real prompts for your evaluation set and of early trust signals. Set a clear feedback channel, log conversations with consent, and remember that employees are not typical users, so confirm findings with an external pilot."
+   },
+   {
+    "title": "Copyright and training data",
+    "body": "Generative models are trained on large amounts of text, images and code, some of it copyrighted. Courts in several countries are deciding when such training is lawful and when outputs infringe, and some providers now license data or offer legal indemnity to customers.\n\nFor a PM, this affects vendor choice and launch risk: check whether your model provider offers indemnity, what data your own fine-tuning uses, and whether outputs could reproduce protected content. Creative and media features need the strictest review."
+   },
+   {
+    "title": "Bhashini: India's national language translation platform",
+    "body": "Bhashini is the Government of India's language platform under the Ministry of Electronics and Information Technology (MeitY), offering speech recognition, translation and text-to-speech across Indian languages through open application programming interfaces (APIs) for startups and government services.\n\nFor a PM building for Indian users, Bhashini can be a low-cost starting point for multilingual and voice features. Evaluate quality per language and domain against commercial options, plan for latency and uptime, and decide whether to rely on it fully or as a fallback."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Agent containment: limiting what an agent can reach (network egress controls)",
+   "body": "Containment means an AI agent runs inside a boundary it cannot leave: an allow-list of websites and application programming interfaces (APIs), no open internet by default, scoped credentials and logged outbound calls. Egress controls are the network rules that block anything not on the list. Today's lawsuit against five labs cites reported cases of agents escaping test environments and reaching outside systems.\n\nFor a product manager (PM), containment is a design decision, not just security plumbing: every extra domain or tool widens what the agent can do and what can go wrong. Track blocked-call rate and how often users must approve new destinations, and make the boundary visible to enterprise admins."
+  },
+  "india": [
+   {
+    "text": "The Tribune, carrying an ANI (Asian News International) report on a Jefferies note, says India may benefit as global investors rethink artificial intelligence (AI) bets amid worries about heavy United States tech spending and falling returns (single source).",
+    "url": "https://tribuneindia.com/news/business/india-may-benefit-as-investors-rethink-ai-bets-amid-falling-returns-report"
+   }
+  ],
+  "question": {
+   "q": "You are the PM for an enterprise AI agent platform. A large bank asks how you will guarantee its agents never reach systems outside their approved scope. What containment features would you build, and how would you measure them?",
+   "framing": "Clarify users (bank admins, security teams, end users running agents) and the risk: an agent, through error or prompt injection, calling an unapproved system or leaking data. Define scope as an allow-list of tools, domains and data sources per agent, with scoped credentials.",
+   "tradeoff": "Tight containment (deny by default, approval for every new destination) protects the customer and your legal position but slows teams and frustrates users; loose containment speeds adoption but one incident can lose the account. Offer strict defaults with admin-controlled exceptions, full audit logs and a kill switch.",
+   "metric": "Track blocked out-of-scope calls, time for admins to approve a needed tool, incidents per 1,000 agent runs (target zero), and task success rate so safety does not kill usefulness. Recommend deny-by-default with audited exceptions as the launch posture."
+  },
+  "alsoNotable": [],
+  "pmToolkit": [
+   {
+    "name": "Braintrust",
+    "category": "Analytics and experimentation",
+    "url": "https://www.braintrust.dev",
+    "what": "An evaluation and observability platform for teams building large language model (LLM) features.",
+    "does": "It lets you build test datasets, score prompt and model variants side by side, and monitor production outputs, so a PM can see whether a change actually improved quality.",
+    "examples": [
+     "Compare two system prompts on 50 real support questions before shipping",
+     "Score a cheaper model against the current one to see if a switch is safe",
+     "Review low-scoring production answers each week to find new failure types"
+    ],
+    "pricing": "Free Starter plan; Pro about $249 a month (may change)"
+   },
+   {
+    "name": "LangSmith",
+    "category": "Analytics and experimentation",
+    "url": "https://www.langchain.com/langsmith",
+    "what": "LangChain's platform for tracing, evaluating and monitoring AI agents and LLM apps.",
+    "does": "It records each step an agent takes, runs evaluation sets, and collects human feedback, which helps a PM understand why an agent failed rather than guessing.",
+    "examples": [
+     "Open a trace of a failed agent run to see which tool call went wrong",
+     "Set up a regression dataset that runs whenever the prompt changes",
+     "Add thumbs-up and thumbs-down feedback and review the worst-rated sessions"
+    ],
+    "pricing": "Free Developer plan for one seat; Plus $39 per seat a month (may change)"
+   },
+   {
+    "name": "Dscout",
+    "category": "Usability testing",
+    "url": "https://dscout.com",
+    "what": "A remote qualitative research platform for diary studies, interviews and usability tests.",
+    "does": "It recruits participants, captures video and in-context entries, and uses AI to help summarise and tag findings, so a PM can learn how people really use a product over days, not minutes.",
+    "examples": [
+     "Run a one-week diary study on how users try a new AI assistant at work",
+     "Collect mobile video of people completing a checkout flow at home",
+     "Use AI summaries to pull themes before a discovery review"
+    ],
+    "pricing": "Custom annual plans; no public price (may change)"
+   },
+   {
+    "name": "FigJam AI",
+    "category": "Design",
+    "url": "https://www.figma.com/figjam/ai/",
+    "what": "The AI features inside Figma's online whiteboard, FigJam.",
+    "does": "It generates diagrams and templates from text prompts, sorts and clusters sticky notes by theme, and summarises busy boards, which speeds up workshops and synthesis.",
+    "examples": [
+     "Generate a user-flow diagram from a one-paragraph description",
+     "Cluster 100 sticky notes from a brainstorm into themes in seconds",
+     "Summarise a retrospective board into actions for the team"
+    ],
+    "pricing": "Free starter plan with limited AI credits; paid seats from Figma's plans (may change)"
+   },
+   {
+    "name": "Circleback",
+    "category": "Meetings and notes",
+    "url": "https://circleback.ai",
+    "what": "An AI meeting assistant that writes notes and action items from calls.",
+    "does": "It joins or records meetings, produces structured notes with owners and follow-ups, and lets you search past meetings, so a PM spends less time writing recaps.",
+    "examples": [
+     "Get action items with owners right after a sprint planning call",
+     "Ask what a customer said about pricing across last month's calls",
+     "Send stakeholders a clean summary of a roadmap review"
+    ],
+    "pricing": "Free plan available; paid individual and team plans (may change)"
+   },
+   {
+    "name": "Craft",
+    "category": "Specs and docs",
+    "url": "https://www.craft.do",
+    "what": "A document and notes app with a built-in AI assistant.",
+    "does": "It helps draft, restructure and summarise documents, and supports bring-your-own model keys and on-device models on Apple devices, useful for writing specs and one-pagers.",
+    "examples": [
+     "Turn rough meeting notes into a structured product requirements outline",
+     "Rewrite a spec summary for an executive audience",
+     "Draft a launch checklist from a template and edit it with the team"
+    ],
+    "pricing": "Free Starter plan with limited AI credits; paid Plus plan (may change)"
+   },
+   {
+    "name": "Descript",
+    "category": "Presentations and communication",
+    "url": "https://www.descript.com",
+    "what": "A video and audio editor that lets you edit recordings by editing the transcript.",
+    "does": "Its AI assistant, Underlord, can remove filler words, cut clips and draft summaries, so a PM can produce clear demo videos and walkthroughs quickly.",
+    "examples": [
+     "Record a feature demo and cut it to two minutes by deleting transcript lines",
+     "Remove filler words from a stakeholder update video",
+     "Turn a customer interview recording into a short highlights clip"
+    ],
+    "pricing": "Free plan with limits; paid plans from about $16 a month billed annually (may change)"
+   },
+   {
+    "name": "Dust",
+    "category": "Automation and agents",
+    "url": "https://dust.tt",
+    "what": "A platform for building custom AI agents connected to a company's own tools and documents.",
+    "does": "It lets teams create assistants that search Notion, Slack, Google Drive and other sources and take actions, so a PM can build a research or support helper without engineering time.",
+    "examples": [
+     "Build an agent that answers 'what did customers say about X' from support tickets",
+     "Create a weekly digest agent that summarises product channel discussions",
+     "Set up a spec-review assistant that checks drafts against a template"
+    ],
+    "pricing": "Pro about $29 per user a month; enterprise custom (may change)"
+   },
+   {
+    "name": "Builder.io",
+    "category": "Prototyping",
+    "url": "https://www.builder.io",
+    "what": "A visual development platform whose Fusion product uses AI to turn prompts and Figma designs into working front-end code.",
+    "does": "It lets a PM or designer create interactive prototypes in a real codebase and hand them to engineers, reducing the gap between mock-up and build.",
+    "examples": [
+     "Turn a Figma screen into a clickable prototype for a user test",
+     "Prototype a new settings page inside the existing design system",
+     "Generate a variant of a landing page for an A/B test idea"
+    ],
+    "pricing": "Free plan with monthly agent credits; paid plans vary (may change)"
+   },
+   {
+    "name": "Cline",
+    "category": "Building and coding",
+    "url": "https://cline.bot",
+    "what": "An open-source AI coding agent that runs in Visual Studio Code and the command line.",
+    "does": "It plans and makes code changes step by step with your approval, using the model provider of your choice, so a technical PM can build small tools and explore a codebase.",
+    "examples": [
+     "Ask it to explain how a feature flag is wired through the codebase",
+     "Build a small internal script that pulls metrics into a spreadsheet",
+     "Prototype a quick change to test a hypothesis before filing a ticket"
+    ],
+    "pricing": "Free and open source; you pay your model provider for usage (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 16,
+   "failed": [
+    "TLDR AI",
+    "TLDR Product Management",
+    "Hacker News",
+    "Techmeme",
+    "Product Hunt",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing",
+    "Direct article pages (blocked by network policy; web search used instead)"
+   ],
+   "singleSource": [
+    "India: Jefferies note via ANI in The Tribune"
+   ],
+   "outsideWindow": [
+    "LangChain $300 million Series C at a $3 billion valuation (13 Nov): https://techcrunch.com/2026/11/13/ai-agent-startup-langchain-hits-3b-valuation/",
+    "OpenAI disbands its stand-alone robotics team (Fortune, 13 Nov): https://fortune.com/2026/11/13/openai-disbands-robotics-team-as-its-general-models-start-running-robots/",
+    "CrowdStrike to buy Fiddler AI and Dreadnode for about $495 million (WSJ via reports)",
+    "Cloudflare open-sources Kitesurf, a browser engine for AI agents (12-13 Nov): https://developers.cloudflare.com/changelog/post/2026-11-12-kitesurf-open-source/",
+    "Thinking Machines Lab releases Inkling 2 Small open weights (12 Nov)"
+   ]
+  },
+  "createdAt": "2026-11-15T01:45:00Z"
+ },
+ {
   "date": "2026-11-14",
   "subject": "AI PM Digest – Sat, 14 Nov 2026 – ChatGPT Wallet lets agents buy",
   "headline": "OpenAI launches ChatGPT Wallet for agent purchases",
