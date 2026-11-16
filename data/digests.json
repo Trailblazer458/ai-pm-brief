@@ -1,5 +1,276 @@
 [
  {
+  "date": "2026-11-16",
+  "subject": "AI PM Digest – Mon, 16 Nov 2026 – California AI kill-switch deadline today",
+  "headline": "California AI kill-switch deadline today",
+  "quiet": true,
+  "topStories": [
+   {
+    "title": "Today: California's deadline for recommendations on a frontier-AI 'kill switch' and on-site independent verifiers",
+    "what": "Governor Gavin Newsom's executive order of 18 September 2026 (N-9-26) gave California's Government Operations Agency and Office of Emergency Services until 16 November 2026 to recommend whether state law should require a shutdown capability ('kill switch') for frontier models and whether large frontier developers should host independent verification organisations on-site for audits. A web search this morning found no published recommendations yet; the order itself does not require a kill switch.",
+    "why": "If adopted, these ideas would add shutdown, audit and verification duties for the frontier labs whose models many products are built on, which could change vendor terms, release timing and the evidence product teams must keep. It is also a signal that 'can you stop it?' is becoming a standard question for AI products.",
+    "take": "Be ready to turn a policy idea into product requirements: a tested shutdown path, audit logs and evaluation evidence an outside verifier could check.",
+    "url": "https://ppc.land/newsom-sets-november-16-deadline-to-study-frontier-ai-kill-switch/",
+    "source": "PPC Land; California Governor's Office"
+   }
+  ],
+  "modelsPricing": [],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Regulatory patchwork: shipping AI under many state and national rules",
+    "body": "A regulatory patchwork is what you get when different jurisdictions (US states such as California and New York, the European Union, India) each write their own AI rules, with different definitions, thresholds and duties. A product used everywhere has to satisfy all of them at once.\n\nFor a product manager (PM) this becomes a design choice: build to the strictest common standard everywhere, or ship region-specific behaviour behind configuration. The first is simpler but slower; the second is flexible but multiplies testing. Today's California deadline on frontier-AI shutdown and verification rules is a reminder to keep a requirements map by region and to budget roadmap time for compliance work."
+   },
+   {
+    "title": "Data strategies for low-resource languages",
+    "body": "A low-resource language is one with little digitised, clean text or speech available for training, which is true of many Indian languages. Teams fill the gap by licensing data from publishers, partnering with radio stations, digitising books with optical character recognition (OCR), and paying native speakers to create or label examples.\n\nFor a PM, data acquisition becomes a roadmap item with its own cost, timeline and consent requirements, not a background engineering task. It also decides which languages you can launch first. Today's India item on data shortages for the IndiaAI Mission models shows why compute alone does not close the quality gap."
+   },
+   {
+    "title": "Transliteration and script choice in Indian-language products",
+    "body": "Many Indian users type their language in Latin letters (for example Hindi written as 'kya haal hai') rather than in the native script, and switch between the two. Transliteration converts text between scripts; script choice is deciding which forms your product accepts and replies in.\n\nFor a PM this affects input design, search, and evaluation: a model that does well on native-script Hindi may stumble on romanised Hindi. Decide which scripts to support from real user data, test each one separately, and let users pick the output script rather than guessing."
+   },
+   {
+    "title": "Nondeterminism: why the same prompt can give different answers",
+    "body": "Language models sample their output, so the same prompt can give different answers. Even with temperature set to zero, small differences in how requests are batched on servers and in floating-point maths can change results, and providers update models behind the same name.\n\nFor a PM this means one good test run proves little. Evaluate features over many runs, report pass rates rather than single examples, and design the user experience so variation is acceptable (for example, offering 'regenerate'). Where users need identical answers, such as in compliance outputs, store and reuse the generated result instead of regenerating it."
+   },
+   {
+    "title": "Embedding dimensions and vector storage cost",
+    "body": "An embedding is a list of numbers that represents the meaning of a piece of text; its length is its dimension (often hundreds to thousands of numbers). Some newer embedding models are trained so the first part of the list still works on its own, letting you keep shorter vectors.\n\nFor a PM, dimension size is a cost-quality dial for search and retrieval features: longer vectors can improve match quality but increase storage, memory and query cost at scale. When a retrieval feature grows to millions of documents, ask the team to measure retrieval quality at smaller dimensions before paying for the largest setting."
+   },
+   {
+    "title": "Image tokens: how pictures use up context and cost",
+    "body": "Multimodal models convert images into tokens, just as they do text. A high-resolution screenshot or photo can consume many tokens, so images take up context window space and are billed like input text, depending on the provider's rules.\n\nFor a PM building features on screenshots, receipts or documents, image size is a pricing lever. Resizing or cropping images before sending them, or sending only the relevant region, can cut cost and latency. Include image-heavy cases in cost forecasts, because a feature that looks cheap in text-only tests can be expensive once users upload photos."
+   },
+   {
+    "title": "Text-to-SQL (structured query language): asking questions of structured data",
+    "body": "Text-to-SQL means a model turns a plain-language question ('How many orders came from Pune last week?') into a database query written in SQL (structured query language), runs it, and explains the result. It is the core of many 'chat with your data' features.\n\nFor a PM the risks are wrong but plausible answers and access to data a user should not see. Good products show the generated query, restrict which tables can be read, and test against a set of questions with known answers. Measure answer correctness, not just whether the query ran without errors."
+   },
+   {
+    "title": "Step budgets and stop conditions for agents",
+    "body": "An agent works in a loop: plan, call a tool, read the result, repeat. A step budget caps how many loops, tool calls, tokens or minutes it may use; stop conditions define when it should finish, give up, or ask a human.\n\nFor a PM, budgets protect unit economics and user experience. Without them, an agent can loop on a hard task, burn cost and still fail. Set budgets per task type, track how often agents hit the limit, and design a graceful outcome when they do, such as returning partial work with a clear note on what is left."
+   },
+   {
+    "title": "Document parsing quality in retrieval pipelines",
+    "body": "Before a model can answer questions from PDFs, slides or scanned forms, those files must be converted to clean text. Tables, multi-column layouts, headers and scanned pages often come out jumbled, and retrieval-augmented generation (RAG) then retrieves broken fragments.\n\nFor a PM, many 'the model is wrong' complaints in document features trace back to parsing, not the model. Sample real customer documents early, inspect the parsed output, and include tables and scans in your evaluation set. Choosing a better parser can be cheaper than upgrading the model."
+   },
+   {
+    "title": "Groundedness checks: verifying answers against sources",
+    "body": "A groundedness check tests whether each claim in an answer is actually supported by the retrieved sources, rather than just whether a citation is attached. It can be done by a second model, by rules, or by human review on a sample.\n\nFor a PM this is a key quality metric for search, support and research assistants, where a confident answer with a mismatched citation erodes trust fast. Decide what happens when a check fails: hide the claim, add a warning, or decline to answer. Track the groundedness rate over time, especially after model or prompt changes."
+   },
+   {
+    "title": "Memorisation and personal data leaking from model outputs",
+    "body": "Models can memorise rare strings from training or fine-tuning data, such as names, phone numbers or internal documents, and repeat them in outputs. Fine-tuning on customer data raises this risk because the data is small and specific.\n\nFor a PM this is a privacy and contract risk. Remove or mask personal data before fine-tuning, test with prompts designed to extract training data, and filter outputs for patterns such as phone numbers or identity numbers. Under India's Digital Personal Data Protection (DPDP) Act, an unexpected disclosure of personal data could become a reportable incident, so plan for it."
+   },
+   {
+    "title": "Interruptibility: letting people stop an agent mid-task",
+    "body": "Interruptibility means a user or operator can pause or stop an AI agent at any point and leave the system in a safe, understandable state. It is the product-level version of the shutdown controls regulators are now discussing for frontier models.\n\nFor a PM this needs explicit design: a visible stop control, clean handling of half-finished actions (for example, a draft saved but not sent), and a summary of what was done before the stop. Test stopping at awkward moments. Today's California deadline on 'kill switch' recommendations shows that shutdown capability is becoming a policy expectation, not just good practice."
+   },
+   {
+    "title": "Open-weight licence terms: permissive versus restricted",
+    "body": "Open-weight models are released with licences that vary widely. Permissive licences such as Apache 2.0 allow broad commercial use; others restrict use above a user threshold, ban certain uses, or require attribution, and some forbid using outputs to train competing models.\n\nFor a PM choosing an open-weight model, the licence is a business constraint as real as accuracy. Check it with legal before building, confirm it covers your expected scale and markets, and record it in your vendor review. Several Indian sovereign models, such as Gnani's Evon, have been reported as open-weight, so licence terms matter for Indian builders too."
+   },
+   {
+    "title": "Prompt portability and the cost of switching model providers",
+    "body": "Prompts, tool definitions and evaluation thresholds tuned for one model rarely work the same on another. Switching providers therefore means re-tuning prompts, re-running evaluations and sometimes changing product behaviour.\n\nFor a PM this is a hidden switching cost that weakens your negotiating position with a provider. Keeping prompts in version control, maintaining a provider-neutral evaluation suite, and testing a second model regularly lowers that cost. The goal is not constant switching but the credible ability to switch when price, quality or reliability changes."
+   },
+   {
+    "title": "Pricing AI agents against the cost of human work",
+    "body": "When an AI agent does work a person used to do, such as resolving a support ticket or drafting a contract, buyers compare its price to the cost of that person's time rather than to software subscriptions. Vendors use this to anchor prices well above typical per-seat software.\n\nFor a PM this framing can unlock larger budgets but raises the bar: the agent must reliably complete the task, and buyers will measure it against human quality. It works best when outcomes are countable. Be careful of overclaiming savings; buyers will check the numbers after the contract is signed."
+   },
+   {
+    "title": "Trajectory evaluation for agents",
+    "body": "Trajectory evaluation judges the path an agent took, not just its final answer: which tools it called, in what order, whether it wasted steps, and whether it did anything risky along the way. Final-answer evaluation only checks the end result.\n\nFor a PM, an agent can reach a right answer through an unsafe or expensive path, such as deleting and recreating a record instead of editing it. Add trajectory checks for high-stakes actions, step count and cost, alongside success rate. This shows whether quality gains come with hidden costs before customers notice."
+   },
+   {
+    "title": "Variance reduction in AI experiments: controlled-experiment using pre-experiment data (CUPED)",
+    "body": "Controlled-experiment using pre-experiment data (CUPED) is a statistical technique that uses each user's behaviour before an experiment to remove noise from the results. It lets an A/B test reach a confident answer with fewer users or in less time.\n\nFor a PM testing AI features, where effects are often small and outcomes noisy, this can make the difference between a test that concludes in two weeks and one that never does. Ask your data team whether the experimentation platform supports it, and use it for metrics with a strong pre-period signal, such as weekly usage."
+   },
+   {
+    "title": "Slice-based evaluation: measuring quality by segment",
+    "body": "Slice-based evaluation breaks quality scores down by segment, such as language, device, region, user type or query category, instead of reporting one overall number. An average can hide a segment where the feature performs badly.\n\nFor a PM this is how you find that a feature works well in English but poorly in Tamil, or well on desktop but not on low-end phones. Define the slices that matter for your users before launch, set minimum quality bars for each, and block launches that fail a key slice even if the overall score looks fine."
+   },
+   {
+    "title": "Chat versus structured interfaces: when not to use a chat box",
+    "body": "A chat box is flexible but puts the burden on users to know what to ask. Structured interfaces, such as buttons, forms, filters and suggested actions, guide users to what the AI can do well and collect the inputs it needs.\n\nFor a PM the choice depends on the task: open-ended exploration suits chat, while repeated, well-defined tasks (filing a claim, booking a slot) usually work better as structured flows with AI behind them. Many good products combine both. Watch for chat features where users repeatedly fail to phrase requests well; that is a signal to add structure."
+   },
+   {
+    "title": "Tone and persona guidelines for AI assistants",
+    "body": "Tone and persona guidelines describe how an AI assistant should sound: formal or casual, brief or detailed, how it apologises, how it says no, and what it should never say. They work like a brand voice guide, applied through system prompts and checked in evaluations.\n\nFor a PM, consistent tone builds trust and makes the product feel deliberate. Write the guide with examples of good and bad replies, include it in evaluation rubrics, and test it in every supported language, since a polite phrase in English may sound odd when translated. Revisit it after model upgrades, which can shift tone."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Regulatory patchwork: shipping AI under many state and national rules",
+   "body": "A regulatory patchwork is what you get when different jurisdictions (US states such as California and New York, the European Union, India) each write their own AI rules, with different definitions, thresholds and duties. A product used everywhere has to satisfy all of them at once.\n\nFor a product manager (PM) this becomes a design choice: build to the strictest common standard everywhere, or ship region-specific behaviour behind configuration. The first is simpler but slower; the second is flexible but multiplies testing. Today's California deadline on frontier-AI shutdown and verification rules is a reminder to keep a requirements map by region and to budget roadmap time for compliance work."
+  },
+  "india": [
+   {
+    "text": "Inside AI reports (15 Nov) that India's new IndiaAI Mission models (EKA-1 from Soket Labs, and Dhīr 2B and Dhīr 5B from ZenteiQ, released 3 Nov) face a shortage of digital data in regional languages that more compute alone cannot fix (single source for this report; the model launch itself is widely covered).",
+    "url": "https://insideai.news/news/artificial-intelligence/india-indigenous-ai-models-regional-languages-data/15285/"
+   }
+  ],
+  "question": {
+   "q": "California is weighing a 'kill switch' requirement for frontier AI models. You are the PM for an AI agent product that books, pays and sends messages for users, built on a third-party frontier model. How would you design the product so it can be safely stopped, and how would you know it works?",
+   "framing": "Separate two stops: an operator-level shutdown (turn off the model or agent fleet, for example if the provider pulls a model or a regulator requires it) and a user-level stop (halt one agent mid-task). Map which agent actions are reversible, such as drafts, and which are not, such as payments and sent messages.",
+   "tradeoff": "Faster, more autonomous agents complete more tasks but are harder to stop cleanly; adding confirmation points and checkpoints before irreversible actions makes stopping safe but adds friction and can lower completion rates.",
+   "metric": "Recommend checkpointing before every irreversible action plus a fallback model or degraded mode. Track time-to-halt in drills, the share of stops that leave no half-finished irreversible action, task completion rate, and user-initiated stop rate as a trust signal."
+  },
+  "alsoNotable": [],
+  "pmToolkit": [
+   {
+    "name": "Notably",
+    "category": "Customer research",
+    "url": "https://notably.ai",
+    "what": "Notably is an AI-assisted research repository for organising and analysing user interviews and notes.",
+    "does": "It helps a PM tag, cluster and summarise qualitative research so themes and supporting quotes are easy to find and share.",
+    "examples": [
+     "Upload ten discovery interview transcripts and cluster pain points into themes.",
+     "Pull supporting quotes for a problem statement in a product requirements document.",
+     "Build a shared research board so designers and engineers can see raw evidence."
+    ],
+    "pricing": ""
+   },
+   {
+    "name": "Thematic",
+    "category": "Feedback analysis",
+    "url": "https://getthematic.com",
+    "what": "Thematic is a customer feedback analytics platform that uses AI to find themes in survey answers, reviews and support tickets.",
+    "does": "It turns large volumes of open-text feedback into tracked themes and trends, so a PM can see what is driving satisfaction or complaints.",
+    "examples": [
+     "Find the top reasons behind detractor scores in a Net Promoter Score survey.",
+     "Track whether complaints about a feature drop after a release.",
+     "Compare feedback themes between two customer segments before roadmap planning."
+    ],
+    "pricing": "No public price list; contact sales (may change)"
+   },
+   {
+    "name": "ProdPad",
+    "category": "Roadmapping",
+    "url": "https://www.prodpad.com",
+    "what": "ProdPad is a product management platform for ideas, feedback and Now-Next-Later roadmaps, with a built-in AI assistant called CoPilot.",
+    "does": "It helps a PM capture feedback, link it to ideas and roadmap items, and use CoPilot to draft and critique ideas and specs.",
+    "examples": [
+     "Ask CoPilot to draft a user story and acceptance criteria from a raw idea.",
+     "Link customer feedback to a roadmap initiative to justify its priority.",
+     "Get an AI critique of a roadmap for gaps before a leadership review."
+    ],
+    "pricing": "CoPilot included on all plans; paid plans reported from about $24 per editor a month, billed annually (may change)"
+   },
+   {
+    "name": "Firebase Studio",
+    "category": "Prototyping",
+    "url": "https://firebase.google.com/docs/studio",
+    "what": "Firebase Studio is Google's browser-based development workspace with an App Prototyping agent that builds working apps from prompts.",
+    "does": "It lets a PM go from a written idea to a clickable, working web app prototype without setting up a local development environment.",
+    "examples": [
+     "Turn a one-paragraph feature idea into a working prototype for user testing.",
+     "Build an internal tool demo to show engineers the intended flow.",
+     "Create two variants of an onboarding screen to compare in a quick test."
+    ],
+    "pricing": "Free to access; publishing and some integrations need a Cloud Billing account (may change)"
+   },
+   {
+    "name": "Banani",
+    "category": "UI design",
+    "url": "https://www.banani.co",
+    "what": "Banani is an AI user interface design tool that generates editable screens from text prompts, sketches, images or product documents.",
+    "does": "It helps a PM produce realistic screen designs quickly to explain an idea, without waiting for a designer's first pass.",
+    "examples": [
+     "Generate mobile screens for a new checkout flow from a short description.",
+     "Turn a whiteboard sketch from a workshop into clean wireframes.",
+     "Create a visual for a spec so stakeholders react to something concrete."
+    ],
+    "pricing": ""
+   },
+   {
+    "name": "LogRocket",
+    "category": "Product analytics",
+    "url": "https://logrocket.com",
+    "what": "LogRocket records user sessions and product analytics, with an AI layer called Galileo that summarises sessions and flags issues.",
+    "does": "It helps a PM see where users struggle, with AI summaries of sessions and detection of friction and errors, so you do not have to watch every replay.",
+    "examples": [
+     "Ask Galileo why users abandon a signup step and review the flagged sessions.",
+     "Check whether a new release introduced errors that block a key flow.",
+     "Summarise sessions from a key account before a customer call."
+    ],
+    "pricing": "Free plan with 1,000 sessions a month; Galileo AI on the Pro plan, from $292 a month (may change)"
+   },
+   {
+    "name": "MeetGeek",
+    "category": "Meetings and notes",
+    "url": "https://meetgeek.ai",
+    "what": "MeetGeek is an AI meeting assistant that records, transcribes and summarises video calls.",
+    "does": "It gives a PM searchable transcripts, summaries and action items from customer and team calls, and can push notes into other tools.",
+    "examples": [
+     "Get automatic summaries and action items from a sprint review.",
+     "Search past customer calls for every mention of a competitor.",
+     "Share a short highlight from a user call with engineers."
+    ],
+    "pricing": "Free tier available; paid plans billed per user per month (may change)"
+   },
+   {
+    "name": "Userlytics",
+    "category": "Usability testing",
+    "url": "https://www.userlytics.com",
+    "what": "Userlytics is a remote user testing platform with a participant panel and AI-assisted analysis of test sessions.",
+    "does": "It lets a PM run moderated or unmoderated usability tests and use AI transcription and analysis to find issues faster.",
+    "examples": [
+     "Test a prototype with five participants from a target country before launch.",
+     "Compare task success on two navigation designs.",
+     "Use AI analysis to pull key moments from a dozen session recordings."
+    ],
+    "pricing": "Contact sales; pay-as-you-go projects and subscriptions offered (may change)"
+   },
+   {
+    "name": "Storydoc",
+    "category": "Presentations",
+    "url": "https://www.storydoc.com",
+    "what": "Storydoc is an AI tool for building interactive, scroll-based presentations and documents instead of static slides.",
+    "does": "It helps a PM turn a pitch, update or proposal into an interactive web page with engagement analytics showing who read what.",
+    "examples": [
+     "Turn a quarterly product update into an interactive page for stakeholders.",
+     "Build a feature launch one-pager for the sales team.",
+     "See which sections of a proposal an executive actually read."
+    ],
+    "pricing": "Free trial; Starter reported at $17.40 a month (may change)"
+   },
+   {
+    "name": "Equals",
+    "category": "Data and SQL",
+    "url": "https://equals.com",
+    "what": "Equals is a spreadsheet connected to live databases and business tools, with AI that can write formulas and SQL queries.",
+    "does": "It lets a PM pull data from sources such as Postgres, Snowflake or Stripe into a familiar spreadsheet and ask AI to build the query or analysis.",
+    "examples": [
+     "Ask in plain language for weekly active users by plan and get the SQL written.",
+     "Build a self-refreshing metrics sheet for a weekly product review.",
+     "Combine revenue and usage data to check adoption of a paid feature."
+    ],
+    "pricing": ""
+   }
+  ],
+  "sourceNotes": {
+   "checked": 16,
+   "failed": [
+    "TLDR AI",
+    "TLDR Product Management",
+    "Hacker News (hnrss)",
+    "Techmeme",
+    "Product Hunt",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing",
+    "Direct article fetches (all hosts unreachable from this environment; items come from web search)"
+   ],
+   "singleSource": [
+    "Inside AI: India's new models face a regional-language data shortage"
+   ]
+  },
+  "createdAt": "2026-11-16T01:50:00Z"
+ },
+ {
   "date": "2026-11-15",
   "subject": "AI PM Digest – Sun, 15 Nov 2026 – Nonprofits sue five frontier AI labs",
   "headline": "Nonprofits sue five frontier AI labs",
