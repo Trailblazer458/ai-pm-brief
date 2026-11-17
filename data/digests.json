@@ -1,5 +1,306 @@
 [
  {
+  "date": "2026-11-17",
+  "subject": "AI PM Digest – Tue, 17 Nov 2026 – US curbs remote AI chip access",
+  "headline": "US curbs remote access to advanced AI chips",
+  "quiet": false,
+  "topStories": [
+   {
+    "title": "US Commerce Department issues rule to stop China-headquartered firms reaching advanced AI chips remotely through overseas data centres",
+    "what": "On Monday 16 November the US Commerce Department's Bureau of Industry and Security issued an interim final rule aimed at companies headquartered in China and other countries of concern that use advanced US AI chips through data centres in third countries. Exporters now need a licence to ship advanced chips to Brazil, Indonesia, Malaysia, Singapore and Thailand (with a carve-out for US-headquartered companies), and the rule formally scraps the earlier AI Diffusion Rule.",
+    "why": "Export controls now reach remote (cloud) access to compute, not just shipping hardware, so cloud and application programming interface (API) providers in those countries may need stricter customer checks and AI teams renting graphics processing units (GPUs) there could face new paperwork or capacity limits. 'Who can use your AI service, and from where' is becoming a regulated product surface.",
+    "take": "Be ready to explain that compute access is now a compliance question, and how know-your-customer (KYC) checks would change sign-up and onboarding for an AI platform.",
+    "url": "https://www.bloomberg.com/news/articles/2026-11-16/us-moves-to-limit-remote-access-to-advanced-ai-chips",
+    "source": "Bloomberg; Reuters; CBS News; The Japan Times; The Next Web"
+   },
+   {
+    "title": "AMD completes its $8.2 billion all-stock acquisition of Fei-Fei Li's World Labs",
+    "what": "AMD closed its roughly $8.2 billion all-stock purchase of World Labs, the spatial-intelligence and world-model startup co-founded by Fei-Fei Li, who becomes AMD's executive vice president and chief scientist reporting to chief executive Lisa Su. The deal was agreed in September; reports say AMD's closing release did not describe changes to World Labs' Atlas product or developer APIs.",
+    "why": "A chipmaker buying a model lab is vertical integration: AMD gets in-house model research to shape its hardware and software and to compete with Nvidia in models for robotics and 3D worlds. For teams building on a startup's API, it is a live example of supplier acquisition risk.",
+    "take": "Use it to discuss why hardware companies move up the stack into models, and how you would protect a product that depends on an API whose owner just changed.",
+    "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/amd-acquires-ai-legend-fei-fei-lis-world-labs-for-usd8-2-billion-imagenet-pioneer-will-become-amd-chief-scientist-as-the-chipmaker-brings-her-lab-in-house",
+    "source": "Tom's Hardware; Yahoo Finance; Seeking Alpha"
+   },
+   {
+    "title": "California's consumer agency chief says AI companies that break state licensing rules may be taken to court",
+    "what": "Rohit Chopra, secretary of California's Business and Consumer Services Agency, told a Reuters conference on Monday that his agency is considering suing AI companies that break state rules, saying there is no AI exception to state licensing rules in fields such as medicine and banking.",
+    "why": "AI products that act like a doctor, adviser or lender may be judged under the same licensing rules as the humans in those professions. That shapes scope, disclaimers, human escalation and which markets a product team can enter first.",
+    "take": "When scoping an AI feature in a regulated field, start from the existing professional and licensing rules, not only from AI-specific regulation.",
+    "url": "https://investing.com/news/stock-market-news/california-consumer-watchdog-chief-says-ai-companies-that-violate-state-rules-will-be-taken-to-court-5031231",
+    "source": "Reuters (via Investing.com); Crypto Briefing"
+   }
+  ],
+  "modelsPricing": [],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Know-your-customer (KYC) checks for AI compute and application programming interface (API) access",
+    "body": "Know-your-customer means verifying who a customer is, where they are and who ultimately owns them before giving them a service. Banks do it by law; cloud and AI platform providers increasingly do it for powerful compute and models, because rules such as the US remote-access rule announced on 16 November target who can reach advanced chips through data centres.\n\nFor a product manager (PM) on an AI platform, KYC is a growth-versus-compliance trade-off. Strict checks at sign-up slow self-serve conversion; light checks risk regulatory trouble and abuse. A common answer is tiered verification: instant access to small quotas, and identity and ownership checks before high limits or sensitive models. Track sign-up drop-off at each verification step."
+   },
+   {
+    "title": "Rate limits and throughput quotas",
+    "body": "Model providers cap how much you can send: requests per minute, tokens per minute and sometimes tokens per day, usually rising with your spending tier. Hitting a limit returns an error rather than an answer.\n\nFor a PM these limits are a hidden product constraint. A launch that drives a usage spike can fail even though the model works. Plan capacity before launch, queue or batch non-urgent work, show users a graceful 'busy' state, and negotiate higher tiers early. Watch the rate of throttled requests as an operational metric alongside latency."
+   },
+   {
+    "title": "Best-of-n sampling: generating several answers and picking one",
+    "body": "Best-of-n means asking a model for several candidate answers to the same request and choosing the best, using a scoring model, a test (for example, does the code run?) or a rule. It trades extra compute for higher quality without changing the model.\n\nFor a PM it is a cost-quality dial: n candidates cost roughly n times as much and can add latency, but can lift success on hard tasks where answers are checkable. It works best when you have a reliable verifier. Use it selectively, for high-value or hard requests, and measure cost per successful task rather than cost per call."
+   },
+   {
+    "title": "Re-embedding cost when you switch embedding models",
+    "body": "An embedding model turns text into vectors for search. Vectors from different embedding models are not compatible, so upgrading the model means re-processing every document in your index, which takes compute, time and careful cut-over.\n\nFor a PM this makes the embedding model a sticky choice. Before switching, estimate the re-indexing cost and downtime, run both indexes in parallel and compare retrieval quality on a test set. Keep the original source text stored so you can always re-embed, and budget a migration project rather than treating it as a one-line config change."
+   },
+   {
+    "title": "Retrieval over tables and spreadsheets",
+    "body": "Most retrieval-augmented generation (RAG) systems are built for paragraphs of text. Tables, spreadsheets and structured records behave differently: splitting a table into chunks can separate numbers from their column headers, and models can misread rows.\n\nFor a PM, if your users' knowledge lives in spreadsheets, product catalogues or financial reports, plain text chunking will produce confident wrong numbers. Options include keeping headers with every chunk, converting rows to sentences, or querying the data directly with code or structured queries. Build an evaluation set of numeric questions with known answers and track exact-match accuracy."
+   },
+   {
+    "title": "Evaluating multi-turn conversations",
+    "body": "Many AI evaluations score a single question and answer. Real users have conversations: they clarify, change their mind and refer back to earlier messages. Multi-turn evaluation tests whether the assistant keeps context, stays consistent and reaches the goal over a whole dialogue.\n\nFor a PM, single-turn scores can look strong while real conversations fail at turn five. Build test conversations from real (anonymised) transcripts or simulated users, and score outcomes at the conversation level: was the task completed, how many turns did it take, and did the assistant contradict itself? Compare these with user-level metrics such as resolution and repeat contact."
+   },
+   {
+    "title": "Deterministic code versus model calls: what to keep out of the large language model",
+    "body": "Not every step in an AI feature should be done by the model. Calculations, permission checks, date logic, formatting and business rules are often better done in ordinary code, which is cheap, fast and always gives the same answer. The model handles the fuzzy parts, such as understanding intent or writing text.\n\nFor a PM this is a key architecture conversation. Pushing everything through a large language model (LLM) is quick to prototype but adds cost, latency and errors in places where errors are unacceptable, such as prices or eligibility. In specs, mark which steps must be deterministic and which can be probabilistic."
+   },
+   {
+    "title": "Canary tokens for detecting data leaks and prompt injection",
+    "body": "A canary token is a unique, harmless marker planted somewhere it should never leave, such as a fake secret inside a system prompt or a private document. If it ever appears in an output, a log or an outbound request, you know data is leaking or an injected instruction worked.\n\nFor a PM this is a cheap early-warning signal for AI agents that read untrusted content and can call tools. It does not prevent attacks, but it turns invisible failures into alerts. Add canary checks to monitoring, and track canary trigger rate after releases and model changes."
+   },
+   {
+    "title": "Over-refusal: when a safe model becomes unhelpful",
+    "body": "Over-refusal is when an AI system declines requests that are actually acceptable, for example refusing a medical-information question or a security-education question because it pattern-matches to something risky. It is the flip side of guardrails that block too little.\n\nFor a PM, over-refusal silently hurts retention: users simply leave. Track refusal rate by topic and segment, sample refusals for human review, and maintain a test set of legitimate requests that must not be refused. Today's California comments on regulated professions are a reminder that the goal is careful, appropriately scoped help, not blanket refusal."
+   },
+   {
+    "title": "Free-tier abuse and promotion fraud in AI products",
+    "body": "Free AI access is valuable compute, so it attracts abuse: multiple accounts to farm free credits, resale of access, scripted use and fake sign-ups to claim promotions. Each abusive user costs real inference spend.\n\nFor a PM designing a free tier or a partner promotion (such as a telecom bundle), abuse controls are part of the unit economics. Common levers are phone or payment verification, per-device limits, usage caps and anomaly detection, each adding some friction for honest users. Track cost per free user, share of usage from flagged accounts, and the conversion impact of each verification step."
+   },
+   {
+    "title": "Vendor acquisition risk: when your AI supplier gets bought",
+    "body": "When a startup whose model or application programming interface (API) you rely on is acquired, its priorities can change: pricing, roadmap, terms, data handling or even whether the product continues. AMD's completed purchase of World Labs is a fresh example of a model lab moving inside a larger company.\n\nFor a PM, this is a supplier risk to manage before it happens. Keep an abstraction layer so you can switch providers, check contracts for change-of-control and notice periods, export your data and evaluation sets, and keep a tested fallback. Review critical AI suppliers whenever acquisition news appears."
+   },
+   {
+    "title": "Telecom distribution partnerships for AI products",
+    "body": "AI companies increasingly reach mass-market users by bundling subscriptions with mobile operators: the telecom company offers the AI plan free or discounted with certain recharge plans. Jio's free Google AI Pro offer, now closed to new sign-ups, is an Indian example.\n\nFor a PM this is a powerful go-to-market lever in India, where operators reach hundreds of millions of people, but it brings trade-offs: you buy reach rather than intent, the operator controls the funnel, and much of the user base may be low-engagement. Plan the post-promotion path and measure activation, not just redemptions."
+   },
+   {
+    "title": "Vertical foundation models: domain-specific versus general models",
+    "body": "A vertical foundation model is trained or heavily adapted for one domain, such as cybersecurity, law or medicine, instead of serving every task. Startups like Corma, which reported a large raise for cybersecurity-focused models, bet that domain data and evaluation beat general models plus prompting.\n\nFor a PM the build-or-choose question is: does a general frontier model with retrieval and good prompts already meet the quality bar on your evaluation set? Vertical models can win on accuracy, cost and data control in narrow tasks, but they can fall behind fast as general models improve. Re-run the comparison with every major model release."
+   },
+   {
+    "title": "Trial-to-paid conversion and the promotion cliff",
+    "body": "Trial-to-paid conversion is the share of users on a free trial or promotion who start paying when it ends. The 'promotion cliff' is the drop in active users when a free period expires and most people do not convert.\n\nFor a PM, long free promotions inflate active-user numbers and can hide weak willingness to pay. Measure conversion by acquisition channel, track engagement in the final weeks of the trial as a leading indicator, and design the end of the trial carefully (reminders, a cheaper plan, keeping some value free). Forecast revenue on converted users, not redeemed promotions."
+   },
+   {
+    "title": "Cohort retention curves for AI features",
+    "body": "A cohort retention curve tracks a group of users who started in the same week or month and shows what share are still active over time. A healthy product's curve flattens; one that keeps falling toward zero has not found lasting value.\n\nFor AI features, where novelty drives early trial, cohort curves separate curiosity from habit. Compare curves for cohorts before and after a model upgrade or prompt change, and by segment and acquisition channel. A flattening curve is stronger evidence of product-market fit than a spike in sign-ups."
+   },
+   {
+    "title": "Heterogeneous treatment effects: when an AI change helps some users and hurts others",
+    "body": "A heterogeneous treatment effect means an experiment's impact differs across groups. An AI feature can raise the average metric while making things worse for a segment, such as new users, non-English speakers or people on slow networks.\n\nFor a PM, a positive average can hide real harm, and AI features are especially likely to vary by language, task type and user expertise. Pre-register the key segments you will check, make sure each has enough sample size, and be wary of hunting through dozens of slices for a story. If one segment is harmed, consider targeting the rollout rather than shipping to everyone."
+   },
+   {
+    "title": "Designing regional availability and 'not available here' states",
+    "body": "AI features are often unavailable in some countries because of regulation, export controls, data rules or partner contracts. How the product behaves for those users, from hiding features to showing a clear explanation, is a design decision.\n\nFor a PM, poorly handled regional gaps create confusing errors, support tickets and trust damage. Decide per feature whether to hide, disable with an explanation or offer an alternative, keep a single source of truth for where each feature is allowed, and test with location settings. Rules like the new US chip-access rule show these maps can change quickly."
+   },
+   {
+    "title": "Usage meters and credit displays for AI products",
+    "body": "Many AI products charge in credits, tokens or message limits. A usage meter shows users how much they have used and what remains, ideally before they hit a wall.\n\nFor a PM the meter shapes trust and revenue. Hidden limits cause angry surprises and churn; clear meters with warnings at, say, 80 percent let users plan, upgrade or slow down. Translate abstract units into things users understand, such as 'about 40 more reports'. Track upgrade rate after limit warnings and support tickets about billing."
+   },
+   {
+    "title": "Professional licensing rules and AI in regulated fields",
+    "body": "Fields such as medicine, law, banking and financial advice require licences for humans who practise them. Regulators increasingly say these rules also apply when an AI product performs similar work; California's consumer agency chief said on 16 November there is no AI exception.\n\nFor a PM building in a regulated field, this decides the product's shape: informational help versus individual advice, when a licensed human must review or sign off, what disclaimers and escalation paths are required, and which markets to launch in first. Involve legal early and write the licensed-activity boundary into the spec."
+   },
+   {
+    "title": "India Semiconductor Mission and the AI hardware supply chain",
+    "body": "The India Semiconductor Mission is the government programme that supports chip design and manufacturing in India through incentives for fabrication, assembly and design startups. AI depends on this stack, from data-centre chips to sensors in devices; startups such as Bharat Semi, which raised funding for AI image sensors, sit in the design layer.\n\nFor a PM in India, local chip and device capacity affects cost, supply security and what on-device AI products are feasible. It also matters for public-sector and strategic buyers who may prefer domestic suppliers. Know the policy direction, but base product plans on what is shipping today."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Know-your-customer (KYC) checks for AI compute and application programming interface (API) access",
+   "body": "Know-your-customer means verifying who a customer is, where they are and who ultimately owns them before giving them a service. Banks do it by law; cloud and AI platform providers increasingly do it for powerful compute and models, because rules such as the US remote-access rule announced on 16 November target who can reach advanced chips through data centres.\n\nFor a product manager (PM) on an AI platform, KYC is a growth-versus-compliance trade-off. Strict checks at sign-up slow self-serve conversion; light checks risk regulatory trouble and abuse. A common answer is tiered verification: instant access to small quotas, and identity and ownership checks before high limits or sensitive models. Track sign-up drop-off at each verification step."
+  },
+  "india": [
+   {
+    "text": "Reliance Jio has stopped accepting new claims for its free Google AI Pro offer, which gave eligible users up to 18 months of Google's premium Gemini features; existing users keep access while on a qualifying plan (reported as an unlimited 5G plan of ₹349 or more). Jio's terms set the redemption window as 30 October 2025 to 29 October 2026, and no reason was given. A live case study in subsidised AI distribution through telecom bundles and what happens when the promotion ends.",
+    "url": "https://inc42.com/buzz/jio-ends-new-sign-ups-for-free-google-ai-pro-subscription/"
+   },
+   {
+    "text": "Bharat Semi, an Indian startup designing artificial intelligence (AI) image sensors for physical AI, raised a $24 million seed round led by Info Edge Group, South Park Commons and Indus Bridge Ventures (also reported by Inc42). The company is pre-revenue and reports design wins with General Atomics and Kaynes Semicon.",
+    "url": "https://iaiac.in/bharat-semi-raises-24-million-in-seed-funding-to-scale-ai-sensor-technology"
+   }
+  ],
+  "question": {
+   "q": "The US has just tightened rules on remote access to advanced AI chips, targeting China-headquartered companies using data centres in countries such as Singapore and Malaysia. You are the PM for a self-serve AI model API platform with fast-growing customers across Southeast Asia and India. How would you change onboarding and access, and how would you measure the impact?",
+   "framing": "Separate the regulatory requirement (knowing who ultimately controls each customer and where compute is used) from the growth goal (fast self-serve sign-up). Segment customers by risk: country, ownership, spend level and model capability requested.",
+   "tradeoff": "Strict identity and ownership checks for everyone reduce compliance risk but slow activation and push small developers to competitors; tiered verification keeps sign-up fast but needs good monitoring so high-risk customers cannot scale before they are verified.",
+   "metric": "Recommend tiered verification: instant small quotas, then KYC before high rate limits or sensitive models. Track sign-up-to-first-call conversion, drop-off at each verification step, time to verification, share of usage from verified customers and compliance incidents."
+  },
+  "alsoNotable": [
+   {
+    "text": "Corma, which trains cybersecurity-focused foundation models, raised $125 million in a Series A led by NEA at a $1 billion valuation, according to SiliconANGLE (single source).",
+    "url": "https://siliconangle.com/2026/11/16/corma-raises-125m-to-train-cybersecurity-optimized-foundation-models/"
+   },
+   {
+    "text": "NPR reports that regulating AI is expected to be a top priority for congressional Democrats in the new Congress, with Senator Bernie Sanders planning several AI bills and Representative Yvette Clarke seeking rules on how AI companies use people's data (single source).",
+    "url": "https://www.npr.org/2026/11/16/nx-s1-6037801/regulating-ai-will-being-a-top-priority-for-congressional-democrats-in-the-new-year"
+   }
+  ],
+  "pmToolkit": [
+   {
+    "name": "Glean",
+    "category": "General AI assistants",
+    "url": "https://www.glean.com",
+    "what": "Glean is an enterprise AI assistant and search tool that connects to a company's apps and documents.",
+    "does": "It lets a PM ask questions across internal tools such as docs, tickets and chat, and get answers with links to the sources they came from.",
+    "examples": [
+     "Find every past decision and document about a feature before writing a new spec.",
+     "Ask which customer tickets mention a specific bug across support and chat tools.",
+     "Get a briefing on an unfamiliar team's project before a cross-team meeting."
+    ],
+    "pricing": "No public price list; quote-based enterprise licences (may change)"
+   },
+   {
+    "name": "BlazeSQL",
+    "category": "Data and SQL",
+    "url": "https://www.blazesql.com",
+    "what": "BlazeSQL is an AI assistant that turns plain-English questions into structured query language (SQL) queries and charts over a connected database.",
+    "does": "It helps a PM pull product data without writing SQL by hand, and shows the generated query so an analyst can check it.",
+    "examples": [
+     "Ask how many users activated a feature last week, split by plan.",
+     "Generate a weekly chart of retention for a new cohort.",
+     "Draft a query to size an opportunity, then hand it to an analyst to verify."
+    ],
+    "pricing": "14-day free trial; Team plan $400 a month including 3 users (may change)"
+   },
+   {
+    "name": "Microsoft Clarity",
+    "category": "Analytics and experimentation",
+    "url": "https://clarity.microsoft.com",
+    "what": "Microsoft Clarity is a website behaviour analytics tool with heatmaps, session recordings and a Copilot feature that summarises recordings with AI.",
+    "does": "It shows a PM where users click, scroll and get stuck, and uses AI summaries to highlight key events across many sessions.",
+    "examples": [
+     "Summarise sessions on a new onboarding page to see where users drop off.",
+     "Compare heatmaps before and after a pricing page change.",
+     "Find rage-click and dead-click hotspots to prioritise bug fixes."
+    ],
+    "pricing": "Free (may change)"
+   },
+   {
+    "name": "Mem",
+    "category": "Specs and docs",
+    "url": "https://mem.ai",
+    "what": "Mem is an AI-powered notes app that organises notes automatically and lets you chat with everything you have written.",
+    "does": "It helps a PM capture ideas, meeting notes and research in one place and pull related notes together when drafting a spec.",
+    "examples": [
+     "Ask what you have noted about a competitor over the past quarter.",
+     "Turn scattered feature ideas into a first-draft outline for a spec.",
+     "Surface related notes from earlier discovery calls while writing a problem statement."
+    ],
+    "pricing": "Free tier available (may change)"
+   },
+   {
+    "name": "Mural",
+    "category": "Design and workshops",
+    "url": "https://www.mural.co",
+    "what": "Mural is a visual collaboration whiteboard with built-in AI features (Mural AI) for workshops and planning.",
+    "does": "It helps a PM run remote brainstorming, journey mapping and prioritisation sessions, with AI help to cluster and summarise sticky notes.",
+    "examples": [
+     "Cluster 100 sticky notes from a discovery workshop into themes.",
+     "Map a customer journey with the team and summarise the pain points.",
+     "Run a remote prioritisation exercise and export the results."
+    ],
+    "pricing": "Free plan for 3 murals without Mural AI; Team+ about $10 per user per month billed annually (may change)"
+   },
+   {
+    "name": "Amp",
+    "category": "Building and coding",
+    "url": "https://ampcode.com",
+    "what": "Amp is an AI coding agent from Sourcegraph that works in the terminal and code editors.",
+    "does": "It lets a technical PM make small code changes, explore a codebase or build a quick prototype by describing the task in plain language.",
+    "examples": [
+     "Ask how a feature flag is implemented before discussing a change with engineers.",
+     "Build a throwaway prototype to test an idea with users.",
+     "Fix copy or a small user interface bug in a branch for engineering review."
+    ],
+    "pricing": ""
+   },
+   {
+    "name": "Synthesia",
+    "category": "Presentations and communication",
+    "url": "https://www.synthesia.io",
+    "what": "Synthesia is an AI video platform that turns a script into a presenter-style video with AI avatars and voices.",
+    "does": "It helps a PM produce short explainer, launch and training videos without filming, including in multiple languages.",
+    "examples": [
+     "Make a two-minute feature walkthrough for sales and support teams.",
+     "Produce release-note videos in Hindi and English from one script.",
+     "Create an onboarding video for a new internal tool."
+    ],
+    "pricing": "Free plan with limited minutes and watermark; paid plans available (may change)"
+   },
+   {
+    "name": "Bluedot",
+    "category": "Meetings and notes",
+    "url": "https://www.bluedothq.com",
+    "what": "Bluedot is an AI meeting recorder and note-taker for video calls.",
+    "does": "It records and transcribes calls and produces summaries and action items a PM can share with the team.",
+    "examples": [
+     "Record customer interviews and pull out quotes for a research summary.",
+     "Send action items to the team right after a planning meeting.",
+     "Search past calls for what a stakeholder said about a deadline."
+    ],
+    "pricing": "Limited free tier; paid from about $14 per seat per month billed annually (may change)"
+   },
+   {
+    "name": "PlaybookUX",
+    "category": "Usability testing",
+    "url": "https://www.playbookux.com",
+    "what": "PlaybookUX is a user research platform for moderated and unmoderated usability tests and interviews, with participant recruiting and AI-assisted summaries.",
+    "does": "It helps a PM recruit target users, run tests on prototypes or live products, and get summarised findings from session recordings.",
+    "examples": [
+     "Run an unmoderated test of a new checkout flow with ten target users.",
+     "Recruit participants matching a persona for discovery interviews.",
+     "Get AI summaries of recordings to share key findings with design."
+    ],
+    "pricing": "Pay-as-you-go per participant or annual plans (may change)"
+   },
+   {
+    "name": "Jira Product Discovery",
+    "category": "Feedback and roadmapping",
+    "url": "https://www.atlassian.com/software/jira/product-discovery",
+    "what": "Jira Product Discovery is Atlassian's tool for capturing ideas, scoring them and building roadmaps linked to delivery work in Jira.",
+    "does": "It helps a PM collect ideas and evidence, prioritise with custom fields and share roadmap views with stakeholders.",
+    "examples": [
+     "Score incoming feature ideas by impact and effort in one view.",
+     "Link customer insights to ideas so priorities have evidence behind them.",
+     "Publish a now-next-later roadmap for leadership that stays in sync with Jira."
+    ],
+    "pricing": "Free for up to 3 creators; paid plans priced per creator (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 16,
+   "failed": [
+    "TLDR AI",
+    "TLDR Product Management",
+    "Hacker News (hnrss)",
+    "Techmeme",
+    "Product Hunt",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing",
+    "Direct article fetches (hosts unreachable from this environment; items come from web search results)"
+   ],
+   "singleSource": [
+    "Corma $125 million Series A (SiliconANGLE)",
+    "NPR: AI regulation a top priority for congressional Democrats"
+   ]
+  },
+  "createdAt": "2026-11-17T01:19:56Z"
+ },
+ {
   "date": "2026-11-16",
   "subject": "AI PM Digest – Mon, 16 Nov 2026 – California AI kill-switch deadline today",
   "headline": "California AI kill-switch deadline today",
