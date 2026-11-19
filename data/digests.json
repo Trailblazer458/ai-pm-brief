@@ -1,5 +1,348 @@
 [
  {
+  "date": "2026-11-19",
+  "subject": "AI PM Digest – Thu, 19 Nov 2026 – Anthropic prices record IPO at $83",
+  "headline": "Anthropic prices its IPO at $83 a share, above range",
+  "quiet": false,
+  "topStories": [
+   {
+    "title": "Update: Anthropic prices its initial public offering (IPO) at $83 a share, above its $70–$78 range",
+    "what": "Anthropic said it priced 980 million Class A shares at $83 (about 956 million sold by the company), with Nasdaq trading under the ticker ANT expected to start on 19 November and closing on 20 November. CNBC reports the offering raised about $81.3 billion, the largest on record, and outlets including AP and Fortune put the valuation at about $1.5 trillion.",
+    "why": "Your model supplier is now a public company with quarterly revenue targets, which tends to push it towards enterprise contracts, pricing discipline and predictable roadmaps. Fortune reports that strategic partners including Google and Nvidia agreed to buy $26 billion of stock at the IPO price, a reminder that AI vendors are often investors, partners and rivals at once.",
+    "take": "Be ready to explain how a supplier going public changes your vendor risk: more disclosure and stability, but also more pressure on pricing and margins.",
+    "url": "https://www.anthropic.com/news/anthropic-prices-initial-public-offering",
+    "source": "Anthropic; CNBC; Fortune; TechCrunch; CNN"
+   },
+   {
+    "title": "Google launches Gemini 4 Neon at $3/$15 per million tokens, aimed at coding and enterprise work",
+    "what": "Google released Gemini 4 Neon on 18 November in the Gemini app and Antigravity for AI Pro and Ultra subscribers and through the paid Gemini application programming interface (API), at $3 per million input tokens and $15 per million output tokens with about a 1 million token context window. Google says it beats Claude Sonnet 5.5 and GPT-6.2 Sol on the Artificial Analysis Intelligence Index at its highest reasoning setting; Artificial Analysis scores it 61, one point above Gemini 4 Carbon.",
+    "why": "This is the fourth frontier price-performance move in about ten days, and it lands in the mid-tier where most production traffic runs. Neon has no free API tier, and its price advantage over Carbon only applies once Carbon's introductory rate ends on 30 November, so compare cost per task, not list price.",
+    "take": "Show you can read a launch: which benchmark, at what reasoning setting, against which price, and from what date.",
+    "url": "https://9to5google.com/2026/11/18/gemini-4-neon-announcement/",
+    "source": "9to5Google; VentureBeat; Artificial Analysis"
+   },
+   {
+    "title": "US Government Accountability Office (GAO): covert testers got attack plans from ChatGPT, Claude, Gemini and Grok",
+    "what": "A GAO report released 18 November (GAO-27-108814), requested by Senator Maggie Hassan, says investigators bypassed safeguards on all four platforms with common techniques and obtained expert-confirmed plans for attacking an electrical grid and building an explosive device in under 12 hours each. GAO noted much of the information was already public; Anthropic questioned the method and said its systems have been strengthened since May, and Google said earlier model versions were tested.",
+    "why": "Government auditors are now doing their own red-teaming, so safety claims will be tested from outside and published. PMs on consumer AI products should expect questions about marginal uplift, multi-turn misuse and how fast safeguards are updated.",
+    "take": "Separate 'the model said something bad' from 'the model gave meaningful uplift beyond public information', and name the metric you would track.",
+    "url": "https://www.washingtontimes.com/news/2026/nov/18/claude-chatgpt-gemini-grok-produced-attack-plans-covert-tests-gao/",
+    "source": "Washington Times; Fox News; KXAN; Scripps stations"
+   },
+   {
+    "title": "Palo Alto Networks to buy Applied Compute for about $4.5 billion in stock",
+    "what": "Palo Alto Networks' Securities and Exchange Commission (SEC) filing describes an all-stock deal valued at $4.5 billion, expected to close in its fiscal third quarter of 2027 pending regulatory clearance. Applied Compute builds tools that help companies train, serve and improve their own proprietary models, and had raised $350 million at a $3.25 billion valuation weeks earlier.",
+    "why": "Security platforms are buying model-customisation capability, betting that enterprises will want custom models tuned on their own data rather than only general models. It also shows how fast AI infrastructure startups can be absorbed by incumbents, a supplier risk for their customers.",
+    "take": "Use it to discuss when owning a custom model is a real moat versus an expensive distraction.",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001327567/000132756726000030/ex992pressrelease_november.htm",
+    "source": "Palo Alto Networks SEC filing; AI Weekly (citing The Wall Street Journal)"
+   },
+   {
+    "title": "Update: California releases next steps on mandatory AI safety standards and oversight",
+    "what": "Governor Gavin Newsom's office released next steps on mandatory AI safety standards and oversight on 18 November and urged Congress and the White House to adopt California's framework or treat it as a minimum standard. The office says SB 813, signed in 2026, made California the first state to set up a framework for certifying independent organisations that assess AI systems for safety and risk.",
+    "why": "Certified third-party assessors would turn safety evaluation into a compliance step with its own timelines and costs. Teams shipping frontier-model features to Californian users should watch what evidence assessors will require. (Governor's office release; details not independently confirmed.)",
+    "take": "Regulation is moving from principles to audits; know who in your company would own an external assessment.",
+    "url": "https://www.gov.ca.gov/2026/11/18/governor-newsoms-nation-leading-ai-safety-framework-is-getting-even-stronger-as-california-releases-next-steps-on-mandatory-safety-standards-and-oversight/",
+    "source": "Office of the Governor of California"
+   }
+  ],
+  "modelsPricing": [
+   {
+    "text": "Gemini 4 Carbon's introductory application programming interface (API) rate of $2/$10 per million input/output tokens runs until 30 November; the standard $4/$20 rate applies from 1 December, which is when Gemini 4 Neon ($3/$15, cached input $0.15) becomes 25% cheaper than Carbon. (Reported by third-party pricing sites.)",
+    "url": "https://www.datastudios.org/post/google-gemini-4-neon-launch-api-pricing-3-input-15-output"
+   }
+  ],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Coopetition in the AI stack: when partners are also rivals",
+    "body": "Coopetition means cooperating and competing with the same company at once. In AI it is everywhere: cloud providers invest in model labs whose models compete with their own, and chip makers fund their customers. Fortune reports Google and Nvidia agreed to buy $26 billion of Anthropic stock at its IPO price, the same day Google launched Gemini 4 Neon against Anthropic's mid-tier model.\n\nFor a PM, coopetition shapes dependency decisions. A supplier that also competes with you may favour its own products on pricing, features or access. Map each critical supplier's incentives, keep a tested second option for your most important flows, and avoid building your differentiation on a capability your supplier could ship itself."
+   },
+   {
+    "title": "Shared token budgets: how reasoning tokens use up the context window",
+    "body": "In many reasoning models, the context window is one budget shared by your input, the model's hidden thinking tokens and its visible answer. Gemini 4 Neon's roughly 1 million token window is reported to work this way. A long prompt plus heavy reasoning leaves less room for output.\n\nFor a PM, this affects feature design and cost. A document-analysis feature that feeds in huge files at a high reasoning setting may truncate answers or fail. Set limits on input size per reasoning level, track how often responses hit the limit, and remember that thinking tokens are usually billed as output tokens."
+   },
+   {
+    "title": "Continuous batching and serving efficiency",
+    "body": "Continuous batching is a serving technique where an inference server adds new requests to a running batch as others finish, instead of waiting for a whole batch to complete. Open-source serving engines such as vLLM and SGLang, which Sarvam says its Token Factory builds on, use it to keep graphics processing units (GPUs) busy.\n\nFor a PM, serving efficiency is why two providers can sell the same open-weight model at very different prices and speeds. When you self-host or choose a host, ask about throughput under load and time to first token at peak, not just list price. Better utilisation lowers cost per request, which shapes your margins."
+   },
+   {
+    "title": "Same model, different host: why quality and speed vary across providers",
+    "body": "Open-weight models are served by many providers, and the 'same' model can behave differently from one host to another. Differences come from quantisation, serving settings, context limits, tool-calling support and hardware.\n\nFor a PM, never assume a model's published benchmark applies to every host. Before choosing a provider, run your own evaluation set on that provider's endpoint and compare accuracy, latency and failure rates. Pin the provider and configuration in your contract or code, and re-test when the host changes its stack."
+   },
+   {
+    "title": "OpenAI-compatible application programming interfaces (APIs) as a switching layer",
+    "body": "Many providers, including Sarvam's Token Factory, now offer endpoints that accept the same request format as OpenAI's API. That means an app can often switch providers by changing a base address and a model name rather than rewriting its integration.\n\nFor a PM, this lowers technical switching costs and strengthens your negotiating position, but it does not make models interchangeable. Prompts, tool-calling behaviour and output formats still differ. Keep a thin abstraction layer, store prompts per model, and treat a provider switch as a product change that needs evaluation, not a configuration tweak."
+   },
+   {
+    "title": "Agent experience: designing products and content for AI agents as users",
+    "body": "Agent experience means designing your product's interfaces, data and content so that AI agents, not just people, can use them reliably. Knotch's Ace for Agents, which serves structured web content to verified AI agents, is one example of companies building for this new kind of visitor.\n\nFor a PM, agents are becoming a user segment with their own needs: clear structured data, stable application programming interfaces, machine-readable policies and authentication. Decide which agent actions you want to allow, measure agent traffic separately from human traffic, and consider whether agent visits create value or just cost."
+   },
+   {
+    "title": "Retry, timeout and fallback budgets for model calls",
+    "body": "Every production call to a large language model can be slow, fail or hit a rate limit. A retry, timeout and fallback budget defines how long to wait, how many times to retry, and which backup model or response to use when the main model fails.\n\nFor a PM, these settings are product decisions, not just engineering ones. Too many retries add latency and cost; too few create visible errors. Agree on a maximum wait time users will accept, a fallback experience (a cheaper model, a cached answer or a clear error) and track how often fallbacks fire."
+   },
+   {
+    "title": "Uplift assessment: measuring risk beyond public information",
+    "body": "Uplift assessment asks how much an AI system meaningfully helps someone cause harm compared with what they could already do using search engines, books or public sources. The GAO report noted that much of the attack information it obtained was already public, which is exactly the question uplift studies try to answer.\n\nFor a PM, uplift framing helps you prioritise safety work. Not every harmful-sounding output is equally dangerous; the biggest risks are where the model adds expertise, speed or synthesis that would be hard to get otherwise. Work with safety teams to define high-uplift categories and focus guardrails and testing there."
+   },
+   {
+    "title": "Task decomposition attacks: splitting a harmful request into harmless-looking steps",
+    "body": "A task decomposition attack breaks a harmful goal into many small requests that each look innocent, then combines the answers. Single-message filters often miss it because no one message is clearly harmful.\n\nFor a PM, this means safety checks need conversation-level and account-level context, not just message-level classification. Trade-offs include privacy (looking across sessions), cost and false positives for legitimate users. Include multi-step misuse scenarios in your red-team plan and measure how many turns an attacker needs before safeguards trigger."
+   },
+   {
+    "title": "Refusal consistency across product surfaces",
+    "body": "Refusal consistency means a model's safety behaviour is the same whether it is used through a consumer app, the application programming interface, an agent with tools or a partner integration. In practice, different system prompts, tools and settings can make one surface far easier to misuse than another.\n\nFor a PM who owns several surfaces, run the same safety test set on each one and compare results. Gaps often appear in newer surfaces such as agents and plugins. Treat any surface that is much weaker than the others as a launch blocker, and document which safeguards live in the model versus the product layer."
+   },
+   {
+    "title": "Attack success rate and harmful-completion rate as safety metrics",
+    "body": "Attack success rate is the share of adversarial attempts that get a model to produce disallowed output; harmful-completion rate is the share of all responses in a sample that are harmful. Together with over-refusal rates, they give a quantitative view of safety.\n\nFor a PM, these metrics turn safety from a yes-or-no claim into something you can track across releases. Report them by harm category and attack technique, set thresholds for launch, and pair them with helpfulness metrics so that a safer model does not quietly become a less useful one."
+   },
+   {
+    "title": "Price elasticity testing for AI plans",
+    "body": "Price elasticity measures how demand changes when price changes. For AI products, elasticity tests compare conversion, usage and retention at different price points or plan limits, usually through careful experiments or staged rollouts.\n\nFor a PM, this matters as model costs keep shifting: Gemini 4 Carbon's price doubles after its introductory period, while new models undercut older ones. Before passing cost changes to users, test how sensitive each segment is. Watch for long-term effects, since heavy users may churn after a price rise even if short-term conversion holds."
+   },
+   {
+    "title": "Pre-registration of experiment hypotheses",
+    "body": "Pre-registration means writing down your hypothesis, primary metric, sample size and decision rule before an experiment starts. It prevents teams from searching through many metrics after the fact and claiming whichever one moved.\n\nFor AI features, where outputs vary and many metrics can be measured, pre-registration keeps decisions honest. A PM should agree the success metric and guardrail metrics with stakeholders up front, record them in the experiment brief, and treat other findings as hypotheses for the next test rather than proof."
+   },
+   {
+    "title": "Role-based AI workflows: designing for a job, not a feature",
+    "body": "Role-based AI workflows package prompts, connectors and steps around a specific job, such as sales, support or recruiting, rather than offering a general chat box. OpenAI's Sales plugin for ChatGPT Work, with pre-built workflows for sales tasks, follows this pattern.\n\nFor a PM, starting from a role makes value easier to prove: you can measure time saved on known tasks and integrate with the tools that role already uses. The trade-off is breadth versus depth. Interview users in the role, map their weekly workflow, and pick the few high-frequency tasks where AI clearly helps."
+   },
+   {
+    "title": "Mixed-initiative interaction: deciding who leads, the user or the AI",
+    "body": "Mixed-initiative interaction is a design approach where both the user and the AI can take the lead, for example the AI suggesting a next step and the user accepting, editing or ignoring it. The balance can shift depending on the task and the user's confidence.\n\nFor a PM, the key decision is when the AI should act on its own and when it should ask. Too much initiative feels intrusive or risky; too little feels like a passive tool. Define initiative levels per task, make it easy to take control back, and track acceptance and override rates for AI-initiated actions."
+   },
+   {
+    "title": "Assumption mapping for AI features",
+    "body": "Assumption mapping lists the beliefs a feature depends on, then ranks them by importance and how much evidence you have. For AI features, key assumptions include that the model can do the task well enough, that users will trust it, that costs fit the business model and that data is available.\n\nFor a PM, this focuses discovery on the riskiest unknowns first. Test model feasibility with a quick evaluation, desirability with a prototype or Wizard-of-Oz test, and viability with a cost estimate per task. Revisit the map when a new model, like today's Gemini 4 Neon, changes feasibility or cost."
+   },
+   {
+    "title": "Inference platforms and model aggregators as a business layer",
+    "body": "Inference platforms host many models, often open-weight ones, behind one application programming interface and charge per token. Sarvam's Token Factory, which offers its own model alongside models from DeepSeek, Kimi, GLM and Gemma, is an Indian example.\n\nFor a PM, aggregators make it easy to compare and switch models, but they add a supplier between you and the model maker. Weigh convenience, data residency and price against reliability and support. Their business depends on serving efficiency and volume, so ask about uptime commitments and how quickly they add or retire models."
+   },
+   {
+    "title": "Owning a custom model: when enterprises should train their own",
+    "body": "A custom model is one an organisation post-trains on its own data and tasks, then serves itself or through a partner. Palo Alto Networks' planned purchase of Applied Compute, which builds tools to train, serve and improve proprietary models, is a bet that more enterprises will want this.\n\nFor a PM, custom models can improve quality on narrow tasks, cut cost per request and create a data advantage, but they bring training costs, evaluation work and the risk of falling behind the next general model. Start with prompting and retrieval, and move to a custom model only when evaluations show a lasting gap."
+   },
+   {
+    "title": "Rupee pricing and purchasing-power pricing for Indian AI products",
+    "body": "Purchasing-power pricing sets prices according to what customers in each market can afford, rather than converting a dollar price. Sarvam's Token Factory bills in rupees, and global AI apps increasingly offer lower Indian prices.\n\nFor a PM targeting India, local-currency pricing reduces payment friction and currency risk for customers, but inference costs are often in dollars, which squeezes margins. Model unit economics per Indian user, consider smaller plans or usage packs, and use cheaper models or caching to keep gross margin healthy at Indian price points."
+   },
+   {
+    "title": "Human data supply chains: consent and fair work in AI training data",
+    "body": "AI models, especially for robotics and voice, rely on people who record, label and check data. Companies such as Humyn Labs collect real-world data across India and other regions. This human data supply chain raises questions about consent, pay, working conditions and how contributors' personal data is handled.\n\nFor a PM, data sourcing is a reputational and legal risk. Under India's Digital Personal Data Protection Act, contributors' personal data needs a lawful basis and clear notice. Ask vendors how they obtain consent, pay and protect workers, and include data provenance in your vendor due diligence."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Coopetition in the AI stack: when partners are also rivals",
+   "body": "Coopetition means cooperating and competing with the same company at once. In AI it is everywhere: cloud providers invest in model labs whose models compete with their own, and chip makers fund their customers. Fortune reports Google and Nvidia agreed to buy $26 billion of Anthropic stock at its IPO price, the same day Google launched Gemini 4 Neon against Anthropic's mid-tier model.\n\nFor a PM, coopetition shapes dependency decisions. A supplier that also competes with you may favour its own products on pricing, features or access. Map each critical supplier's incentives, keep a tested second option for your most important flows, and avoid building your differentiation on a capability your supplier could ship itself."
+  },
+  "india": [
+   {
+    "text": "Sarvam AI launched Token Factory, a generally available inference service for open-weight models running on graphics processing units (GPUs) in India, billed in rupees and offered through an OpenAI-compatible application programming interface (API). Launch models include Sarvam 105B plus models from GLM, DeepSeek, Kimi and Gemma; Sarvam says prompts stay in India.",
+    "url": "https://www.sarvam.ai/blogs/sarvam-token-factory/"
+   },
+   {
+    "text": "Soket AI, one of the IndiaAI Mission's indigenous model builders, raised $4 million from Bajaj Finserv to expand its AI model work (single source; Inc42 headline).",
+    "url": "https://inc42.com/"
+   },
+   {
+    "text": "Physical AI data startup Humyn Labs raised a $47 million Series A, including $26 million in equity led by Accel (single source; Business Standard).",
+    "url": "https://www.business-standard.com/companies/news/ai-startup-humyn-labs-raises-47-million-in-series-a-funding-round-126111800765_1.html"
+   }
+  ],
+  "question": {
+   "q": "You are the PM for an AI customer-support product built on Claude. Anthropic is now a public company, and Google, one of its investors, has just launched a cheaper mid-tier model, Gemini 4 Neon. Your CEO asks: should we change our model strategy?",
+   "framing": "Start from supplier risk and economics: list your critical flows, current quality and cost per resolved ticket, and how each supplier's incentives (public-market pressure, competing products, investor ties) could affect price, access and roadmap.",
+   "tradeoff": "Staying single-vendor keeps quality stable and engineering simple but concentrates risk; adding a second vendor improves resilience and negotiating power but adds evaluation, prompt maintenance and possible quality differences.",
+   "metric": "Run Neon on your own evaluation set for the top three ticket types, route a small share of low-risk traffic if it matches quality, and keep a tested fallback. Track resolution rate, cost per resolved ticket, escalation rate and latency, and review supplier risk each quarter."
+  },
+  "alsoNotable": [
+   {
+    "text": "OpenAI's Sales plugin for ChatGPT Work runs pre-built workflows for sales tasks, alongside Salesforce and HubSpot plugins; one newsletter says it launched on 18 November with 30+ partner plugins (single source on date and count).",
+    "url": "https://openai.com/business/plugins/sales/"
+   },
+   {
+    "text": "The Neuron reports that GPT-6.2 Astra is OpenAI's first externally released model to reach its High threshold for AI self-improvement (single source).",
+    "url": "https://www.theneuron.ai/digest/everything-that-happened-in-ai-today-wednesday-november-18-2026/"
+   },
+   {
+    "text": "The US Conference of Catholic Bishops launched an AI task force chaired by Bishop Oscar Cantú, pushing for child protection and support for workers displaced by automation.",
+    "url": "https://washingtontimes.com/news/2026/nov/18/us-catholic-bishops-new-ai-task-force-urges-regulation-worker"
+   },
+   {
+    "text": "Knotch launched Ace for Agents on 17 November, serving structured web content to verified AI agents (single source).",
+    "url": "https://aiagentsdirectory.com/news/ai-agents-news-brief-november-18-2026"
+   },
+   {
+    "text": "Germany called for more innovation-friendly AI regulation in Europe, according to The Neuron's daily digest (single source).",
+    "url": "https://www.theneuron.ai/digest/everything-that-happened-in-ai-today-wednesday-november-18-2026/"
+   }
+  ],
+  "pmToolkit": [
+   {
+    "name": "Sprig",
+    "category": "Customer research",
+    "what": "Sprig is an in-product survey and user research platform with AI analysis.",
+    "does": "It lets a PM ask targeted questions inside the product and uses AI to summarise results across surveys, session replays, heatmaps and feedback.",
+    "examples": [
+     "Trigger a two-question survey after users try a new AI feature to measure perceived quality",
+     "Run a pricing survey using Van Westendorp questions before changing plan limits",
+     "Ask AI to summarise why users abandon onboarding across replays and survey answers"
+    ],
+    "url": "https://sprig.com",
+    "pricing": "Pricing not public; third-party listings report a limited free tier (may change)"
+   },
+   {
+    "name": "ChatPRD",
+    "category": "Specs and docs",
+    "what": "ChatPRD is an AI assistant built specifically for writing and reviewing product requirement documents (PRDs).",
+    "does": "It drafts PRDs from rough ideas, critiques existing specs as a reviewer would, and helps turn them into user stories.",
+    "examples": [
+     "Turn interview notes into a first-draft PRD for an AI feature",
+     "Ask it to review your spec for missing edge cases and success metrics",
+     "Generate user stories and acceptance criteria from a finished PRD"
+    ],
+    "url": "https://www.chatprd.ai",
+    "pricing": "Free plan; Pro and Teams paid with 14-day trial (may change)"
+   },
+   {
+    "name": "v0",
+    "category": "Prototyping",
+    "what": "v0 is Vercel's AI app builder that turns text prompts into working web interfaces and apps.",
+    "does": "It lets a PM generate clickable React-based prototypes from a description or screenshot and deploy them to share with users.",
+    "examples": [
+     "Build a clickable prototype of a new dashboard to test with five users",
+     "Recreate a competitor flow from a screenshot to discuss improvements",
+     "Generate three layout options for an AI chat sidebar before a design review"
+    ],
+    "url": "https://v0.app",
+    "pricing": "Free tier with limited credits; Plus about $30 per user per month (may change)"
+   },
+   {
+    "name": "Visily",
+    "category": "Design and wireframing",
+    "what": "Visily is an AI-powered wireframing and user interface design tool for non-designers.",
+    "does": "It converts screenshots, sketches or text prompts into editable wireframes and mock-ups that a PM can share with designers.",
+    "examples": [
+     "Turn a whiteboard sketch photo into a clean wireframe for a spec",
+     "Convert a competitor screenshot into an editable mock-up to annotate",
+     "Generate a first wireframe from a text description before a design kickoff"
+    ],
+    "url": "https://www.visily.ai",
+    "pricing": "Free Starter plan; Pro from about $11 per editor per month (may change)"
+   },
+   {
+    "name": "Amplitude",
+    "category": "Analytics and experimentation",
+    "what": "Amplitude is a product analytics platform with built-in AI agents, experimentation and session replay.",
+    "does": "It tracks how users move through a product, and its AI agents help a PM ask questions in plain language, spot changes and run experiments.",
+    "examples": [
+     "Ask an AI agent why weekly active users of a feature dropped last week",
+     "Build a funnel from first prompt to saved result for an AI feature",
+     "Set up a web experiment comparing two onboarding flows"
+    ],
+    "url": "https://amplitude.com",
+    "pricing": "Free plan with up to 2 million events per month; paid plans above (may change)"
+   },
+   {
+    "name": "Enterpret",
+    "category": "Feedback and roadmapping",
+    "what": "Enterpret is an AI customer-feedback platform that unifies feedback from many sources.",
+    "does": "It automatically tags feedback from support tickets, reviews, calls and surveys into a product-specific taxonomy and lets a PM query it in plain English.",
+    "examples": [
+     "Find the top complaints about a new release across support tickets and app reviews",
+     "Ask which feature requests come from the highest-revenue accounts",
+     "Set an alert for sudden spikes in negative sentiment about pricing"
+    ],
+    "url": "https://www.enterpret.com",
+    "pricing": "Custom pricing on request (may change)"
+   },
+   {
+    "name": "Otter.ai",
+    "category": "Meetings and notes",
+    "what": "Otter.ai is an AI meeting assistant that records, transcribes and summarises conversations.",
+    "does": "It produces live transcripts, summaries and action items from meetings and lets a PM ask questions across past conversations.",
+    "examples": [
+     "Transcribe customer interviews so you can quote users accurately in a spec",
+     "Get action items automatically after a sprint planning meeting",
+     "Search past calls for every mention of a competitor"
+    ],
+    "url": "https://otter.ai",
+    "pricing": "Free Basic plan with 300 minutes a month; Pro from about $8.33 per user per month billed annually (may change)"
+   },
+   {
+    "name": "Lyssna",
+    "category": "Usability testing",
+    "what": "Lyssna (formerly UsabilityHub) is a remote user research platform for quick usability tests and surveys.",
+    "does": "It lets a PM run first-click, five-second, preference and prototype tests with their own users or a paid research panel.",
+    "examples": [
+     "Run a five-second test on a new landing page headline",
+     "Compare two onboarding screen designs with a preference test",
+     "Test whether users can find a new AI feature with a first-click test"
+    ],
+    "url": "https://www.lyssna.com",
+    "pricing": "Free plan with limited studies and responses; Growth about $199 per month (may change)"
+   },
+   {
+    "name": "Gamma",
+    "category": "Presentations",
+    "what": "Gamma is an AI tool that creates presentations, documents and simple web pages from a prompt or outline.",
+    "does": "It turns notes or a written outline into a designed deck that a PM can edit, share as a link or export.",
+    "examples": [
+     "Turn a product strategy memo into a 10-slide review deck",
+     "Create a one-page launch summary to share with sales teams",
+     "Draft a case-interview presentation from your notes in minutes"
+    ],
+    "url": "https://gamma.app",
+    "pricing": "Free plan with one-time credits; Plus about $8 per month billed annually (may change)"
+   },
+   {
+    "name": "Perplexity",
+    "category": "General AI assistant",
+    "what": "Perplexity is an AI answer engine that searches the web and cites its sources.",
+    "does": "It helps a PM research markets, competitors and technical topics quickly, with links to check every claim.",
+    "examples": [
+     "Research how competitors price AI add-ons, with sources",
+     "Get a cited summary of a new regulation affecting your product",
+     "Prepare for an interview by researching a company's recent launches"
+    ],
+    "url": "https://www.perplexity.ai",
+    "pricing": "Free plan; Pro $20 per month (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 16,
+   "failed": [
+    "TLDR AI",
+    "TLDR Product Management",
+    "Hacker News",
+    "Techmeme",
+    "Product Hunt",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing",
+    "Most direct article fetches (network policy); only anthropic.com could be read directly"
+   ],
+   "singleSource": [
+    "California safety next steps (governor's office release)",
+    "Soket AI funding",
+    "Humyn Labs Series A",
+    "OpenAI Sales plugin launch date and count",
+    "GPT-6.2 Astra self-improvement threshold",
+    "Knotch Ace for Agents",
+    "Germany AI regulation call"
+   ]
+  },
+  "createdAt": "2026-11-19T01:50:00Z"
+ },
+ {
   "date": "2026-11-18",
   "subject": "AI PM Digest – Wed, 18 Nov 2026 – OpenAI ships GPT-6.2 Astra, Sol",
   "headline": "OpenAI releases GPT-6.2 Astra and Sol",
