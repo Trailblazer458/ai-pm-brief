@@ -1,5 +1,314 @@
 [
  {
+  "date": "2026-11-20",
+  "subject": "AI PM Digest – Fri, 20 Nov 2026 – Anthropic stock jumps 17% on debut",
+  "headline": "Anthropic stock jumps 17% on its first trading day",
+  "quiet": false,
+  "topStories": [
+   {
+    "title": "Update: Anthropic shares close their first trading day up about 17% at $97.17, valuing the company at roughly $1.76–1.8 trillion fully diluted",
+    "what": "Anthropic began trading on Nasdaq under the ticker ANT on 19 November, opening at $111.50 against its $83 initial public offering (IPO) price and closing at $97.17. CNN and Bloomberg put its fully diluted value near $1.76–1.77 trillion; outlets using the basic share count put it nearer $1.27–1.28 trillion.",
+    "why": "A model supplier that is now a listed company has to show quarterly growth and margins, which can shape its pricing, rate limits and enterprise focus, so product teams building on Claude should watch its filings as closely as its model launches. The gap between valuation figures is also a reminder to check how any headline number is calculated.",
+    "take": "Public listing turns a model vendor's pricing and roadmap into investor commitments; read the prospectus for signals on margins and customer concentration.",
+    "url": "https://www.cnn.com/2026/11/19/business/live-news/anthropic-ipo",
+    "source": "CNN; Bloomberg; CNBC"
+   },
+   {
+    "title": "Google makes Gemini Tasks free in six countries including India, letting Gemini call businesses and make purchases with user approval",
+    "what": "Google made Gemini's Tasks feature (previously called Gemini Spark) free in the United States (US), India, Canada, Australia, Japan and South Korea; it can call businesses, schedule appointments and make purchases within a user-set budget, and asks for human approval before sharing payment or private account details. Separately, Google is extending how long it keeps temporary chats and chats with history turned off from 72 hours to about two months.",
+    "why": "Making an action-taking agent free in India puts agentic commerce in front of a very large, mobile-first market and raises the bar for any Indian consumer app planning similar features. The retention change shows how agent features pull privacy and data-retention decisions into product scope.",
+    "take": "Budgets plus approval checkpoints are becoming the default trust pattern for consumer agents; know how you would measure whether they reduce bad purchases without killing completion.",
+    "url": "https://www.androidauthority.com/google-gemini-tasks-update-3736266/",
+    "source": "Android Authority; Digital Trends; TechCrunch; The AI Insider"
+   },
+   {
+    "title": "Big United States (US) banks shift liability for third-party AI agent losses onto customers, even when the agent is hacked",
+    "what": "Citi updated its online terms so that customers who give an outside AI agent access to their account are responsible for what the agent does, including losses if the agent or its login details are hacked; Citi's own AI agents are exempt. PNC and Citizens have taken similar positions, according to reports building on TechCrunch.",
+    "why": "Liability rules decide whether agents can safely act in finance at all: if users carry the risk, adoption of third-party agents for banking will be slower, and agent builders will need scoped, revocable access rather than shared passwords. Courts have not yet tested how far banks can push this shift.",
+    "take": "Who bears the loss when an agent errs is a product decision, not just a legal one; it shapes onboarding, permissions and the business model.",
+    "url": "https://decrypt.co/383677/citi-customers-responsible-ai-banking-agents-rogue-hack",
+    "source": "Decrypt; TechCrunch (via reports); Crypto Briefing"
+   },
+   {
+    "title": "At the Asia-Pacific Economic Cooperation (APEC) summit, Trump rejects 'globalist regulation' of AI while Xi calls for keeping AI under human control",
+    "what": "US President Donald Trump said the United States opposes 'globalist regulation' of artificial intelligence in any form, while Chinese President Xi Jinping, per Xinhua, said the two countries should strengthen coordination on AI safety risks and keep AI under human control. Canadian Prime Minister Mark Carney said on 18 November that the lack of global AI governance is an 'enormous risk'.",
+    "why": "With no global rulebook coming, product teams shipping across markets will keep facing a patchwork of national and state rules, so compliance design (data, disclosures, safety testing) has to be modular by region.",
+    "take": "Expect fragmentation, not harmonisation: design AI compliance features as per-market configuration.",
+    "url": "https://www.euronews.com/2026/11/19/us-president-trump-rejects-global-ai-regulation-as-chinas-xi-calls-for-cooperation-on-safe",
+    "source": "Euronews; ABC News; The Standard; Canadian Affairs"
+   }
+  ],
+  "modelsPricing": [],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Reading an initial public offering (IPO) prospectus for product signals",
+    "body": "A prospectus (in the US, the S-1 filing) is the document a company publishes before listing. Beyond the finances, it describes revenue by segment, top customers, risks, costs of serving the product and planned uses of the money raised.\n\nFor a PM, a supplier's or competitor's prospectus is free strategy research. Revenue mix tells you whether they will prioritise consumers or enterprises; gross margin hints at future price moves; risk factors list the dependencies they fear. With Anthropic now public, its filings become a regular input to any model-vendor decision."
+   },
+   {
+    "title": "Encoder-only models for classification and ranking",
+    "body": "Not every AI task needs a chatbot. Encoder-only models (the BERT family is the classic example) read text and turn it into a representation used to classify, tag or rank, rather than generating new text. They are small, fast and cheap to run.\n\nFor a PM, this is a cost and latency lever. Spam detection, intent routing, sentiment tagging and search re-ranking often work well with a small encoder model at a fraction of the cost of calling a large generative model. Ask engineering which steps truly need generation before budgeting for it."
+   },
+   {
+    "title": "Cascaded versus native speech-to-speech voice pipelines",
+    "body": "A cascaded voice pipeline chains three steps: speech recognition turns audio into text, a language model writes a reply, and text-to-speech speaks it. A native speech-to-speech model takes audio in and produces audio out directly.\n\nFor a PM, the trade-off is control versus naturalness. Cascades are easier to debug, log and filter because there is text at every step, and you can swap components. Native models usually respond faster and keep tone and emotion, but are harder to audit. Voice agents like Gemini Tasks' business calls make this choice very visible."
+   },
+   {
+    "title": "Custom inference chips and what they mean for AI cost",
+    "body": "Most AI runs on general-purpose graphics processing units (GPUs). Large companies increasingly design custom chips, application-specific integrated circuits (ASICs) such as Google's tensor processing units (TPUs), tuned for running models cheaply at scale.\n\nFor a PM, chip strategy shows up as price and capacity. Providers with their own chips may cut prices or offer more generous limits, while others depend on supplier allocation. When comparing vendors, ask about capacity guarantees and how their hardware roadmap affects cost per request over the next year or two."
+   },
+   {
+    "title": "Delegated budgets and spending caps for agents",
+    "body": "When an agent can spend money, the user sets a mandate: a maximum amount, allowed merchants or categories, and when the agent must stop and ask. Gemini Tasks, for example, lets users set a budget and asks for approval before sharing payment details.\n\nFor a PM, the cap design decides both safety and usefulness. Too tight and the agent keeps interrupting; too loose and one error is costly. Decide defaults per category, log every spend against the mandate, and track how often users raise or lower caps as a sign of trust."
+   },
+   {
+    "title": "Tool-selection accuracy when an agent has many tools",
+    "body": "As agents gain dozens or hundreds of tools, a key failure is choosing the wrong one or none at all. Teams address this with clear tool descriptions, grouping tools, or a search step that loads only the relevant tools for each request.\n\nFor a PM, every new integration has a hidden cost: it can confuse the agent about existing ones. Measure tool-selection accuracy on a fixed test set whenever tools are added, and treat it as a release gate. Fewer, sharper tools often beat a large catalogue."
+   },
+   {
+    "title": "Evaluating agents on live websites versus sandboxed copies",
+    "body": "Agents that browse or shop can be tested on the real web or on sandboxed replicas of sites. Live tests reflect reality but change daily and can trigger real actions; sandboxes are repeatable and safe but drift from the real sites over time.\n\nFor a PM, use both. Sandboxes give stable regression scores for every release; a small, carefully supervised live test catches what the copies miss, such as new layouts or pop-ups. Report the two numbers separately so a sandbox score is not mistaken for real-world success."
+   },
+   {
+    "title": "Credential sharing versus scoped delegated access for third-party agents",
+    "body": "Some agents work by logging in with the user's password, often called screen-scraping. The safer alternative is delegated access: the user grants a limited, revocable token (for example through OAuth) that allows only specific actions.\n\nFor a PM, this choice drives risk and partnerships. Banks such as Citi now say customers carry the losses when third-party agents use their access, which makes password sharing a hard sell. Building on scoped permissions, with clear revocation, is slower to set up but makes your agent acceptable to cautious partners and users."
+   },
+   {
+    "title": "Shadow AI: unsanctioned AI tool use inside companies",
+    "body": "Shadow AI is employees using AI tools their company has not approved, such as pasting work documents into a personal chatbot. It happens because the tools are useful and easy to reach.\n\nFor a PM building enterprise AI, shadow AI is both a risk and a demand signal. Customers worry about data leakage, so admin controls, data handling promises and audit logs help you sell. Inside your own company, it tells you which jobs people want help with; give them a sanctioned tool rather than just a ban."
+   },
+   {
+    "title": "Liability allocation for agent mistakes",
+    "body": "When an AI agent makes a costly error, someone has to bear the loss: the user, the agent provider, or the platform where it acted. Terms of service, insurance and regulation decide this, and practice is still being formed.\n\nFor a PM, liability shapes the product. If your company carries the risk, you will need tighter permissions, confirmations and monitoring, and possibly pricing that funds a guarantee. If users carry it, adoption may slow. The bank terms in today's news show incumbents pushing risk outward; a clear guarantee can become a competitive advantage."
+   },
+   {
+    "title": "Stock-based compensation and talent retention in AI companies",
+    "body": "Many technology companies pay part of salaries in shares or options. In AI, where top researchers are scarce, equity is a main tool for hiring and keeping people, and listing on a stock market lets employees sell shares after a lock-up period.\n\nFor a PM, this matters for competitive analysis and team planning. A rival's listing can trigger departures once shares become sellable, slowing its roadmap or seeding new startups. Equity costs also appear in a company's financial statements, affecting how margins and profitability are judged."
+   },
+   {
+    "title": "Acceptance rate and edit distance for AI suggestions",
+    "body": "Acceptance rate is the share of AI suggestions users keep. Edit distance measures how much users change a suggestion before keeping it. Together they show whether output is actually useful, not just generated.\n\nFor a PM, these are strong leading indicators for drafting, coding and agent-proposal features. A high acceptance rate with heavy edits means the AI saves some effort but not much; a falling acceptance rate after a model change is an early warning. Track both by segment and task type rather than as one blended number."
+   },
+   {
+    "title": "Support contact rate as an AI quality signal",
+    "body": "Support contact rate is how often users reach a human support channel per active user or per task. For AI features, rises in contacts, complaints or refunds often reveal failures that automated evaluations miss.\n\nFor a PM, it is a practical guardrail metric. Tag tickets that mention the AI feature, review samples weekly, and compare contact rates between users who used the feature and those who did not. A launch that lifts engagement but also lifts support contacts may be shifting cost rather than creating value."
+   },
+   {
+    "title": "Measuring time saved: self-reported versus observed",
+    "body": "Many AI products promise to save time. Teams measure this either by asking users how much time they saved or by observing task duration with and without the feature. The two methods often disagree.\n\nFor a PM, self-reports are cheap but tend to be optimistic; observed timings are more credible but harder to collect. Use controlled comparisons where possible, measure full task completion rather than just the AI step, and present time-saved claims to buyers with the method stated, especially when pricing against the cost of human work."
+   },
+   {
+    "title": "Warm hand-off from AI to a human",
+    "body": "A warm hand-off is when an AI assistant passes a conversation to a person along with the context: what the user asked, what was tried and why it is escalating. A cold hand-off makes the user start again.\n\nFor a PM, hand-off design decides whether automation feels helpful or like a wall. Define clear triggers (low confidence, frustration, high-stakes requests), pass a short summary to the human, and tell the user what happens next. Measure repeat-explanation complaints and resolution after hand-off, not just how many conversations the AI contained."
+   },
+   {
+    "title": "Inline suggestions (ghost text) as an interaction pattern",
+    "body": "Ghost text is a faded suggestion shown inside the place the user is already typing, accepted with one key or ignored by continuing to type. Code editors popularised it; it now appears in email and documents.\n\nFor a PM, the pattern trades interruption for subtlety. It works when suggestions are short, fast and usually right; it annoys when slow or noisy. Key decisions are when to show suggestions, how long they can be, and latency limits. Measure acceptance rate and whether users turn the feature off."
+   },
+   {
+    "title": "Turn-taking and barge-in in voice agents",
+    "body": "In conversation, people interrupt, pause and talk over each other. Voice agents need turn-taking logic: detecting when the user has finished speaking, and handling barge-in, when the user interrupts while the agent is speaking.\n\nFor a PM, these details decide whether a voice agent feels natural or robotic. Cut-off users, long silences and talking over people drive hang-ups. Test with real accents, background noise and code-mixed speech common in India, and track interruption handling and drop-off rates alongside task success."
+   },
+   {
+    "title": "Chat data retention periods as a product decision",
+    "body": "Retention is how long a product keeps conversations and related data. Choices range from deleting immediately to keeping for months for abuse prevention, debugging or training, with different rules for 'temporary' chats.\n\nFor a PM, retention is a trust promise. Longer retention helps safety reviews and quality work but raises privacy risk and duties under laws such as India's Digital Personal Data Protection Act. Google's move to keep temporary Gemini chats for about two months instead of 72 hours shows these settings change and must be communicated clearly."
+   },
+   {
+    "title": "International AI governance and why global rules are hard",
+    "body": "International AI governance covers efforts by forums such as the United Nations, the G7 and Asia-Pacific Economic Cooperation (APEC) to agree shared rules or safety practices. Countries disagree on goals, from safety to competitiveness, so agreements tend to be voluntary.\n\nFor a PM, the practical effect is that global harmonisation is unlikely soon. Trump's rejection of 'globalist regulation' at APEC suggests companies should expect national rules to diverge. Build compliance features region by region, keep track of where data and models run, and watch voluntary commitments that can still shape customer expectations."
+   },
+   {
+    "title": "Model origin and jurisdiction risk when choosing a provider",
+    "body": "Every model has an origin: who trained it, where they are based and which laws apply to them. Hosting a model locally changes where data flows, but not who built the model or how its training choices were made.\n\nFor a PM, origin matters for regulated customers, government buyers and public perception. Sarvam's decision to host Chinese models on an Indian platform shows the debate: local hosting can address data location concerns, while some buyers will still ask about the model's origin. Document the origin, licence and hosting location of each model you use."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Reading an initial public offering (IPO) prospectus for product signals",
+   "body": "A prospectus (in the US, the S-1 filing) is the document a company publishes before listing. Beyond the finances, it describes revenue by segment, top customers, risks, costs of serving the product and planned uses of the money raised.\n\nFor a PM, a supplier's or competitor's prospectus is free strategy research. Revenue mix tells you whether they will prioritise consumers or enterprises; gross margin hints at future price moves; risk factors list the dependencies they fear. With Anthropic now public, its filings become a regular input to any model-vendor decision."
+  },
+  "india": [
+   {
+    "text": "Update: Sarvam AI, which builds Indian-language models, faces scrutiny for offering access to six Chinese AI models on its new Token Factory inference platform; MediaNama's founder Nikhil Pahwa said he sees no issue with Sarvam hosting Chinese models. The debate is about what 'sovereign AI' should mean for India.",
+    "url": "https://www.medianama.com/2026/11/223-sarvam-token-factory-india-sovereign-ai/"
+   },
+   {
+    "text": "Inc42 reports that Disseqt AI, an AI governance and testing startup, raised $8 million (about ₹75 crore) in a round led by Gresham House Ventures. (single source; other listings show different earlier rounds)",
+    "url": "https://inc42.com/buzz/ai-startup-disseqt-ai-raises-8-mn-to-scale-international-operations/"
+   }
+  ],
+  "question": {
+   "q": "Anthropic, a key model supplier for your product, has just listed on the stock market. As the PM of an Indian business-software product built on its models, what would you change in your roadmap and vendor strategy over the next two quarters?",
+   "framing": "Clarify how dependent the product is (share of features, cost of goods, customer promises) and what the listing changes: quarterly pressure on the supplier's revenue and margins, and much more public information through filings.",
+   "tradeoff": "Deeper commitment to one vendor (better pricing, early access) versus multi-vendor flexibility (an abstraction layer, evaluation suites for alternatives, possibly an Indian or open-weight fallback) that costs engineering time and may lower quality.",
+   "metric": "Recommend keeping the primary vendor while building a tested fallback for the top workflows; track cost per successful task, share of traffic that can switch within a day, and quality gap on a golden dataset, reviewed after each supplier earnings report."
+  },
+  "alsoNotable": [
+   {
+    "text": "CNBC reports some Democratic lawmakers see Anthropic's initial public offering (IPO) as a reason to push for AI regulation; Senator Mark Warner pointed to legislation that would require public companies to disclose AI-related financing. (single source)",
+    "url": "https://www.cnbc.com/2026/11/19/anthropic-ipo-ant-live-updates.html"
+   },
+   {
+    "text": "Benzinga: valuation expert Aswath Damodaran urges investors to 'pay attention to the footnotes' of Anthropic's initial public offering (IPO); the coverage notes that restricted stock, options and convertibles can make headline market capitalisation misleading.",
+    "url": "https://www.benzinga.com/markets/ipos/26/11/63462749/damodaran-on-anthropics-ipo-pay-attention-to-the-footnotes"
+   }
+  ],
+  "pmToolkit": [
+   {
+    "name": "Replit",
+    "category": "Building and coding",
+    "url": "https://replit.com",
+    "what": "A browser-based development platform with an AI agent that plans, builds and deploys apps from plain-language requests.",
+    "does": "Lets a PM turn an idea into a working, shareable prototype without a local setup; its new Missions feature coordinates several agents toward a goal within budget and approval rules.",
+    "examples": [
+     "Build a clickable prototype of a new onboarding flow to test with five users.",
+     "Create an internal dashboard that pulls a CSV of support tickets and charts themes.",
+     "Spin up a quick landing page to test demand for a feature idea."
+    ],
+    "pricing": "Free tier; Core reported at about $20–25/month (may change)"
+   },
+   {
+    "name": "Claude",
+    "category": "General AI assistant",
+    "url": "https://claude.ai",
+    "what": "Anthropic's AI assistant for writing, analysis, coding and research, available on web, desktop and mobile.",
+    "does": "Helps a PM draft and critique documents, analyse long files and data, and build small interactive artifacts such as calculators or mock-ups.",
+    "examples": [
+     "Upload a product requirements document and ask for gaps, risks and open questions.",
+     "Paste 50 customer interview notes and ask for themes with supporting quotes.",
+     "Draft three versions of a launch announcement for different audiences."
+    ],
+    "pricing": "Free tier; Pro about $20/month (may change)"
+   },
+   {
+    "name": "Julius AI",
+    "category": "Data and SQL",
+    "url": "https://julius.ai",
+    "what": "An AI data analyst that answers questions about spreadsheets and databases in plain language and produces charts.",
+    "does": "Lets a PM explore product data, run quick analyses and generate visuals without writing code or waiting for an analyst.",
+    "examples": [
+     "Upload a feature-usage export and ask which segments adopted fastest.",
+     "Ask for a retention chart by signup month from a CSV.",
+     "Check whether a metric change after a launch is larger than normal week-to-week variation."
+    ],
+    "pricing": "Free plan with limited messages; paid plans reported from about $20/month (may change)"
+   },
+   {
+    "name": "Zapier Agents",
+    "category": "Automation and agents",
+    "url": "https://zapier.com/agents",
+    "what": "Zapier's AI agents that carry out tasks across thousands of connected apps, using live data and web browsing.",
+    "does": "Lets a PM automate repetitive work such as triaging feedback, compiling updates or enriching records, without engineering help.",
+    "examples": [
+     "Have an agent read new feedback form entries, tag them by theme and post a weekly summary to Slack.",
+     "Compile a Monday digest of competitor changelog updates.",
+     "Route new bug reports to the right team based on their content."
+    ],
+    "pricing": "Free plan available; Pro reported at $50/month (may change)"
+   },
+   {
+    "name": "Canny",
+    "category": "Feedback and roadmapping",
+    "url": "https://canny.io",
+    "what": "A customer feedback and public roadmap tool with an AI feature (Autopilot) that captures feedback from support chats and calls.",
+    "does": "Helps a PM collect, deduplicate and prioritise feature requests, and close the loop with customers when work ships.",
+    "examples": [
+     "Automatically pull feature requests out of support conversations into one board.",
+     "Rank requests by number of customers and revenue to prepare a prioritisation review.",
+     "Notify everyone who voted for a feature when it launches."
+    ],
+    "pricing": "Free plan; paid plans reported from about $79/month (may change)"
+   },
+   {
+    "name": "tl;dv",
+    "category": "Meetings and notes",
+    "url": "https://tldv.io",
+    "what": "An AI meeting recorder and note-taker for Google Meet, Zoom and Microsoft Teams.",
+    "does": "Records calls, writes summaries and lets a PM search across meetings for what customers or stakeholders said.",
+    "examples": [
+     "Record customer discovery calls and pull every mention of a pain point.",
+     "Share a timestamped clip of a customer request with engineering.",
+     "Get automatic notes and action items after sprint reviews."
+    ],
+    "pricing": "Free plan with limited AI notes; Pro reported at about $18/month billed annually (may change)"
+   },
+   {
+    "name": "Uizard",
+    "category": "Design",
+    "url": "https://uizard.io",
+    "what": "An AI design tool that turns text prompts, sketches or screenshots into editable app and web mock-ups.",
+    "does": "Lets a PM produce wireframes and simple prototypes quickly to communicate ideas before involving designers.",
+    "examples": [
+     "Generate a first-draft mobile flow from a one-paragraph feature description.",
+     "Turn a whiteboard sketch photo into an editable wireframe.",
+     "Create two layout variants to discuss in a design review."
+    ],
+    "pricing": "Free plan; Pro reported at about $12/month billed annually (may change)"
+   },
+   {
+    "name": "Beautiful.ai",
+    "category": "Presentations",
+    "url": "https://www.beautiful.ai",
+    "what": "An AI presentation tool that builds and auto-formats slides from prompts and keeps layouts consistent as you edit.",
+    "does": "Helps a PM create clean roadmap reviews, strategy decks and launch updates quickly.",
+    "examples": [
+     "Turn a written strategy memo into a first-draft deck.",
+     "Build a quarterly roadmap review with consistent slide layouts.",
+     "Create a one-page launch summary deck for leadership."
+    ],
+    "pricing": "14-day free trial; Pro reported at about $12–14.50/month billed annually (may change)"
+   },
+   {
+    "name": "Outset",
+    "category": "Customer research",
+    "url": "https://outset.ai",
+    "what": "An AI-moderated research platform that runs and analyses user interviews at scale.",
+    "does": "Lets a PM run many interviews in parallel with an AI moderator that asks follow-up questions, then synthesises the results.",
+    "examples": [
+     "Run 50 interviews overnight to test reactions to a new pricing page.",
+     "Probe why trial users did not convert, with follow-up questions on their answers.",
+     "Compare how two customer segments describe the same problem."
+    ],
+    "pricing": "Custom quote; no published price (may change)"
+   },
+   {
+    "name": "Mixpanel",
+    "category": "Analytics and experimentation",
+    "url": "https://mixpanel.com",
+    "what": "A product analytics platform with AI features that let you ask questions about user behaviour in plain language.",
+    "does": "Helps a PM build funnels, retention and cohort reports and investigate metric changes without writing queries.",
+    "examples": [
+     "Ask in plain language where users drop off in onboarding.",
+     "Compare retention of users who used an AI feature against those who did not.",
+     "Investigate which segments drove a sudden change in weekly active users."
+    ],
+    "pricing": "Free plan; Growth starts at $0 for the first 1 million events, then usage-based (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 16,
+   "failed": [
+    "TLDR AI",
+    "TLDR Product Management",
+    "Hacker News (hnrss)",
+    "Techmeme",
+    "Product Hunt",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing",
+    "All direct article fetches (network policy); stories were written from web search results only"
+   ],
+   "singleSource": [
+    "Disseqt AI funding (Inc42)",
+    "Senator Warner AI-financing disclosure push (CNBC)"
+   ]
+  },
+  "createdAt": "2026-11-20T01:45:00Z"
+ },
+ {
   "date": "2026-11-19",
   "subject": "AI PM Digest – Thu, 19 Nov 2026 – Anthropic prices record IPO at $83",
   "headline": "Anthropic prices its IPO at $83 a share, above range",
