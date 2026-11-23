@@ -1,5 +1,277 @@
 [
  {
+  "date": "2026-11-23",
+  "subject": "AI PM Digest – Mon, 23 Nov 2026 – OpenAI scientist proposes AI development limits",
+  "headline": "OpenAI scientist proposes AI development limits",
+  "quiet": true,
+  "topStories": [
+   {
+    "title": "OpenAI chief scientist Jakub Pachocki publishes internal pretraining perplexity scores and proposes industry-wide limits on AI development",
+    "what": "In a 22 November post titled 'Perplexity and Intelligence', Pachocki argues that perplexity (how well a model predicts held-out text) can act as a shared measure of pretraining progress, shares OpenAI's internal scores for past models, and proposes common limits, based on perplexity and other measurements, that labs would agree not to cross until monitoring of AI behaviour improves. Coverage cites a possible window around 0.68 to 0.7 log-perplexity, but this is a proposal, not an agreed pause, and OpenAI measures it on its own internal data, so scores are hard to compare across labs.",
+    "why": "If labs ever coordinate on capability ceilings, the pace of model upgrades a product team plans around could slow or become less predictable. It also shows that a single pretraining number does not tell you whether a model is better for your users.",
+    "take": "Be ready to explain why a lab-level metric like perplexity is not a product metric, and how you would test a new model on your own tasks.",
+    "url": "https://techcrunch.com/2026/11/22/openais-chief-scientist-has-thoughts-on-how-to-limit-ai-development/",
+    "source": "TechCrunch; also Yahoo News, AI Weekly"
+   },
+   {
+    "title": "Update: OpenRouter drops three inference providers and removes 125 endpoints from zero data retention eligibility after the Dragos canary research",
+    "what": "On 22 November, model router OpenRouter said it had off-boarded three inference providers, removed 125 endpoints from zero data retention (ZDR) eligibility and notified potentially affected customers, following Dragos research that seeded about two million canary prompts. OpenRouter says its own systems were not breached, the providers were not named, the 125 figure includes precautionary removals, and it plans to move from provider self-attestation to technical validation and continuous auditing.",
+    "why": "Privacy promises in an AI product depend on every company that serves your requests; routers and marketplaces add choice and low prices but also extra hops you must verify. Expect enterprise buyers to ask how you validate, not just contract for, zero retention.",
+    "take": "Self-attestation is not verification: describe how you would audit a vendor's data handling, and what you would tell customers if a supplier failed.",
+    "url": "https://www.unite.ai/openrouter-cuts-three-providers-after-ai-prompt-exposure-findings/",
+    "source": "Unite.AI; also DEV Community, Brandefense, Runtime Wire"
+   }
+  ],
+  "modelsPricing": [],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Perplexity: what a model's prediction score does and does not tell you",
+    "body": "Perplexity measures how surprised a language model is by text it has not seen; lower means it predicts the next token better. It is a standard way for labs to track pretraining progress, because it is cheap to compute and improves smoothly as models scale.\n\nFor a PM, the lesson is that perplexity is a lab metric, not a product metric. It depends on the test data, so scores from different labs are not comparable, and it misses gains from post-training, tools and prompting. Today OpenAI's chief scientist proposed limits tied to perplexity; when choosing a model, still judge it on your own task evaluations, cost and latency."
+   },
+   {
+    "title": "Chain-of-thought monitoring",
+    "body": "Reasoning models write out intermediate steps before answering. Chain-of-thought monitoring means reading or automatically scanning those steps to catch unsafe plans, reward hacking or misunderstanding before the final action happens.\n\nFor a PM building agents, this is a cheap early-warning layer, but a fragile one: the written reasoning may not reflect what the model actually computed, and training models to hide bad reasoning can make it less useful. Decide where reasoning traces are logged, who reviews them, and what triggers a block. Today's OpenAI proposal ties future limits to better ways of monitoring model behaviour, which is exactly this kind of tool."
+   },
+   {
+    "title": "Race dynamics and collective action among AI labs",
+    "body": "A race dynamic happens when each competitor would prefer everyone to slow down, but no one wants to slow down alone and lose ground. Coordinated commitments, standards or regulation are the usual ways to escape this collective-action problem.\n\nFor a PM, race dynamics explain why model releases arrive in rapid, competitive bursts and why safety commitments are often framed as industry-wide. When a lab proposes shared limits, as OpenAI's chief scientist did today, ask what it would change for your roadmap: release cadence, access to the newest models, and how your suppliers might differentiate if raw capability stops being the main race."
+   },
+   {
+    "title": "Benchmark saturation and headroom",
+    "body": "A benchmark is saturated when top models score near its ceiling, so it can no longer separate a good model from a great one. Labs then move to harder tests, and older scores stop being informative.\n\nFor a PM, saturation means a headline score may say little about your use case. Check whether the benchmark still has headroom, whether it resembles your tasks, and whether gains are within noise. Keep your own evaluation set with hard, realistic cases so it does not saturate the moment a new model ships, and refresh it as your product and users change."
+   },
+   {
+    "title": "Transparency as a competitive strategy",
+    "body": "Companies sometimes publish internal data, such as safety test results, metrics or incident reports, to shape industry norms, build trust and influence regulation. Transparency can also set the terms of a debate in the publisher's favour.\n\nFor a PM, publishing information is a strategic choice with trade-offs: it can win trust with enterprise buyers and regulators, but it reveals capability and invites scrutiny. OpenAI publishing its internal perplexity scores today is an example. When deciding what your product discloses (evaluation results, data practices, model changes), weigh the trust gained against competitive and legal exposure."
+   },
+   {
+    "title": "Provider pinning and endpoint allow-lists in model routers",
+    "body": "Model routers send each request to one of many providers hosting the same model, choosing on price, speed or availability. Provider pinning restricts traffic to named providers, and an allow-list defines which endpoints are permitted at all.\n\nFor a PM, routing flexibility trades against control. Letting a router pick freely can lower cost and improve uptime, but your data may reach hosts you have not vetted. Pin sensitive traffic to providers you have audited, keep a reviewed allow-list, and re-check it when the router changes its roster, as OpenRouter did today by removing 125 endpoints from zero data retention eligibility."
+   },
+   {
+    "title": "Confidential computing for AI inference",
+    "body": "Confidential computing runs workloads inside hardware-protected trusted execution environments, so even the cloud host's operators cannot read the data being processed. For AI, it can keep prompts and outputs encrypted while a model processes them, and some setups provide attestation: cryptographic proof of what code is running.\n\nFor a PM handling sensitive data, it offers technical evidence instead of contractual promises. The trade-offs are cost, performance overhead, limited hardware and provider support. Today's OpenRouter move from self-attestation towards technical validation shows why buyers increasingly ask for proof, not just policies."
+   },
+   {
+    "title": "Supplier vetting as a marketplace's core product",
+    "body": "In a two-sided marketplace, buyers trust the platform rather than each individual seller, so the platform's real product includes how well it vets, monitors and removes suppliers. One bad supplier can damage trust in the whole marketplace.\n\nFor a PM running or relying on a marketplace, invest in onboarding checks, continuous monitoring and clear removal rules, and communicate incidents quickly. Today OpenRouter off-boarded three providers and notified customers. If you buy through a marketplace, ask how it verifies suppliers and what happens when one fails."
+   },
+   {
+    "title": "Data Processor chains under India's Digital Personal Data Protection (DPDP) Act",
+    "body": "Under India's Digital Personal Data Protection Act, the Data Fiduciary (the company that decides why and how personal data is processed) stays responsible for data handled by its Data Processors, the vendors that process data on its behalf, and should engage them under a valid contract.\n\nFor a PM, every model host, router and analytics tool that touches user prompts is part of this chain. Map which processors see personal data, make sure contracts cover retention and security, and plan how you would respond if one is compromised. Today's OpenRouter action shows how long and opaque these chains can be."
+   },
+   {
+    "title": "Overtraining small models for cheaper inference",
+    "body": "Scaling research suggests a compute-optimal ratio of model size to training data. Many labs now deliberately train small models on far more data than that ratio suggests, which costs more to train but produces a compact model that is cheaper and faster to run.\n\nFor a PM, this explains why small models keep getting better and why price per token keeps falling. Training is a one-time cost for the lab; inference is a recurring cost for you. When a high-volume feature needs low latency, test whether a heavily trained small model meets your quality bar before defaulting to a frontier model."
+   },
+   {
+    "title": "Looped (recurrent-depth) transformers",
+    "body": "A looped transformer reuses some of its layers several times for each token, rather than passing data once through a stack of distinct layers. This lets a model do more computation without storing more parameters, so it can be smaller in memory.\n\nFor a PM, the appeal is capable models that fit on laptops or phones, which matters for privacy, offline use and cost. The trade-off is that repeated layers add computation per token, which can affect speed. Treat new architectures as options to test against your latency and quality requirements, not as automatic upgrades."
+   },
+   {
+    "title": "Hierarchical (map-reduce) summarisation",
+    "body": "When a document or collection is too long for one prompt, map-reduce summarisation splits it into chunks, summarises each chunk, then summarises the summaries. Variants keep key quotes or structured notes at each level to reduce information loss.\n\nFor a PM, this pattern powers features like meeting digests, research synthesis and contract review. Trade-offs: more model calls mean more cost and latency, and details can be lost or distorted at each level. Evaluate whether the final summary keeps the facts users care about, and consider long-context models as an alternative when the input fits."
+   },
+   {
+    "title": "Lightweight personalisation through user profiles in prompts",
+    "body": "Instead of fine-tuning a model per user, many products store a short profile (preferences, role, past choices) and insert it into the prompt. The model then tailors responses without any change to its weights.\n\nFor a PM, this is a cheap, reversible way to personalise, but it raises design questions: what goes into the profile, how users view and edit it, how it uses up context and cost, and how stale facts are corrected. Measure whether personalisation improves task success, and give users clear controls, since unexplained personalisation can feel intrusive."
+   },
+   {
+    "title": "Service-level objectives and error budgets for AI features",
+    "body": "A service-level objective (SLO) is a target such as '99% of answers return within 3 seconds'. An error budget is the allowed shortfall; when it is used up, teams pause risky launches and focus on reliability.\n\nFor AI features, a PM can set SLOs not only for uptime and latency but also for quality signals, such as the share of answers passing automated checks. Error budgets give a shared rule for when to ship model changes and when to stabilise, which reduces arguments between speed and reliability."
+   },
+   {
+    "title": "Bayesian A/B testing for AI features",
+    "body": "Traditional A/B testing asks whether a result is statistically significant. Bayesian A/B testing instead estimates the probability that one variant is better and by how much, updating as data arrives.\n\nFor a PM, Bayesian results are easier to explain ('there is a 92% chance the new prompt improves task success') and support decisions based on expected gain and risk. The trade-offs are the need to choose prior assumptions and the temptation to stop tests early. Agree in advance on the decision rule, such as the probability and minimum effect needed to ship."
+   },
+   {
+    "title": "Opportunity solution trees for AI discovery",
+    "body": "An opportunity solution tree, a discovery technique popularised by Teresa Torres, links a desired outcome to the customer opportunities (needs and pain points) that could drive it, then to candidate solutions and the experiments that test them.\n\nFor AI products, it keeps teams from starting with 'where can we add a model?' and instead anchors work in customer problems. AI then becomes one possible solution among several, compared with simpler options. It also makes it easier to explain in interviews why you chose an AI approach and how you would test it."
+   },
+   {
+    "title": "One-way and two-way door decisions in AI product work",
+    "body": "Amazon popularised the idea that some decisions are two-way doors, easy to reverse, while others are one-way doors, costly or impossible to undo. Two-way doors should be made quickly; one-way doors deserve careful analysis.\n\nFor AI PMs, swapping a prompt or model behind a feature flag is usually a two-way door, while training on customer data, publishing a public API or making privacy commitments are closer to one-way doors. Classifying decisions this way helps a team move fast on experiments while slowing down on choices that lock in cost, data or trust."
+   },
+   {
+    "title": "Customer advisory boards for AI products",
+    "body": "A customer advisory board is a small group of representative customers who meet regularly with the product team to review plans, test early features and give candid feedback.\n\nFor AI products, these boards are especially useful because buyers often have strong views on data use, accuracy thresholds and governance that usage data alone does not reveal. A PM can use them to validate trust and security requirements, prioritise enterprise controls and preview changes such as new model providers before rollout. Keep the group diverse so that a few large customers do not dominate the roadmap."
+   },
+   {
+    "title": "Purpose limitation under India's Digital Personal Data Protection (DPDP) Act",
+    "body": "India's Digital Personal Data Protection Act allows personal data to be processed for the lawful purpose the person consented to, or for certain specified legitimate uses. Using data collected for one purpose for an unrelated new purpose generally needs a fresh legal basis.\n\nFor a PM, this matters when teams want to reuse support chats, uploads or usage logs to train or improve AI models. Decide up front which purposes your notice and consent cover, design consent flows that are specific and clear, and check with legal before repurposing data for model training."
+   },
+   {
+    "title": "AI literacy duty under the European Union (EU) AI Act",
+    "body": "Article 4 of the European Union AI Act requires providers and deployers of AI systems to take measures to ensure a sufficient level of AI literacy among staff and others operating AI on their behalf. It has applied since February 2025.\n\nFor a PM selling into Europe, this creates demand for training materials, in-product guidance and clear documentation of what the system can and cannot do. Enterprise customers may ask vendors to support their literacy obligations, so good onboarding, help content and admin guidance become part of the product and the sales case."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Perplexity: what a model's prediction score does and does not tell you",
+   "body": "Perplexity measures how surprised a language model is by text it has not seen; lower means it predicts the next token better. It is a standard way for labs to track pretraining progress, because it is cheap to compute and improves smoothly as models scale.\n\nFor a PM, the lesson is that perplexity is a lab metric, not a product metric. It depends on the test data, so scores from different labs are not comparable, and it misses gains from post-training, tools and prompting. Today OpenAI's chief scientist proposed limits tied to perplexity; when choosing a model, still judge it on your own task evaluations, cost and latency."
+  },
+  "india": [],
+  "question": {
+   "q": "OpenAI's chief scientist says perplexity, a pretraining metric, is a good measure of model progress. You are the PM for an AI writing assistant, and your model provider announces a new model with much lower perplexity. How do you decide whether to switch?",
+   "framing": "Separate lab metrics from product outcomes: lower perplexity means better next-token prediction on the lab's data, not necessarily better results for your users, tasks, languages or cost limits.",
+   "tradeoff": "Switching early may bring quality gains and competitive parity, but risks regressions, higher cost or latency, changed tone, and evaluation drift; waiting is safer but may leave users on a weaker experience.",
+   "metric": "Run the new model on your golden evaluation set and a shadow test, then a staged A/B test. Decide on task success rate, user edit rate, cost per successful task and latency, with guardrails on safety and complaint rate."
+  },
+  "alsoNotable": [],
+  "pmToolkit": [
+   {
+    "name": "Marvin (HeyMarvin)",
+    "category": "Customer research",
+    "what": "An AI-assisted research repository that stores, transcribes and analyses customer interviews and feedback.",
+    "does": "Helps a PM tag interview themes, search past research and pull quotes and insights without re-watching recordings.",
+    "examples": [
+     "Upload ten churn interviews and ask for the top recurring reasons with supporting quotes",
+     "Search all past research for mentions of a competitor before a strategy review",
+     "Build a highlight reel of user pain points to share with engineering"
+    ],
+    "url": "https://heymarvin.com",
+    "pricing": "Quote-based; third-party listings report a limited free tier (may change)"
+   },
+   {
+    "name": "UX Pilot",
+    "category": "Prototyping",
+    "what": "An AI design tool that generates wireframes and high-fidelity user interface screens from text prompts.",
+    "does": "Lets a PM turn a feature idea into clickable-looking screens quickly to discuss with designers and users.",
+    "examples": [
+     "Generate wireframes for an onboarding flow from a one-paragraph spec",
+     "Create empty, loading and error states for an AI chat feature",
+     "Produce two layout options for a settings page to test with users"
+    ],
+    "url": "https://uxpilot.ai",
+    "pricing": "Free plan with limited credits; paid plans from about $12 a month billed annually per Capterra (may change)"
+   },
+   {
+    "name": "Relume",
+    "category": "Design and sitemaps",
+    "what": "An AI website planning tool that generates sitemaps and wireframes from a short description.",
+    "does": "Helps a PM structure a marketing site or product pages and get un-styled wireframes with draft copy in minutes.",
+    "examples": [
+     "Draft a sitemap for a new product's landing pages before a launch",
+     "Turn the sitemap into wireframes to align marketing and design",
+     "Compare two information architectures for a help centre"
+    ],
+    "url": "https://www.relume.io",
+    "pricing": "Free plan limited to one project; paid plans vary, check the pricing page (may change)"
+   },
+   {
+    "name": "Heap",
+    "category": "Product analytics",
+    "what": "A product analytics platform, now part of Contentsquare, that captures user interactions automatically and includes an AI assistant called CoPilot.",
+    "does": "Lets a PM ask analytics questions in plain language, build funnels and find where users drop off without pre-planning every event.",
+    "examples": [
+     "Ask CoPilot why trial-to-paid conversion dropped last week",
+     "Build a funnel for a new AI feature retroactively from auto-captured clicks",
+     "Compare retention for users who used a feature versus those who did not"
+    ],
+    "url": "https://www.heap.io",
+    "pricing": "Free tier with session limits reported; paid plans by quote (may change)"
+   },
+   {
+    "name": "Unwrap",
+    "category": "Feedback analysis",
+    "what": "An AI customer feedback analytics platform that pulls in reviews, surveys, support tickets and social comments.",
+    "does": "Groups feedback into themes, tracks trends and sends alerts so a PM can see emerging issues and prioritise fixes.",
+    "examples": [
+     "Spot a spike in complaints after a release and find the root cause",
+     "Rank the most requested features across app reviews and support tickets",
+     "Send a weekly feedback summary to leadership with trend changes"
+    ],
+    "url": "https://unwrap.ai",
+    "pricing": ""
+   },
+   {
+    "name": "Zoom AI Companion",
+    "category": "Meetings and notes",
+    "what": "Zoom's built-in AI assistant that summarises meetings, answers questions about them and drafts follow-ups.",
+    "does": "Gives a PM automatic meeting summaries and action items so they can focus on the conversation instead of note-taking.",
+    "examples": [
+     "Get a summary and action items after a sprint review",
+     "Ask what was decided about a launch date in a meeting you joined late",
+     "Share a recap of a customer call with the account team"
+    ],
+    "url": "https://www.zoom.com/en/ai-assistant/",
+    "pricing": "Included with eligible paid Zoom Workplace plans; Zoom lists paid plans from $14.16 per user a month billed annually (may change)"
+   },
+   {
+    "name": "Userbrain",
+    "category": "Usability testing",
+    "what": "A remote usability testing service that recruits testers, records their sessions and offers AI-generated insights.",
+    "does": "Lets a PM run quick unmoderated tests and get summaries of usability issues and themes across sessions.",
+    "examples": [
+     "Test whether new users can find an AI feature without guidance",
+     "Compare task completion on two onboarding designs",
+     "Collect recorded reactions to a pricing page before launch"
+    ],
+    "url": "https://www.userbrain.com",
+    "pricing": "Third-party listings report plans from about $49 a month; testers billed separately (may change)"
+   },
+   {
+    "name": "Kiro",
+    "category": "Building and coding",
+    "what": "An AI coding environment from Amazon Web Services built around spec-driven development, where requirements and design documents guide the AI agent.",
+    "does": "Helps a PM turn written requirements into a working prototype, and see how specs translate into tasks and code.",
+    "examples": [
+     "Write a short spec and have Kiro generate requirements, a design and a task list",
+     "Build a small internal tool prototype to test an idea",
+     "Review how a feature spec breaks down into engineering tasks"
+    ],
+    "url": "https://kiro.dev",
+    "pricing": "Free tier with limited requests; paid tiers Pro, Pro+ and Power listed in its FAQ (may change)"
+   },
+   {
+    "name": "Canva",
+    "category": "Presentations",
+    "what": "An online design platform whose AI features, including Magic Design, can generate slide decks from a prompt.",
+    "does": "Helps a PM quickly produce polished decks, one-pagers and visuals for stakeholder updates and launches.",
+    "examples": [
+     "Generate a first draft of a quarterly review deck from an outline",
+     "Create a launch one-pager with consistent brand styling",
+     "Turn a feature explainer into a short visual for sales teams"
+    ],
+    "url": "https://www.canva.com",
+    "pricing": "Free plan with limited AI uses; Pro listed at US$144 a year for one person (may change)"
+   },
+   {
+    "name": "Microsoft 365 Copilot",
+    "category": "General AI assistant",
+    "what": "Microsoft's AI assistant built into Word, Excel, PowerPoint, Outlook and Teams, grounded in an organisation's work data.",
+    "does": "Helps a PM draft documents, summarise email threads and meetings, and analyse spreadsheets within the tools they already use.",
+    "examples": [
+     "Draft a product requirements document in Word from meeting notes",
+     "Summarise a long stakeholder email thread before a decision meeting",
+     "Turn a Word spec into a first-draft PowerPoint presentation"
+    ],
+    "url": "https://www.microsoft.com/microsoft-365-copilot/pricing",
+    "pricing": "Enterprise listed at $30 per user a month paid yearly; Business add-on cheaper (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 16,
+   "failed": [
+    "TLDR AI",
+    "TLDR Product Management",
+    "Hacker News (hnrss)",
+    "Techmeme",
+    "Product Hunt",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing",
+    "Direct article fetches (network policy blocked these hosts); items written from web search results"
+   ],
+   "singleSource": []
+  },
+  "createdAt": "2026-11-23T01:40:00Z"
+ },
+ {
   "date": "2026-11-22",
   "subject": "AI PM Digest – Sun, 22 Nov 2026 – Canary prompts expose three AI providers",
   "headline": "Canary prompts expose breaches at three AI providers",
