@@ -1,5 +1,316 @@
 [
  {
+  "date": "2026-11-24",
+  "subject": "AI PM Digest – Tue, 24 Nov 2026 – Anthropic's Claude Ship automates code approvals",
+  "headline": "Anthropic launches Claude Ship to review, fix and approve code",
+  "quiet": false,
+  "topStories": [
+   {
+    "title": "Anthropic launches Claude Ship, a pull request (PR) suite in which AI agents review, fix and, under team-written rules, approve code changes",
+    "what": "Anthropic launched Claude Ship for Claude Team and Enterprise plans on GitHub repositories. It bundles Code Review (generally available) with two public-beta agents: PR Steward, which keeps a pull request passing by responding to failing checks, merge conflicts and review comments but cannot approve or merge, and Claude Approvals, which applies an approval policy the team writes as a file in the repository.",
+    "why": "This moves coding agents from suggesting to signing off, so the product questions become who sets the policy, how much autonomy to grant, and how to prove the agent is safe; Anthropic itself suggests running approvals in observe-only mode first and warns the tools may miss bugs or security issues. Admin spend limits for Code Review and PR Steward also show how agent features are being priced and governed.",
+    "take": "A strong example of staged autonomy: separate the agent that fixes from the agent that approves, encode the rules as policy, and start in observe-only mode.",
+    "url": "https://claude.com/resources/articles/introducing-claude-ship",
+    "source": "Anthropic; also TechCrunch, 9to5Mac, Reuters via Investing.com, Claude Code docs"
+   },
+   {
+    "title": "Update: Nvidia reinstates Jensen Huang as chief executive officer (CEO) eleven days after his resignation; shares jump about 31%",
+    "what": "Nvidia's board unanimously reinstated Jensen Huang as president, CEO and board member with immediate effect on 23 November, citing input from 'senior levels of the United States government'; President Trump said he had spoken to the board. A committee of independent directors will investigate reports of a foreign intelligence effort targeting Huang, and Nvidia stock rose about 31% as the Nasdaq had its best day since April 2025.",
+    "why": "The company that supplies most AI compute just went through an abrupt leadership exit and return driven partly by government pressure, which is a live example of supplier governance and political risk in the AI stack. For product teams, it is a reminder that compute pricing, availability and roadmaps can be shaken by events far outside engineering.",
+    "take": "Use it to show you understand supplier concentration: what would you do if your main model or chip vendor had a governance crisis?",
+    "url": "https://www.cnn.com/2026/11/23/tech/nvidia-reinstates-jensen-huang-ceo",
+    "source": "Nvidia filing (SEC 8-K), CNN, CBS News, NBC News, Yahoo Finance"
+   },
+   {
+    "title": "Amazon agrees to buy Decart's AI optimisation technology and hire its founders to speed up its Trainium chips; the price is reported at about $7.5 billion",
+    "what": "Amazon signed a deal to acquire the technology behind the Decart Optimization Stack and bring over Decart's co-founders and engineers into Annapurna Labs, its chip unit, to make AI training and inference faster and cheaper on Trainium and Inferentia chips. Amazon did not disclose the price; Bloomberg and others report about $7.5 billion, and the deal does not include Decart's own AI models.",
+    "why": "Software that makes models run well on non-Nvidia chips is what lowers switching costs, so this is a bet that cheaper inference on Amazon's own silicon can win customers. If it works, it could change the cost per token for products built on Amazon Web Services (AWS).",
+    "take": "Hardware is only as good as its software stack: a PM should ask whether cheaper chips come with the tooling to actually move workloads.",
+    "url": "https://www.aboutamazon.com/news/company-news/amazon-decart-ai-optimization",
+    "source": "Amazon; TechCrunch, GeekWire, Yahoo Finance"
+   }
+  ],
+  "modelsPricing": [],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Policy-as-code approval rules for AI agents",
+    "body": "Policy-as-code means writing the rules for what an AI agent may do as a version-controlled file, such as 'documentation-only changes need no human sign-off; anything touching payments needs two reviewers'. The agent checks each action against the file, and changes to the rules are reviewed like any other code.\n\nFor a product manager (PM), this turns 'how much should we trust the agent?' into an explicit, auditable decision that customers control. Claude Ship's Claude Approvals works this way. Your job is designing sensible default policies, making rules readable to non-engineers, and tracking how often the policy lets the agent act versus escalates to a human."
+   },
+   {
+    "title": "Separation of duties: the agent that writes should not approve",
+    "body": "Separation of duties is an old control principle: the person who makes a change should not be the one who signs it off. Applied to AI, the agent that writes or fixes code should not also approve it, and each agent should have only the permissions its job needs.\n\nFor a PM, this shapes product architecture and trust. Claude Ship separates PR Steward, which fixes but cannot approve or merge, from Claude Approvals. When designing agent features in finance, procurement or healthcare, splitting 'doer' and 'checker' roles is often what makes an enterprise security team say yes."
+   },
+   {
+    "title": "Inference kernels and compiler optimisation",
+    "body": "A kernel is the low-level code that runs a specific maths operation, such as attention, on a chip. Compilers and optimisation stacks rewrite and fuse these operations so the same model runs faster and uses less memory on given hardware, without changing the model itself.\n\nFor a PM, this explains why the same model can cost very different amounts on different chips or providers, and why Amazon is paying heavily for Decart's optimisation technology. When choosing infrastructure, ask about the software stack, not just chip prices: better kernels can cut latency and cost per request with no change to your product."
+   },
+   {
+    "title": "Sparse attention for long inputs",
+    "body": "In standard attention, every token looks at every other token, so cost grows roughly with the square of the input length. Sparse attention lets each token look only at a selected subset, such as nearby tokens plus a few important ones, which makes very long inputs cheaper to process.\n\nFor a PM, sparse attention is one reason long-context features are becoming affordable, but it is a trade-off: a model may miss a detail far away in the document. When a feature depends on finding one fact in a huge input, such as a contract clause, test retrieval at different positions before promising 'read everything' to users."
+   },
+   {
+    "title": "Overfitting and generalisation in fine-tuned models",
+    "body": "Overfitting happens when a model learns its training examples too closely, including their quirks, and performs worse on new inputs. Generalisation is the opposite: doing well on cases it has not seen. Fine-tuning on a small, narrow dataset is a common way to overfit.\n\nFor a PM, this is why a fine-tuned model can shine in a demo built from training-like examples and then disappoint in production. Insist on a held-out test set that reflects real traffic, watch for drops on general tasks after fine-tuning, and treat a sudden jump in eval scores with suspicion until it holds on fresh data."
+   },
+   {
+    "title": "Test suites as guardrails for coding agents",
+    "body": "Automated tests and continuous integration (CI) checks run every time code changes. For coding agents, these checks act as an objective referee: the agent can try a fix, run the tests, and keep iterating until they pass, instead of relying on its own judgement.\n\nFor a PM, the quality of a customer's tests sets a ceiling on what coding agents can safely do in their codebase. Tools like PR Steward respond to failing CI checks. When scoping agent features, measure test coverage as a readiness signal, and recognise that teams with weak tests may need more human review."
+   },
+   {
+    "title": "Project instruction files for coding agents",
+    "body": "Many coding agents read a file in the repository that explains the project's conventions: how to run tests, which folders are off-limits, coding style and review expectations. This gives the agent persistent, team-specific context without repeating it in every prompt.\n\nFor a PM, these files are a lightweight way to customise agent behaviour per team and a strong onboarding lever: a good default template can dramatically improve first-run quality. Track how many active repositories have one, and treat them like product documentation, because outdated instructions quietly degrade agent output."
+   },
+   {
+    "title": "Parallel tool calls in agents",
+    "body": "Parallel tool calling lets a model request several independent actions at once, such as looking up three customer records simultaneously, instead of waiting for each to finish before starting the next.\n\nFor a PM, this mainly affects speed: an agent that takes eight sequential steps can feel slow even if each step is quick. Parallelism can cut wall-clock time, but it complicates error handling and can multiply cost if the model fans out unnecessarily. Specify which actions are safe to run together and which must be sequential, such as 'check the balance before you pay'."
+   },
+   {
+    "title": "Software supply chain risk from AI-generated code",
+    "body": "Coding assistants sometimes suggest packages or libraries that do not exist or are outdated. Attackers can register those invented package names with malicious code, so a developer who installs the suggestion is compromised. AI-written code can also pull in vulnerable dependencies.\n\nFor a PM shipping coding tools, this is a trust issue, not just a security footnote. Features like dependency checks, allow-lists of approved packages and warnings for newly created packages reduce the risk. Anthropic's own warning that Claude Ship may miss security vulnerabilities is a reminder to keep security scanning in the loop."
+   },
+   {
+    "title": "Government intervention risk in strategic AI suppliers",
+    "body": "Some AI suppliers, especially chip makers and frontier labs, are now treated by governments as strategic national assets. That means export rules, leadership decisions and partnerships can be shaped by political pressure, as with the White House role in Nvidia reinstating Jensen Huang.\n\nFor a PM, this is a risk to plan for in supplier choices and roadmaps. A supplier's pricing, availability in India or other regions, or even leadership can change for political reasons. Keep alternatives evaluated, avoid hard dependencies on a single vendor for critical features, and include geopolitical scenarios in your risk register."
+   },
+   {
+    "title": "Picks and shovels: AI infrastructure versus application businesses",
+    "body": "'Picks and shovels' describes selling tools to people in a gold rush rather than digging for gold. In AI, infrastructure businesses (chips, cloud, optimisation software) earn money whichever application wins, while application businesses compete directly for end users.\n\nFor a PM, knowing which layer you are in changes strategy. Infrastructure products compete on cost, performance and ecosystem, as with Amazon buying Decart's optimisation stack. Application products compete on workflow, distribution and user experience, and should expect underlying costs to fall over time. Interviewers often probe whether you can tell where value accrues."
+   },
+   {
+    "title": "Land-and-expand for AI developer tools",
+    "body": "Land-and-expand means winning a small first foothold inside a company, such as one team or one feature, and then growing usage across teams and into paid add-ons. Developer tools often land through a free or low-friction feature and expand once trust is earned.\n\nFor a PM, this guides packaging: start with the lowest-risk, highest-value capability, such as automated code review, and add higher-autonomy features later. Claude Ship's generally available Code Review plus beta agents follows this shape. Track expansion signals like the number of repositories enabled and the share of teams moving from observe-only to active use."
+   },
+   {
+    "title": "Delivery metrics for AI coding tools: lead time and change failure rate",
+    "body": "DevOps Research and Assessment (DORA) metrics measure software delivery: how long a change takes to reach production (lead time), how often teams deploy, how often changes cause failures (change failure rate) and how fast teams recover.\n\nFor a PM selling or adopting AI coding tools, these metrics show whether the tool improves outcomes rather than just activity. More pull requests merged is not a win if the change failure rate rises. A good success case for an AI approval feature shows shorter lead time with a stable or lower failure rate, measured before and after rollout."
+   },
+   {
+    "title": "Counterfactual baselines: measuring what would have happened anyway",
+    "body": "A counterfactual baseline estimates what would have happened without your AI feature. For example, how many bugs would human reviewers have caught on their own? Without it, you may credit the AI for outcomes that would have occurred anyway.\n\nFor a PM, this is how you make honest value claims. Approaches include comparing teams with and without the feature, running the AI in observe-only mode and checking what it flags that humans missed, or replaying past changes. Investors and enterprise buyers increasingly ask for this kind of evidence before renewing contracts."
+   },
+   {
+    "title": "Ratio metrics and the denominator problem",
+    "body": "Many AI metrics are ratios, such as 'suggestions accepted divided by suggestions shown'. The ratio can rise because the numerator improves or because the denominator shrinks, for instance if the AI simply makes fewer, safer suggestions.\n\nFor a PM, always report the numerator and denominator alongside the ratio, and choose the denominator carefully: per user, per session or per task can tell different stories. A review agent with a rising acceptance rate but far fewer comments may be less useful, not more. This is a common trap in AI dashboards and a frequent interview probe."
+   },
+   {
+    "title": "Decision receipts: explaining why an AI allowed or blocked an action",
+    "body": "A decision receipt is a short, readable explanation attached to an AI decision: which rule applied, what evidence it used and who still needs to act. For example, 'Approved under rule 3: documentation-only change; no security files touched'.\n\nFor a PM, receipts build trust, make mistakes easier to spot and speed up audits. They also reduce support tickets, because users can see why something happened. Design them to be specific and brief, link to the rule or source, and test them with users who did not write the policy."
+   },
+   {
+    "title": "Levels of autonomy: designing an autonomy dial",
+    "body": "An autonomy dial lets users choose how much an AI agent may do on its own: suggest only, act with confirmation, act and notify, or act silently within limits. Each level suits different risk and trust situations.\n\nFor a PM, offering clear levels makes adoption easier, because cautious customers can start low and move up as trust grows, as with running Claude Approvals in observe-only mode first. Define what each level means precisely, make the current level visible, and track how users move between levels, since upgrades are a strong trust signal."
+   },
+   {
+    "title": "Pilot design for enterprise AI tools",
+    "body": "An enterprise pilot is a limited trial with a few teams to prove value before a wider rollout. A good pilot has a clear hypothesis, a fixed duration, chosen success metrics, a comparison group and named owners on both sides.\n\nFor a PM, pilot design often decides whether a deal closes. Pick a team with a real pain point and decent data, avoid both the most sceptical and the most enthusiastic teams as your only sample, and agree on metrics such as time saved or error rate before starting. Many AI pilots stall because success was never defined up front."
+   },
+   {
+    "title": "Layers of AI sovereignty: models, compute, data and hosting",
+    "body": "'Sovereign AI' can mean several different things: building models domestically, owning the compute they run on, keeping data inside the country, or controlling who hosts and operates the service. A product can be sovereign on one layer and dependent on another.\n\nFor a PM in India, separating these layers clarifies debates like the one over Sarvam's Token Factory hosting Chinese models on Indian servers. When a government or enterprise customer asks for 'sovereign' AI, ask which layers they mean, since requirements on data residency, model origin and hosting lead to very different architectures and costs."
+   },
+   {
+    "title": "Word error rate for speech recognition in Indian languages",
+    "body": "Word error rate (WER) measures speech recognition quality by counting the words a system gets wrong, by substitution, deletion or insertion, as a share of the words actually spoken. Lower is better.\n\nFor a PM building voice products in India, WER needs care. Code-mixed speech, such as Hinglish, varied accents, noisy phone lines and very short replies like 'haan' can all skew results, and a single average hides weak languages. Measure WER by language, accent and channel, and pair it with task metrics, such as whether the voice agent completed the call, because a low WER does not guarantee a good outcome."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Policy-as-code approval rules for AI agents",
+   "body": "Policy-as-code means writing the rules for what an AI agent may do as a version-controlled file, such as 'documentation-only changes need no human sign-off; anything touching payments needs two reviewers'. The agent checks each action against the file, and changes to the rules are reviewed like any other code.\n\nFor a product manager (PM), this turns 'how much should we trust the agent?' into an explicit, auditable decision that customers control. Claude Ship's Claude Approvals works this way. Your job is designing sensible default policies, making rules readable to non-engineers, and tracking how often the policy lets the agent act versus escalates to a human."
+  },
+  "india": [
+   {
+    "text": "Update: Sarvam AI co-founders say Token Factory, its inference platform that also hosts six Chinese-developed models, runs on privately bought graphics processing units (GPUs) without government support; Pratyush Kumar said its subsidised compute privileges under the IndiaAI Mission expired in March 2026. Critics still question a publicly backed 'sovereign AI' champion reselling Chinese models.",
+    "url": "https://aninews.in/news/business/no-government-support-for-running-open-weight-ai-models-says-sarvams-co-founder-amid-chinese-models-row20261123184831/"
+   },
+   {
+    "text": "Bolna AI released Syl, an automatic speech recognition (ASR) model meant to help voice agents handle short replies and conversational nuance in Indian languages, according to Analytics India Magazine. (single source)",
+    "url": "https://analyticsindiamag.com/"
+   }
+  ],
+  "question": {
+   "q": "You are the product manager for an AI agent that can approve code changes under a policy the customer writes. How would you decide what the agent may approve without a human at launch, and how would you measure whether to expand its autonomy?",
+   "framing": "Clarify the users (engineering managers, security teams, developers), the risk of a bad approval and the customer's existing review process; the goal is faster delivery without more incidents.",
+   "tradeoff": "Speed versus safety: broad autonomy saves reviewer time but raises the cost of mistakes, so start with low-risk change types in observe-only mode, separate fixing from approving, and require humans for sensitive files.",
+   "metric": "Primary: lead time for low-risk changes; guardrails: change failure rate, rollbacks and security findings, plus agreement rate between the agent and human reviewers in observe-only mode. Expand autonomy per change type once agreement and failure rates hold for several weeks."
+  },
+  "alsoNotable": [
+   {
+    "text": "Data-security startup Matters.AI raised ₹115 crore in a pre-Series A round led by Tanglin Venture Partners, Business Standard reports. (single source)",
+    "url": "https://www.business-standard.com/companies/start-ups/data-security-startup-matters-ai-raises-115-crore-in-pre-series-a-round-126112301165_1.html"
+   },
+   {
+    "text": "Larsen & Toubro (L&T) won a multi-year contract to deploy Nvidia B300 GPUs at its Chennai data centre; GPU count and terms were not disclosed. (single source)",
+    "url": "https://analyticsindiamag.com/ai-news/lt-wins-large-order-to-deploy-additional-nvidia-b300-gpus-in-chennai"
+   },
+   {
+    "text": "At the Bengaluru Tech Summit, Karnataka announced AI skilling programmes with Google, Salesforce, Pega, Sarvam AI and Gnani.ai aimed at 63,200 students and professionals.",
+    "url": "https://analyticsindiamag.com/ai-features/from-sarvam-to-all-that-happened-at-the-bengaluru-tech-summit-2026"
+   },
+   {
+    "text": "Scaler co-founder Anshuman Singh launched Arcfront, a startup that turns how professionals solve problems into training data for AI models, Inc42 reports. (single source)",
+    "url": "https://inc42.com/buzz/indias-inference-test-scaler-founders-new-ai-bet-more/"
+   }
+  ],
+  "pmToolkit": [
+   {
+    "name": "Looppanel",
+    "category": "Customer research",
+    "url": "https://www.looppanel.com",
+    "what": "An AI tool for recording, transcribing and analysing user research interviews.",
+    "does": "It transcribes calls, tags notes and helps a PM pull themes and quotes across many interviews quickly, so synthesis takes hours rather than days.",
+    "examples": [
+     "Find recurring pain points across 15 onboarding interviews",
+     "Pull supporting quotes for a problem statement in a spec",
+     "Compare feedback from two customer segments before prioritising"
+    ],
+    "pricing": "Free trial; paid plans (may change)"
+   },
+   {
+    "name": "Google NotebookLM",
+    "category": "Specs and docs",
+    "url": "https://notebooklm.google",
+    "what": "Google's AI research notebook that answers questions grounded only in the sources you upload.",
+    "does": "A PM can load market reports, past specs and interview notes and get cited answers, summaries and audio overviews, which reduces the risk of made-up facts.",
+    "examples": [
+     "Upload competitor docs and ask how each handles pricing",
+     "Turn a stack of research notes into a briefing for a new teammate",
+     "Check a draft spec against past decision records for contradictions"
+    ],
+    "pricing": "Free with a Google account; NotebookLM Plus for higher limits (may change)"
+   },
+   {
+    "name": "Motiff",
+    "category": "Design",
+    "url": "https://motiff.com",
+    "what": "An AI-assisted user interface design and prototyping tool.",
+    "does": "It helps generate interface layouts, apply design systems and build prototypes, so a PM can explore screen ideas before involving a designer full-time.",
+    "examples": [
+     "Generate three layout options for a settings page",
+     "Build a clickable prototype to test a new checkout flow",
+     "Check that mock-ups follow the team's design system"
+    ],
+    "pricing": "Free starter plan available (may change)"
+   },
+   {
+    "name": "LaunchDarkly",
+    "category": "Experimentation",
+    "url": "https://launchdarkly.com",
+    "what": "A feature-flag and experimentation platform with AI Configs for managing prompts and models in production.",
+    "does": "A PM can roll features out gradually, run experiments and switch AI models or prompts for a subset of users without a new deployment.",
+    "examples": [
+     "Roll a new AI summary feature out to 5% of users",
+     "A/B test two prompts for the same feature",
+     "Kill-switch an AI feature instantly if quality drops"
+    ],
+    "pricing": "Free Developer plan, no credit card; paid plans are usage-priced (may change)"
+   },
+   {
+    "name": "Aha! Roadmaps",
+    "category": "Roadmapping",
+    "url": "https://www.aha.io/roadmaps/overview",
+    "what": "A product roadmapping and strategy tool with a built-in AI assistant.",
+    "does": "It links strategy, ideas and features, and its AI assistant drafts records, analyses ideas and helps write product documents inside the roadmap.",
+    "examples": [
+     "Draft feature descriptions from a list of customer ideas",
+     "Link quarterly goals to initiatives and show progress",
+     "Summarise a backlog of ideas into themes for planning"
+    ],
+    "pricing": "30-day free trial; AI assistant included in paid plans (may change)"
+   },
+   {
+    "name": "Tana",
+    "category": "Meetings and notes",
+    "url": "https://tana.inc",
+    "what": "An AI meeting platform with a botless meeting agent, from the makers of the Tana Outliner notes app.",
+    "does": "It captures meetings on Zoom, Teams and Google Meet without a bot joining, then turns them into searchable notes and follow-ups.",
+    "examples": [
+     "Capture decisions and action items from a sprint review",
+     "Search past customer calls for a feature request",
+     "Turn a stakeholder sync into a written update"
+    ],
+    "pricing": "Free tier available; paid plans for more (may change)"
+   },
+   {
+    "name": "Plus AI",
+    "category": "Presentations",
+    "url": "https://plusai.com",
+    "what": "An AI add-on that creates and edits slides inside Google Slides and PowerPoint.",
+    "does": "A PM can generate a first-draft deck from a prompt or document and edit it in the tool their company already uses.",
+    "examples": [
+     "Turn a product requirements document into a review deck",
+     "Restyle an old roadmap deck to brand guidelines",
+     "Draft a launch update for leadership"
+    ],
+    "pricing": "7-day free trial; paid plans from $10 per month (may change)"
+   },
+   {
+    "name": "Mistral Le Chat",
+    "category": "General assistant",
+    "url": "https://chat.mistral.ai",
+    "what": "Mistral AI's chat assistant, built by a European model maker.",
+    "does": "It handles writing, analysis, web search and document questions, and gives a PM a non-United States model to compare outputs and policies against.",
+    "examples": [
+     "Compare answers with your usual assistant on a tricky spec question",
+     "Summarise a long regulation document",
+     "Draft user-facing copy and review its tone"
+    ],
+    "pricing": "Free plan; Pro $14.99 per month (may change)"
+   },
+   {
+    "name": "Make",
+    "category": "Automation and agents",
+    "url": "https://www.make.com",
+    "what": "A visual automation platform with AI modules and AI agents.",
+    "does": "A PM can connect apps and build workflows, such as routing feedback or summarising tickets with AI, without writing code.",
+    "examples": [
+     "Send new app-store reviews to an AI summariser and post themes to Slack",
+     "Create a Jira ticket from a tagged support conversation",
+     "Compile a weekly digest of feature requests"
+    ],
+    "pricing": "Free plan with 1,000 credits per month (may change)"
+   },
+   {
+    "name": "Fabi.ai",
+    "category": "Data and SQL",
+    "url": "https://www.fabi.ai",
+    "what": "An AI data analysis tool that combines structured query language (SQL), Python and an AI assistant.",
+    "does": "It helps a PM ask questions of company data, generate queries and charts, and share reports without waiting for an analyst.",
+    "examples": [
+     "Ask which features retained users best last quarter",
+     "Build a funnel chart for a new onboarding flow",
+     "Share a weekly metrics report with stakeholders"
+    ],
+    "pricing": "Free starter plan; paid plans available (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 16,
+   "failed": [
+    "TLDR AI",
+    "TLDR Product Management",
+    "Hacker News (hnrss)",
+    "Techmeme",
+    "Product Hunt",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing",
+    "Direct article fetches (network policy blocked these hosts); items written from web search results"
+   ],
+   "singleSource": [
+    "Bolna AI Syl speech recognition model (Analytics India Magazine)",
+    "Matters.AI ₹115 crore round (Business Standard)",
+    "L&T Nvidia B300 contract (Analytics India Magazine)",
+    "Arcfront launch (Inc42)"
+   ]
+  },
+  "createdAt": "2026-11-24T01:50:00Z"
+ },
+ {
   "date": "2026-11-23",
   "subject": "AI PM Digest – Mon, 23 Nov 2026 – OpenAI scientist proposes AI development limits",
   "headline": "OpenAI scientist proposes AI development limits",
