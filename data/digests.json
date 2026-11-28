@@ -1,5 +1,284 @@
 [
  {
+  "date": "2026-11-28",
+  "subject": "AI PM Digest – Sat, 28 Nov 2026 – AI shopping traffic jumps 162%",
+  "headline": "AI-referred shopping traffic up 162% on Thanksgiving",
+  "quiet": true,
+  "topStories": [
+   {
+    "title": "Adobe: visits to US retail sites from artificial intelligence (AI) sources rose 162% on Thanksgiving, and those visitors converted 74% more often",
+    "what": "Adobe Analytics data, reported on 27 November, puts US Thanksgiving online spending at a record $7.1 billion, with visits from AI chatbots and AI browsers up 162% year over year (Adobe had forecast 159%) and AI-referred visitors converting 74% more often than other traffic. Separately, Salesforce forecasts that AI and agents will influence about $75.8 billion (21%) of global Cyber Week online sales.",
+    "why": "AI assistants are becoming a measurable acquisition channel, so e-commerce product managers (PMs) now need to plan for how their catalogue appears inside AI answers and how they attribute those visits. Note that Adobe counts click-throughs from AI tools, not purchases completed by autonomous agents, and higher conversion may partly reflect who uses AI tools rather than the channel itself.",
+    "take": "If asked about agentic commerce, separate AI-referred traffic (happening now, measurable) from agent-completed purchases (still small), and flag selection bias before claiming AI traffic is 'better'.",
+    "url": "https://www.tipranks.com/news/the-fly/adobe-data-shows-ai-traffic-soaring-as-thanksgiving-online-sales-reach-7-1b-thefly-news",
+    "source": "TipRanks (The Fly), citing Adobe Analytics; also GSM Global News, Chain Store Age (Salesforce)"
+   },
+   {
+    "title": "India's Ministry of Electronics and Information Technology (MeitY) plans more national compute for AI inference, with government projects served first",
+    "what": "MeitY Secretary S. Krishnan, speaking at Tec-Verse 2026, described plans to expand national computing capacity for AI inference, including a Centre for Development of Advanced Computing (C-DAC) facility in Pune with 3,300 graphics processing units (GPUs) and a 30-petaflop machine in Bengaluru; capacity under an arrangement with G42 would be used mainly for inference. He said government projects come first, then research institutions, innovators and academia, and that MeitY is not currently selecting additional AI models.",
+    "why": "Following the Chariot-1 launch, the IndiaAI Mission's emphasis is moving from training sovereign models to running them, which shapes where Indian AI startups can get subsidised capacity and what it will cost to serve Indian users at scale.",
+    "take": "A good India-specific point for interviews: building a model is a one-off cost, but serving it is a recurring one, and public policy is now following that economics.",
+    "url": "https://khanlist.com/story/meity-plans-to-expand-national-computing-capacity-for-ai-73ceee7e",
+    "source": "Khanlist (reprinting a report credited to The Hindu); also NewsBytes, NewKerala"
+   }
+  ],
+  "modelsPricing": [],
+  "tools": [],
+  "tool": {},
+  "concepts": [
+   {
+    "title": "Selection bias in channel comparisons: why AI-referred shoppers may convert better",
+    "body": "Selection bias happens when the people in one group differ from another group before any treatment happens. Shoppers who arrive from an AI assistant have often already researched, compared and decided, so they would probably convert well whatever channel brought them.\n\nAdobe's finding that AI-referred visitors convert 74% more often is a correlation, not proof that the AI channel causes extra sales. Before shifting budget toward AI visibility, a product manager (PM) should compare like with like (same product category, same intent stage) or run a holdout, and report incremental conversions rather than raw rates."
+   },
+   {
+    "title": "Seasonality and calendar effects when reading AI metrics",
+    "body": "Seasonality means metrics move with the calendar: holidays, paydays, festivals and sale events change who uses a product and why. A feature launched just before a big sale can look like a winner simply because traffic and intent spiked.\n\nPMs should compare against the same period last year, use control groups running at the same time, and avoid declaring victory on holiday-week numbers. In India, Diwali sales, month-end salary days and exam seasons create similar distortions for AI shopping and study assistants."
+   },
+   {
+    "title": "Simpson's paradox in AI dashboards",
+    "body": "Simpson's paradox is when a trend that appears in every subgroup reverses once the subgroups are combined. For example, an AI answer feature could improve satisfaction for both new and returning users, yet the overall average falls because the mix shifted toward new users, who rate everything lower.\n\nPMs should break key AI metrics down by meaningful segments (user tenure, language, device, query type) before drawing conclusions, and watch for changes in segment mix after launches or marketing pushes."
+   },
+   {
+    "title": "Grouped-query attention: sharing memory across attention heads",
+    "body": "In a transformer, each attention head normally keeps its own stored keys and values for every token so far. Grouped-query attention lets several heads share one set of keys and values, which greatly reduces the memory needed during generation with only a small quality cost.\n\nFor a PM, this is one reason some models serve long conversations cheaply and quickly. When comparing open-weight models for self-hosting, architecture choices like this affect how many users one GPU can handle, and therefore your cost per user."
+   },
+   {
+    "title": "Model flops utilisation (MFU): how much of the hardware you actually use",
+    "body": "Model flops utilisation is the share of a chip's theoretical arithmetic capacity that a training or inference job actually uses. Real systems often reach well below peak because of memory bandwidth limits, communication between chips and idle time between requests.\n\nBuying or renting GPUs, as India's national compute plans involve, only pays off if the hardware is kept busy. PMs who own AI infrastructure costs should ask about utilisation, batching and scheduling, not just how many GPUs are available."
+   },
+   {
+    "title": "Cold starts in serverless model hosting",
+    "body": "A cold start is the delay when a model must be loaded into a GPU's memory before it can answer, because no copy is already running. Large models can take a long time to load, so the first request after a quiet period may be very slow.\n\nPMs choosing between serverless (pay per use) and dedicated (always on) hosting face a trade-off: serverless is cheaper for spiky or low traffic, while dedicated avoids cold-start delays for latency-sensitive features. Traffic patterns such as sale-day spikes should drive the choice."
+   },
+   {
+    "title": "Conversation state: stateless calls versus server-side threads",
+    "body": "Many model application programming interfaces (APIs) are stateless: your application resends the whole conversation on every call. Others offer server-side threads, where the provider stores the conversation and you send only the new message.\n\nStateless designs keep you portable and in control of data retention; server-side state is simpler to build but ties you to one provider and raises privacy questions about where conversations live. The choice affects switching costs, data-protection compliance and token spend."
+   },
+   {
+    "title": "Attribute extraction: turning messy product text into structured fields",
+    "body": "Attribute extraction uses a model to pull structured facts, such as size, material, compatibility or warranty, out of unstructured descriptions, reviews or images. The result is clean, filterable data rather than free text.\n\nFor marketplaces, better attributes improve search filters, comparisons and how AI assistants understand your catalogue. A PM should measure extraction accuracy per attribute and per category, and decide which errors need human review, since a wrong size or compatibility claim leads directly to returns."
+   },
+   {
+    "title": "Simulated users for evaluating conversational agents",
+    "body": "A user simulator is a model prompted to play a customer with a goal, persona and constraints, so it can hold many multi-turn conversations with your agent automatically. Each run is then scored for task completion and quality.\n\nSimulators let teams test thousands of conversations before launch, including rare or difficult personas. The risk is that simulated users behave more politely and predictably than real ones, so PMs should check simulator results against a sample of real conversations and keep human review in the loop."
+   },
+   {
+    "title": "Scam amplification: when AI answers recommend fraudulent sellers",
+    "body": "AI shopping and search assistants can surface fake stores, counterfeit listings or too-good-to-be-true deals if those pages look convincing to the retrieval system. A recommendation from an assistant can make a scam look more trustworthy than a plain search result.\n\nAs AI-referred shopping grows during big sale events, PMs need seller-reputation signals, domain-age checks and clear source labels in answers, plus a fast reporting path. Track how often recommended merchants are later flagged as fraudulent."
+   },
+   {
+    "title": "Synchronous versus asynchronous safety checks",
+    "body": "A synchronous check runs before the user sees an output and blocks it if it fails; an asynchronous check runs after the response is shown, flagging issues for later action. Synchronous checks are safer but add delay; asynchronous checks are fast but let some harm through.\n\nPMs should match the check to the risk: block in real time for high-severity harms such as leaking personal data, and use after-the-fact review for lower-risk quality issues. Measure the latency cost of each blocking check against the harm it prevents."
+   },
+   {
+    "title": "Harm taxonomies: a shared list of what can go wrong",
+    "body": "A harm taxonomy is a structured list of the kinds of damage an AI product could cause, such as misinformation, privacy leaks, financial loss, discrimination or unsafe advice, often with severity levels.\n\nA shared taxonomy lets product, policy, legal and engineering teams speak the same language when writing evaluations, triaging incidents and deciding launch readiness. PMs can use it to make sure test sets cover every category, not just the obvious ones."
+   },
+   {
+    "title": "Reserved versus on-demand compute contracts",
+    "body": "Cloud and GPU providers sell capacity either on demand (pay as you go, available when free) or reserved (commit to a volume for months or years at a lower unit price). Some also offer cheaper interruptible capacity that can be reclaimed at short notice.\n\nReserving capacity lowers unit cost and guarantees availability during peaks, but creates a fixed cost if usage disappoints. PMs forecasting AI feature adoption should model a base load to reserve and a peak to buy on demand, and revisit as usage data arrives."
+   },
+   {
+    "title": "Affiliate and referral revenue models for AI assistants",
+    "body": "An AI assistant that sends shoppers to merchants can earn money by taking a commission on resulting sales, much like affiliate websites do. This is one way to fund free assistants without showing ads.\n\nThe model creates a conflict of interest: the assistant may favour merchants who pay higher commissions. PMs must decide how to disclose paid relationships, keep rankings trustworthy, and measure whether recommendations still serve the user first. The answer shapes both revenue and long-term trust."
+   },
+   {
+    "title": "Multi-homing: when users spread their time across several AI assistants",
+    "body": "Multi-homing means customers use several competing products for the same job, such as using two or three chat assistants. It is easy when switching costs are low and products are free or cheap.\n\nHigh multi-homing weakens network effects and pricing power, because no single product owns the user. PMs can reduce it through memory, integrations and workflows that make their product better the more it is used, and should track the share of users who also use competitors."
+   },
+   {
+    "title": "Comparison and shortlist interfaces in AI shopping",
+    "body": "Instead of a single chat reply, an AI shopping experience can build a shortlist, a side-by-side comparison table, or a pros-and-cons view generated from product data and reviews.\n\nStructured comparison views make AI recommendations easier to check and trust, and reduce the cost of a wrong answer. PMs should test when users prefer one confident recommendation versus a short comparison, and measure downstream signals such as returns and repeat purchases, not just clicks."
+   },
+   {
+    "title": "Change freezes and peak-season launch discipline for AI features",
+    "body": "A change freeze is a period, often around major sales or holidays, when teams avoid shipping risky changes. For AI features this includes model upgrades, prompt changes and new retrieval sources, not just code.\n\nBecause model and prompt changes can shift behaviour unpredictably, PMs should treat them as releases and include them in freeze rules. Plan model migrations well before peak events, and keep a tested rollback path ready during them."
+   },
+   {
+    "title": "Hand-off design: sending users from an AI answer to another site",
+    "body": "Hand-off design covers what happens when an assistant sends a user onward, such as to a merchant page, booking form or support portal. Good hand-offs carry context (the chosen product, size or question) so the user does not have to start again.\n\nPoor hand-offs waste the intent an AI answer creates. PMs on both sides should measure drop-off between the answer and the destination, use deep links that pre-fill choices, and agree with partners on what context is passed and how it is protected."
+   },
+   {
+    "title": "Seller disclosure duties under India's Consumer Protection (E-Commerce) Rules",
+    "body": "India's Consumer Protection (E-Commerce) Rules, 2020 require online marketplaces to show information such as seller details, return and refund policies and grievance contacts, and they prohibit unfair trade practices.\n\nAn AI shopping assistant operating in India still has to respect these duties. PMs should make sure AI-generated summaries do not hide seller identity, or misstate return and refund policies, and should involve legal review when AI-generated product summaries are introduced or changed."
+   },
+   {
+    "title": "Right to correction and erasure for AI-inferred profiles under India's Digital Personal Data Protection (DPDP) Act",
+    "body": "India's Digital Personal Data Protection Act, 2023 gives people the right to ask for their personal data to be corrected, completed, updated or erased. This can include profiles and preferences that an AI product has built about a user.\n\nPMs should design a way for users to see and fix what the product believes about them, such as interests, sizes or inferred preferences, and make sure corrections flow into personalisation and memory. Building this early is cheaper than retrofitting it after a complaint."
+   }
+  ],
+  "concept": {
+   "number": 1,
+   "title": "Selection bias in channel comparisons: why AI-referred shoppers may convert better",
+   "body": "Selection bias happens when the people in one group differ from another group before any treatment happens. Shoppers who arrive from an AI assistant have often already researched, compared and decided, so they would probably convert well whatever channel brought them.\n\nAdobe's finding that AI-referred visitors convert 74% more often is a correlation, not proof that the AI channel causes extra sales. Before shifting budget toward AI visibility, a product manager (PM) should compare like with like (same product category, same intent stage) or run a holdout, and report incremental conversions rather than raw rates."
+  },
+  "india": [],
+  "question": {
+   "q": "You are the product manager for an Indian e-commerce marketplace. AI assistants are starting to send shoppers to your site, and early data suggests they convert better than search traffic. How would you decide how much to invest in being discoverable and usable by AI assistants?",
+   "framing": "Clarify the goal (incremental revenue, not raw AI traffic) and the user segments involved; separate two horizons: AI-referred visits today and agent-completed purchases later. Note the selection-bias risk in comparing conversion rates across channels.",
+   "tradeoff": "Investing in structured catalogue data, AI-friendly pages and agent access can grow a valuable channel, but it may deepen dependence on AI platforms that control ranking and could later charge for placement or take the customer relationship.",
+   "metric": "Run a holdout or geographic test to measure incremental orders from AI channels; track AI-referred revenue per visit, return rate and repeat purchase rate. Recommend a staged investment: first clean product data (useful everywhere), then expand only if incremental lift holds."
+  },
+  "alsoNotable": [
+   {
+    "text": "Zurich-based nextesy raised $10.4 million in seed funding led by Swisscom Ventures to automate accounting, payroll and business administration with AI agents (single source).",
+    "url": "https://techstartups.com/2026/11/27/swiss-ai-startup-nextesy-raises-10-4m-to-automate-accounting-payroll-and-business-administration-with-ai-agents/"
+   }
+  ],
+  "pmToolkit": [
+   {
+    "name": "Wondering",
+    "category": "Customer research",
+    "url": "https://wondering.com",
+    "what": "An AI-moderated user research platform that runs interviews and studies with participants.",
+    "does": "Lets a PM launch voice or text interviews where an AI moderator asks follow-up questions, then summarises the themes across responses.",
+    "examples": [
+     "Run 20 quick interviews on why shoppers abandon carts during a sale",
+     "Test reactions to a new AI feature concept in several languages",
+     "Collect follow-up interviews after a usability issue appears in analytics"
+    ],
+    "pricing": "Paid plans reported from about $149 to $179 a month; free trial (may change)"
+   },
+   {
+    "name": "Supernormal",
+    "category": "Meetings and notes",
+    "url": "https://supernormal.com",
+    "what": "An AI meeting notetaker that captures and summarises calls.",
+    "does": "Produces meeting notes, action items and summaries, with a desktop app that can capture notes without a bot joining the call.",
+    "examples": [
+     "Summarise a customer discovery call and pull out pain points",
+     "Share action items after a sprint planning meeting",
+     "Keep a searchable record of stakeholder decisions"
+    ],
+    "pricing": "Free plan with daily and monthly credits; paid plans reported from about $18 to $20 a month (may change)"
+   },
+   {
+    "name": "Fullstory",
+    "category": "Analytics and experimentation",
+    "url": "https://www.fullstory.com",
+    "what": "A digital experience analytics platform with session replay and an AI layer called StoryAI.",
+    "does": "Uses AI agents to summarise user sessions, flag issues that hurt revenue, and answer questions about user behaviour in plain language.",
+    "examples": [
+     "Ask why checkout completion dropped after a release",
+     "Summarise sessions from users who rage-clicked on a new feature",
+     "Find friction points for users arriving from a specific channel"
+    ],
+    "pricing": "Quote-based; no public price list (may change)"
+   },
+   {
+    "name": "Zeda.io",
+    "category": "Feedback and roadmapping",
+    "url": "https://zeda.io",
+    "what": "An AI-powered product discovery and feedback platform.",
+    "does": "Centralises customer feedback from many sources, uses AI to surface insights and themes, and connects them to roadmaps and release notes.",
+    "examples": [
+     "Group hundreds of support tickets into feature themes",
+     "Link a roadmap item to the customer requests behind it",
+     "Draft release notes for a shipped feature"
+    ],
+    "pricing": ""
+   },
+   {
+    "name": "Devin",
+    "category": "Building and coding",
+    "url": "https://devin.ai",
+    "what": "An autonomous AI software engineering agent from Cognition.",
+    "does": "Takes a task description, plans the work, writes and tests code, and opens changes for review, which helps PMs build prototypes or small internal tools.",
+    "examples": [
+     "Build a quick internal dashboard from a spreadsheet",
+     "Prototype a small feature to test with users",
+     "Fix a simple bug report while engineers focus on core work"
+    ],
+    "pricing": "Free and paid tiers; individual plan reported at about $20 a month (may change)"
+   },
+   {
+    "name": "Decktopus",
+    "category": "Presentations and communication",
+    "url": "https://www.decktopus.com",
+    "what": "An AI presentation maker that generates decks from a topic or uploaded file.",
+    "does": "Creates a structured, designed slide deck from a prompt or document, which a PM can then edit for reviews and pitches.",
+    "examples": [
+     "Turn a product requirements document into a review deck",
+     "Create a quarterly roadmap presentation for leadership",
+     "Build a case-study deck for an interview assignment"
+    ],
+    "pricing": "Paid plans reported from about $10 to $25 a month; sources differ on a free version (may change)"
+   },
+   {
+    "name": "Databricks AI/BI Genie",
+    "category": "Data and SQL",
+    "url": "https://docs.databricks.com/en/genie/",
+    "what": "A natural-language interface that lets people ask questions of data in Databricks.",
+    "does": "Turns plain-English questions into structured query language (SQL) over curated datasets and returns answers and charts, so PMs can self-serve analysis.",
+    "examples": [
+     "Ask which cities had the highest repeat-order rate last month",
+     "Compare feature adoption across user cohorts",
+     "Check a metric quickly before a leadership review"
+    ],
+    "pricing": "Usage-based, with a monthly free allowance per user; query compute billed separately (may change)"
+   },
+   {
+    "name": "Bardeen",
+    "category": "Automation and agents",
+    "url": "https://www.bardeen.ai",
+    "what": "A browser-based AI automation tool for repetitive web tasks.",
+    "does": "Automates tasks such as scraping web pages into spreadsheets, enriching lists and moving data between apps, triggered from the browser.",
+    "examples": [
+     "Pull competitor pricing pages into a spreadsheet",
+     "Collect app store reviews for a feedback analysis",
+     "Copy meeting notes into a project tracker automatically"
+    ],
+    "pricing": "Free plan with monthly credits; paid plans reported from about $10 a month (may change)"
+   },
+   {
+    "name": "Adobe Firefly",
+    "category": "Design",
+    "url": "https://www.adobe.com/products/firefly.html",
+    "what": "Adobe's generative AI app for images, video and design assets.",
+    "does": "Generates and edits images and visual assets from text prompts, helping PMs create mock-ups, concept visuals and presentation graphics.",
+    "examples": [
+     "Create concept visuals for a new feature pitch",
+     "Generate placeholder imagery for a prototype",
+     "Produce variations of a banner for a sale-day experiment"
+    ],
+    "pricing": "Free plan with limited credits; paid plans with monthly generative credits (may change)"
+   },
+   {
+    "name": "Locofy.ai",
+    "category": "Prototyping",
+    "url": "https://www.locofy.ai",
+    "what": "A design-to-code tool that converts Figma and other designs into front-end code.",
+    "does": "Turns designs into working React, HTML and other code, so PMs can get clickable prototypes in front of users faster.",
+    "examples": [
+     "Convert a Figma flow into a testable web prototype",
+     "Hand engineers a starting codebase for a new screen",
+     "Build a landing page to test demand for a feature"
+    ],
+    "pricing": "Free plan and paid plans; reported prices vary from about $19 to $40 a month (may change)"
+   }
+  ],
+  "sourceNotes": {
+   "checked": 16,
+   "failed": [
+    "TLDR AI",
+    "TLDR Product Management",
+    "Hacker News (hnrss)",
+    "Techmeme",
+    "Product Hunt",
+    "Simon Willison",
+    "Lenny's Newsletter",
+    "Product Compass",
+    "Product Growth",
+    "One Useful Thing",
+    "Direct article fetches (network policy blocked these hosts); items written from web search results"
+   ],
+   "singleSource": [
+    "nextesy seed round (Tech Startups)"
+   ]
+  },
+  "createdAt": "2026-11-28T01:45:00Z"
+ },
+ {
   "date": "2026-11-27",
   "subject": "AI PM Digest – Fri, 27 Nov 2026 – India launches Chariot-1 sovereign models",
   "headline": "India launches Chariot-1 sovereign AI models",
